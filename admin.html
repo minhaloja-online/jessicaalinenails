@@ -1,0 +1,2411 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Painel · Jessica Aline Nails</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M0 0h74l26 26v74H0z' fill='%23201A2B'/><text x='50' y='67' font-family='Georgia,serif' font-size='46' letter-spacing='2' fill='%23F9F8FB' text-anchor='middle'>JA</text></svg>">
+
+<style>
+:root{
+  --porcelana:#EDEBF0; --branco:#F9F8FB; --tinta:#191520; --suave:#6A6376;
+  --rosa:#8E2F4A; --dourado:#9A90AE; --escuro:#201A2B; --borda:rgba(25,21,32,.13);
+  --ok:#5B7B5A; --alerta:#A8524F;
+  --display:'Prata',Georgia,serif; --corpo:'Work Sans',system-ui,sans-serif;
+}
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--porcelana); color:var(--tinta); font-family:var(--corpo); font-weight:300; font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+h1,h2,h3{ font-family:var(--display); font-weight:300; margin:0; line-height:1.15; }
+button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; }
+a{ color:var(--rosa); }
+input,textarea,select{ font:inherit; }
+:focus-visible{ outline:2px solid var(--rosa); outline-offset:2px; }
+.esconde{ display:none !important; }
+
+/* ---------- ENTRADA ---------- */
+#entrada{ min-height:100svh; display:grid; place-items:center; padding:24px; }
+.cartao{ width:min(100%,410px); background:var(--branco); border-radius:20px; padding:34px 30px; box-shadow:0 30px 60px -34px rgba(42,29,34,.45); }
+.marca{ text-align:center; margin-bottom:26px; }
+.marca b{ font-family:var(--display); font-size:1.5rem; font-weight:300; letter-spacing:.12em; display:block; }
+.marca b i{ color:var(--rosa); }
+.marca small{ font-size:.6rem; letter-spacing:.3em; text-transform:uppercase; color:var(--suave); }
+.aviso{ background:rgba(200,168,107,.14); border:1px solid rgba(200,168,107,.5); border-radius:12px; padding:12px 14px; font-size:.82rem; margin-bottom:18px; }
+
+/* ---------- CAMPOS ---------- */
+.campo{ margin-bottom:14px; }
+.campo label{ display:block; font-size:.64rem; letter-spacing:.16em; text-transform:uppercase; color:var(--suave); margin-bottom:6px; }
+.campo input[type=text],.campo input[type=email],.campo input[type=password],.campo textarea,.campo select{
+  width:100%; background:var(--porcelana); border:1px solid var(--borda); border-radius:10px; padding:11px 13px; color:var(--tinta); transition:border-color .2s,background .2s;
+}
+.campo textarea{ resize:vertical; min-height:78px; line-height:1.55; }
+.campo input:focus,.campo textarea:focus,.campo select:focus{ outline:none; border-color:var(--rosa); background:var(--branco); }
+.campo .ajuda{ font-size:.74rem; color:var(--suave); margin-top:5px; }
+
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:.5em; padding:.82em 1.5em; border-radius:999px; background:var(--escuro); color:var(--branco); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; transition:background .25s,transform .25s,opacity .2s; }
+.btn:hover{ background:var(--rosa); transform:translateY(-1px); }
+.btn[disabled]{ opacity:.5; pointer-events:none; }
+.btn.linha{ background:none; color:var(--tinta); box-shadow:inset 0 0 0 1px var(--borda); }
+.btn.linha:hover{ background:var(--escuro); color:var(--branco); }
+.btn.perigo{ background:none; color:var(--alerta); box-shadow:inset 0 0 0 1px rgba(168,82,79,.4); }
+.btn.perigo:hover{ background:var(--alerta); color:#fff; }
+.btn.largo{ width:100%; }
+.btn.mini{ padding:.55em 1em; font-size:.64rem; }
+.erro{ color:var(--alerta); font-size:.84rem; min-height:1.2em; margin:4px 0 10px; }
+.texto-link{ display:block; text-align:center; margin-top:14px; font-size:.76rem; color:var(--suave); }
+
+/* ---------- PAINEL ---------- */
+#painel{ display:grid; grid-template-columns:236px 1fr; min-height:100svh; }
+.lado{ background:var(--escuro); color:var(--branco); padding:26px 18px; display:flex; flex-direction:column; gap:6px; position:sticky; top:0; height:100svh; }
+.lado .marca{ text-align:left; margin-bottom:24px; }
+.lado .marca b{ color:var(--branco); font-size:1.15rem; }
+.lado .marca small{ color:rgba(253,250,248,.45); }
+.aba{ display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%; text-align:left; padding:11px 14px; border-radius:10px; color:rgba(253,250,248,.62); font-size:.82rem; transition:background .2s,color .2s; }
+.aba:hover{ background:rgba(253,250,248,.06); color:var(--branco); }
+.aba.on{ background:rgba(154,144,174,.18); color:var(--dourado); }
+.selo{ background:var(--rosa); color:#fff; font-size:.62rem; padding:1px 7px; border-radius:999px; }
+.lado .rodape{ margin-top:auto; display:grid; gap:8px; font-size:.72rem; }
+.lado .rodape a,.lado .rodape button{ color:rgba(253,250,248,.6); text-align:left; padding:6px 14px; border-radius:8px; }
+.lado .rodape a:hover,.lado .rodape button:hover{ color:var(--branco); background:rgba(253,250,248,.06); }
+
+.conteudo{ padding:34px clamp(18px,3vw,44px) 120px; max-width:1000px; }
+.titulo-pg{ margin-bottom:6px; font-size:2rem; }
+.legenda{ color:var(--suave); margin:0 0 28px; max-width:62ch; }
+.bloco{ background:var(--branco); border:1px solid var(--borda); border-radius:16px; padding:22px 22px 8px; margin-bottom:18px; }
+.bloco h3{ font-size:1.15rem; margin-bottom:4px; }
+.bloco .desc{ font-size:.82rem; color:var(--suave); margin:0 0 18px; }
+.dupla{ display:grid; grid-template-columns:1fr 1fr; gap:0 16px; }
+@media(max-width:700px){ .dupla{ grid-template-columns:1fr; } }
+
+/* ---------- BARRA DE SALVAR ---------- */
+.barra{ position:fixed; left:236px; right:0; bottom:0; z-index:50; background:var(--branco); border-top:1px solid var(--borda); padding:12px clamp(18px,3vw,44px); display:flex; align-items:center; gap:14px; justify-content:flex-end; box-shadow:0 -8px 24px -18px rgba(42,29,34,.5); }
+.barra .estado{ margin-right:auto; font-size:.82rem; color:var(--suave); }
+.barra .estado.sujo{ color:var(--rosa); }
+
+/* ---------- FOTOS ---------- */
+.fotos{ display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:16px; }
+.foto{ border:1px solid var(--borda); border-radius:14px; overflow:hidden; background:var(--porcelana); }
+.foto .quadro{ aspect-ratio:.85; background:linear-gradient(158deg,#DFD3D9,#9E93A8); background-size:cover; background-position:center; display:grid; place-content:center; color:rgba(42,29,34,.35); font-family:var(--display); font-size:1.6rem; }
+.foto .corpo{ padding:10px; display:grid; gap:8px; }
+.foto b{ font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--suave); font-weight:500; }
+.foto input[type=text]{ width:100%; font-size:.76rem; padding:7px 9px; border:1px solid var(--borda); border-radius:8px; background:var(--branco); }
+.foto .acoes{ display:flex; gap:6px; }
+.foto .acoes .btn{ flex:1; }
+.foto input[type=file]{ display:none; }
+.progresso{ font-size:.72rem; color:var(--rosa); }
+
+/* ---------- SUB-ABAS E AVISOS ---------- */
+.sub-abas{ display:flex; gap:4px; background:rgba(36,28,26,.05); padding:4px; border-radius:12px;
+  margin-bottom:22px; width:max-content; max-width:100%; overflow-x:auto; }
+.sub-aba{ padding:9px 18px; border-radius:9px; font-size:.76rem; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--suave); white-space:nowrap; transition:background .3s, color .3s; }
+.sub-aba.ativa{ background:var(--branco); color:var(--tinta); box-shadow:0 1px 4px rgba(36,28,26,.1); }
+
+.aviso-caixa{ background:#FDF6E6; border:1px solid #E8D9AE; border-radius:12px;
+  padding:14px 16px; font-size:.86rem; line-height:1.6; margin-bottom:20px; }
+.aviso-caixa b{ font-weight:500; }
+.aviso-caixa select{ margin-top:10px; padding:8px 10px; border:1px solid var(--borda);
+  border-radius:9px; background:var(--branco); font:inherit; }
+
+/* ---------- MODAL DO PAINEL ---------- */
+.modal-adm{ position:fixed; inset:0; z-index:900; display:grid; place-items:center; padding:5vw;
+  background:rgba(36,28,26,.55); backdrop-filter:blur(6px);
+  opacity:0; visibility:hidden; transition:opacity .35s, visibility .35s; }
+.modal-adm.aberto{ opacity:1; visibility:visible; }
+.modal-adm .cx{ width:min(100%,440px); background:var(--branco); border-radius:18px; padding:26px;
+  max-height:88svh; overflow:auto; transform:translateY(14px); transition:transform .4s; }
+.modal-adm.aberto .cx{ transform:none; }
+.modal-adm h3{ font-family:var(--display); font-weight:300; font-size:1.5rem; margin:0 0 4px; }
+.resumo-adm{ background:var(--porcelana); border-radius:12px; padding:12px 14px; margin:14px 0 18px; }
+.resumo-adm div{ display:flex; justify-content:space-between; gap:12px; padding:5px 0; font-size:.86rem; }
+.resumo-adm span{ color:var(--suave); }
+.resumo-adm b{ font-weight:500; }
+.btn.vazio{ background:transparent; color:var(--tinta); box-shadow:inset 0 0 0 1px var(--borda); }
+
+/* ---------- AGENDA ---------- */
+.hora-linha{ display:flex; align-items:center; gap:12px; padding:12px 0;
+  border-bottom:1px solid var(--borda); flex-wrap:wrap; }
+.hora-linha:last-child{ border-bottom:0; }
+.hora-linha .quando{ width:112px; flex:none; }
+.hora-linha .quando b{ font-family:var(--display); font-size:1.15rem; display:block; }
+.hora-linha .quando small{ font-size:.68rem; color:var(--suave); }
+.hora-linha .oque{ flex:1; min-width:150px; }
+.hora-linha .oque b{ font-weight:500; font-size:.92rem; display:block; }
+.hora-linha .oque small{ font-size:.76rem; color:var(--suave); }
+.hora-linha .acoes{ display:flex; gap:6px; flex-wrap:wrap; }
+.marca-status{ display:inline-flex; align-items:center; gap:6px; font-size:.7rem;
+  letter-spacing:.1em; text-transform:uppercase; padding:5px 11px; border-radius:999px;
+  background:rgba(36,28,26,.05); white-space:nowrap; }
+.marca-status i{ width:7px; height:7px; border-radius:50%; display:inline-block; }
+/* topo da agenda e navegação de mês */
+.ag-topo{ display:flex; align-items:center; justify-content:space-between; gap:14px;
+  margin-bottom:20px; flex-wrap:wrap; }
+.mes-nav{ display:flex; align-items:center; gap:10px; }
+.mes-nav b{ font-family:var(--display); font-weight:300; font-size:1.25rem; min-width:170px; text-align:center; }
+
+/* caixa dos pedidos pendentes */
+.bloco.pendentes{ border-color:#E8D9AE; background:#FDFBF4; }
+
+/* calendário */
+.cal-cab{ display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-bottom:6px; }
+.cal-cab span{ text-align:center; font-size:.64rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--suave); padding:4px 0; }
+.cal-grade{ display:grid; grid-template-columns:repeat(7,1fr); gap:6px; }
+.cal-dia{ position:relative; min-height:92px; padding:7px 6px 6px; border-radius:11px; text-align:left;
+  background:var(--porcelana); box-shadow:inset 0 0 0 1px rgba(36,28,26,.06);
+  display:flex; flex-direction:column; gap:5px; transition:background .25s, box-shadow .25s, transform .25s; }
+.cal-dia:hover{ background:var(--branco); box-shadow:inset 0 0 0 1px var(--rosa); transform:translateY(-2px); }
+.cal-dia.fora{ opacity:.4; }
+.cal-dia .n{ font-family:var(--display); font-size:1rem; line-height:1; }
+.cal-dia.hoje .n{ color:var(--rosa); font-weight:500; }
+.cal-dia.hoje{ box-shadow:inset 0 0 0 1px var(--rosa); }
+.cal-dia.sel{ background:var(--escuro); box-shadow:none; }
+.cal-dia.sel .n{ color:var(--dourado); }
+.cal-dia.sel .chip{ background:rgba(247,242,238,.12); color:var(--branco); }
+.cal-dia.sel .mais{ color:rgba(247,242,238,.7); }
+.cal-dia[data-pend]::after{ content:""; position:absolute; top:7px; right:7px;
+  width:7px; height:7px; border-radius:50%; background:#B98A2E; }
+.cal-dia .chips{ display:flex; flex-direction:column; gap:3px; }
+.cal-dia .chip{ font-style:normal; font-size:.66rem; padding:2px 5px; border-radius:5px;
+  background:rgba(36,28,26,.05); border-left:3px solid var(--c); white-space:nowrap; overflow:hidden; }
+.cal-dia .mais{ font-style:normal; font-size:.62rem; color:var(--suave); padding-left:3px; }
+.cal-legenda{ display:flex; gap:16px; flex-wrap:wrap; margin-top:16px; font-size:.72rem; color:var(--suave); }
+.cal-legenda span{ display:inline-flex; align-items:center; gap:6px; }
+.cal-legenda i{ width:9px; height:9px; border-radius:50%; display:inline-block; }
+
+@media(max-width:760px){
+  .cal-dia{ min-height:66px; padding:5px 4px; }
+  .cal-dia .chip{ font-size:.58rem; padding:1px 3px; }
+  .mes-nav b{ min-width:130px; font-size:1.05rem; }
+}
+
+.h-dia{ display:grid; grid-template-columns:104px 78px 1fr 1fr; gap:10px; align-items:center;
+  padding:9px 0; border-bottom:1px solid var(--borda); }
+.h-dia:last-child{ border-bottom:0; }
+.h-dia label{ display:flex; align-items:center; gap:8px; font-size:.85rem; color:var(--tinta); margin:0; letter-spacing:0; text-transform:none; }
+.h-dia input[type=time]{ width:100%; padding:7px 9px; border:1px solid var(--borda); border-radius:8px; background:var(--branco); font:inherit; font-size:.85rem; }
+.h-dia.off input[type=time]{ opacity:.4; }
+@media(max-width:640px){ .h-dia{ grid-template-columns:1fr 1fr; } .h-dia label{ grid-column:1/-1; } }
+
+/* ---------- DASHBOARD ---------- */
+.cat{ display:flex; align-items:center; gap:12px; padding:9px 0; }
+.cat .nm{ width:120px; flex:none; font-size:.85rem; }
+.cat .barra{ flex:1; height:8px; border-radius:4px; background:rgba(36,28,26,.07); overflow:hidden; }
+.cat .barra i{ display:block; height:100%; background:var(--rosa); }
+.cat .vl{ width:104px; text-align:right; flex:none; font-size:.85rem; }
+.comp{ display:flex; align-items:baseline; justify-content:space-between; gap:12px;
+  padding:11px 0; border-bottom:1px solid var(--borda); }
+.comp:last-child{ border-bottom:0; }
+.comp .nm{ font-size:.8rem; color:var(--suave); letter-spacing:.08em; text-transform:uppercase; }
+.comp .vl{ font-family:var(--display); font-size:1.15rem; }
+.comp .var{ font-size:.76rem; padding:3px 9px; border-radius:999px; background:rgba(36,28,26,.05); }
+.comp .var.sobe{ color:#2E7D5B; } .comp .var.desce{ color:#A8524F; }
+
+/* ---------- PROFISSIONAIS ---------- */
+.prof-adm{ display:grid; grid-template-columns:190px 1fr; gap:16px; align-items:start;
+  border:1px solid var(--borda); border-radius:14px; padding:14px; margin-bottom:14px; background:var(--branco); }
+.prof-adm.escondido{ opacity:.55; }
+.prof-adm .foto{ margin:0; }
+.prof-adm .cabeca{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; flex-wrap:wrap; }
+.prof-adm .ver{ display:flex; align-items:center; gap:8px; font-size:.8rem; color:var(--suave); }
+.acesso{ border-top:1px solid var(--borda); margin-top:14px; padding-top:14px; }
+.acesso .estado{ display:flex; align-items:center; gap:8px; font-size:.82rem; margin-bottom:10px; }
+.acesso .bolinha{ width:8px; height:8px; border-radius:50%; background:#C9C2BD; flex:none; }
+.acesso .bolinha.on{ background:#2E7D5B; }
+.acesso .form-acesso{ display:none; }
+.acesso .form-acesso.aberto{ display:block; }
+@media(max-width:700px){ .prof-adm{ grid-template-columns:1fr; } }
+
+/* ---------- FINANCEIRO ---------- */
+.mes-barra{ display:flex; align-items:center; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+.mes-barra label{ font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--suave); }
+.dono-caixa{ font-size:.78rem; color:var(--suave); margin-left:6px; }
+.dono-caixa b{ color:var(--tinta); font-weight:500; }
+.mes-barra input{ padding:8px 10px; border:1px solid var(--borda); border-radius:9px; background:var(--branco); font:inherit; }
+
+.painel-num{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:22px; }
+@media(max-width:900px){ .painel-num{ grid-template-columns:repeat(2,1fr); } }
+.num{ border:1px solid var(--borda); border-radius:14px; padding:16px 18px; background:var(--branco); }
+.num b{ display:block; font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--suave); margin-bottom:8px; font-weight:500; }
+.num .v{ font-family:var(--display); font-size:1.75rem; line-height:1; }
+.num small{ display:block; font-size:.72rem; color:var(--suave); margin-top:7px; }
+.num.destaque{ background:var(--escuro); border-color:var(--escuro); }
+.num.destaque b{ color:rgba(247,242,238,.78); }
+.num.destaque small{ color:rgba(247,242,238,.62); }
+.num.destaque small label{ color:rgba(247,242,238,.72); }
+.num.destaque input[type=radio]{ accent-color:var(--dourado); }
+.num.destaque .v{ color:var(--dourado); }
+.num .v.negativo{ color:#B4453F; }
+
+.cabeca-bloco{ display:flex; align-items:baseline; justify-content:space-between; gap:14px; flex-wrap:wrap; }
+#grafico{ display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:12px; align-items:end; min-height:170px; margin-top:16px; }
+.col{ display:grid; align-content:end; justify-items:center; gap:7px; height:100%; }
+.col .barras{ display:flex; align-items:flex-end; gap:4px; height:120px; }
+.col .b{ width:16px; border-radius:5px 5px 0 0; min-height:3px; transition:height .5s ease; }
+.col .b.ent{ background:var(--rosa); }
+.col .b.sai{ background:var(--borda); }
+.col .rot{ font-size:.66rem; color:var(--suave); text-transform:uppercase; letter-spacing:.08em; }
+.chave{ display:inline-flex; align-items:center; gap:6px; font-size:.72rem; color:var(--suave); margin-left:14px; }
+.chave i{ width:10px; height:10px; border-radius:3px; display:inline-block; }
+
+.dupla-forms{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media(max-width:900px){ .dupla-forms{ grid-template-columns:1fr; } }
+.aviso-linha{ color:#B4453F; font-size:.8rem; min-height:1.1em; margin:0 0 8px; }
+
+.lanc{ display:flex; align-items:center; gap:12px; padding:11px 0; border-bottom:1px solid var(--borda); }
+.lanc:last-child{ border-bottom:0; }
+.lanc .dia{ font-size:.72rem; color:var(--suave); width:52px; flex:none; }
+.lanc .txt{ flex:1; min-width:0; }
+.lanc .txt b{ font-weight:500; font-size:.9rem; display:block; }
+.lanc .txt small{ font-size:.72rem; color:var(--suave); }
+.lanc .val{ font-family:var(--display); font-size:1.05rem; white-space:nowrap; }
+.lanc .btn.mini{ flex:none; }
+@media(max-width:620px){
+  .lanc{ flex-wrap:wrap; }
+  .lanc .txt{ flex:1 1 100%; order:2; }
+  .lanc .val{ order:1; margin-left:auto; }
+  .lanc .btn.mini{ order:3; }
+}
+.lanc .val.ent{ color:#2E7D5B; }
+.lanc .val.sai{ color:#B4453F; }
+
+/* ---------- SERVIÇOS ---------- */
+.serv-adm{ display:grid; grid-template-columns:190px 1fr; gap:16px; align-items:start;
+  border:1px solid var(--borda); border-radius:14px; padding:14px; margin-bottom:14px; background:var(--branco); }
+.serv-adm.escondido{ opacity:.55; }
+.serv-adm .foto{ margin:0; }
+.serv-adm .cabeca{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; flex-wrap:wrap; }
+.serv-adm .ordem{ display:flex; align-items:center; gap:6px; }
+.serv-adm .ver{ display:flex; align-items:center; gap:8px; font-size:.8rem; color:var(--suave); }
+.serv-adm .posicao{ font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--suave); }
+@media(max-width:700px){ .serv-adm{ grid-template-columns:1fr; } }
+
+/* ---------- APARÊNCIA ---------- */
+.cores{ display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:14px; margin-bottom:6px; }
+.cor{ display:flex; align-items:center; gap:10px; border:1px solid var(--borda); border-radius:12px; padding:8px 10px; background:var(--porcelana); }
+.cor input[type=color]{ width:38px; height:38px; border:0; border-radius:9px; padding:0; background:none; cursor:pointer; flex:none; }
+.cor div{ min-width:0; }
+.cor b{ display:block; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--suave); font-weight:500; }
+.cor input[type=text]{ width:92px; border:0; background:none; font-size:.82rem; padding:0; }
+.deslize{ display:flex; align-items:center; gap:12px; }
+.deslize input[type=range]{ flex:1; accent-color:var(--rosa); }
+.deslize output{ font-size:.8rem; color:var(--suave); width:56px; text-align:right; }
+.previa{ border:1px solid var(--borda); border-radius:14px; padding:26px; margin-top:6px; }
+.previa .rot{ font-size:.64rem; letter-spacing:.28em; text-transform:uppercase; margin-bottom:10px; }
+.previa h4{ margin:0 0 10px; font-weight:300; font-size:1.9rem; }
+.previa p{ margin:0 0 16px; font-size:.9rem; }
+.previa .bt{ display:inline-block; padding:.8em 1.6em; border-radius:999px; font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; }
+
+/* ---------- AVALIAÇÕES ---------- */
+.av{ border:1px solid var(--borda); border-radius:14px; padding:16px 18px; margin-bottom:12px; background:var(--branco); }
+.av.pendente{ border-color:rgba(200,168,107,.65); background:rgba(200,168,107,.07); }
+.av .topo{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:8px; }
+.av .nome{ font-weight:500; }
+.av .data{ font-size:.74rem; color:var(--suave); margin-left:auto; }
+.av p{ margin:0 0 14px; font-size:.92rem; }
+.av .acoes{ display:flex; gap:8px; flex-wrap:wrap; }
+.estrelas{ color:var(--rosa); letter-spacing:1px; font-size:.9rem; }
+.vazio{ border:1px dashed var(--borda); border-radius:14px; padding:34px; text-align:center; color:var(--suave); }
+
+/* ---------- RECADO ---------- */
+#recado{ position:fixed; left:50%; bottom:86px; transform:translate(-50%,20px); z-index:200; background:var(--escuro); color:var(--branco); padding:12px 22px; border-radius:999px; font-size:.84rem; opacity:0; visibility:hidden; transition:.3s; box-shadow:0 16px 40px -18px rgba(0,0,0,.6); }
+#recado.on{ opacity:1; visibility:visible; transform:translate(-50%,0); }
+#recado.ruim{ background:var(--alerta); }
+
+@media(max-width:860px){
+  #painel{ grid-template-columns:1fr; }
+  .lado{ position:static; height:auto; flex-direction:row; flex-wrap:wrap; align-items:center; gap:6px; padding:14px; }
+  .lado .marca{ width:100%; margin-bottom:8px; }
+  .lado .rodape{ margin:0 0 0 auto; display:flex; }
+  .barra{ left:0; }
+  .conteudo{ padding-bottom:130px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= ENTRADA ================= -->
+<section id="entrada">
+  <div class="cartao">
+    <div class="marca"><b>Jessica Aline <i>Nails</i></b><small>Painel do estúdio</small></div>
+
+    <div id="carregando" style="text-align:center;color:var(--suave);font-size:.86rem">Carregando…</div>
+
+    <!-- primeiro acesso -->
+    <form id="form-criar" class="esconde">
+      <div class="aviso"><b>Primeiro acesso.</b> Ainda não existe administrador. A conta criada agora será a dona do painel — e o cadastro fecha em seguida.</div>
+      <div class="campo"><label for="c-email">E-mail</label><input id="c-email" type="email" autocomplete="email" required></div>
+      <div class="campo"><label for="c-senha">Senha</label><input id="c-senha" type="password" autocomplete="new-password" minlength="6" required><div class="ajuda">Mínimo de 6 caracteres. Use uma senha que você não usa em outro lugar.</div></div>
+      <div class="campo"><label for="c-senha2">Repita a senha</label><input id="c-senha2" type="password" autocomplete="new-password" required></div>
+      <p class="erro" id="c-erro"></p>
+      <button class="btn largo" type="submit">Criar minha conta</button>
+    </form>
+
+    <!-- login -->
+    <form id="form-entrar" class="esconde">
+      <div class="campo"><label for="e-email">E-mail</label><input id="e-email" type="email" autocomplete="email" required></div>
+      <div class="campo"><label for="e-senha">Senha</label><input id="e-senha" type="password" autocomplete="current-password" required></div>
+      <p class="erro" id="e-erro"></p>
+      <button class="btn largo" type="submit">Entrar</button>
+      <button class="texto-link" type="button" id="esqueci">Esqueci minha senha</button>
+    </form>
+
+    <a class="texto-link" href="./index.html">← Voltar para o site</a>
+  </div>
+</section>
+
+<!-- ================= PAINEL ================= -->
+<section id="painel" class="esconde">
+  <aside class="lado">
+    <div class="marca"><b>Jessica Aline <i>Nails</i></b><small>Painel do estúdio</small></div>
+    <button class="aba on" data-aba="avaliacoes">Avaliações <span class="selo esconde" id="conta-pendentes">0</span></button>
+    <button class="aba" data-aba="textos">Textos</button>
+    <button class="aba" data-aba="servicos">Serviços</button>
+    <button class="aba" data-aba="agenda">Agenda</button>
+    <button class="aba" data-aba="equipe">Profissionais</button>
+    <button class="aba" data-aba="caixa">Financeiro</button>
+    <button class="aba" data-aba="fotos">Fotos</button>
+    <button class="aba" data-aba="aparencia">Aparência</button>
+    <button class="aba" data-aba="contato">Contato e links</button>
+    <button class="aba" data-aba="conta">Minha conta</button>
+    <div class="rodape">
+      <a href="./index.html" target="_blank" rel="noopener">Ver o site ↗</a>
+      <button id="sair">Sair do painel</button>
+    </div>
+  </aside>
+
+  <main class="conteudo">
+    <!-- AVALIAÇÕES -->
+    <div class="pg" id="pg-avaliacoes">
+      <h1 class="titulo-pg">Avaliações</h1>
+      <p class="legenda">O que a cliente envia pelo site chega aqui primeiro. Só aparece no site depois que você aprova.</p>
+      <h3 style="margin-bottom:12px">Esperando aprovação</h3>
+      <div id="lista-pendentes"></div>
+      <h3 style="margin:32px 0 12px">Publicadas no site</h3>
+      <div id="lista-aprovadas"></div>
+    </div>
+
+    <!-- TEXTOS -->
+    <div class="pg esconde" id="pg-textos">
+      <h1 class="titulo-pg">Textos</h1>
+      <p class="legenda">Tudo que está escrito no site. Para quebrar uma linha no meio de um título, dê enter — o site respeita a quebra.</p>
+      <div id="campos-textos"></div>
+    </div>
+
+    <!-- AGENDA -->
+    <div class="pg esconde" id="pg-agenda">
+      <h1 class="titulo-pg">Agenda</h1>
+      <p class="legenda">Só você vê esta agenda. Pedidos feitos pelo site entram como <b>aguardando validação</b> e não trancam o horário até você confirmar.</p>
+
+      <div id="sem-vinculo" class="aviso-caixa esconde"></div>
+
+      <div class="ag-topo">
+        <div class="mes-nav">
+          <button class="btn mini" id="ag-ant" aria-label="Mês anterior">←</button>
+          <b id="ag-mes-nome"></b>
+          <button class="btn mini" id="ag-prox" aria-label="Mês seguinte">→</button>
+          <button class="btn mini" id="ag-hoje">Hoje</button>
+        </div>
+        <button class="btn mini" id="ag-novo">+ Marcar horário</button>
+      </div>
+
+      <div class="bloco pendentes esconde" id="ag-pendentes-cx">
+        <div class="cabeca-bloco">
+          <h3>Pedidos aguardando validação</h3>
+          <span class="desc" id="ag-contador"></span>
+        </div>
+        <p class="desc">Aparecem aqui de qualquer data, mesmo fora do mês que você está vendo. Enquanto não validar, o horário segue livre para outra cliente.</p>
+        <div id="ag-pendentes"></div>
+      </div>
+
+      <div class="bloco esconde" id="ag-form-novo">
+        <h3>Marcar horário na mão</h3>
+        <p class="desc">Para quando a cliente combina por telefone ou aparece no studio.</p>
+        <div class="dupla">
+          <div class="campo"><label for="mn-cliente">Cliente</label><input type="text" id="mn-cliente" placeholder="Nome"></div>
+          <div class="campo"><label for="mn-tel">Telefone (opcional)</label><input type="text" id="mn-tel" placeholder="(93) 9 9999-9999"></div>
+        </div>
+        <div class="dupla">
+          <div class="campo"><label for="mn-servico">Serviço</label><select id="mn-servico"></select></div>
+          <div class="campo"><label for="mn-dur">Duração (min)</label><input type="number" id="mn-dur" min="15" step="15" value="60"></div>
+        </div>
+        <div class="dupla">
+          <div class="campo"><label for="mn-data">Data</label><input type="date" id="mn-data"></div>
+          <div class="campo"><label for="mn-hora">Início</label><input type="time" id="mn-hora" step="300"></div>
+        </div>
+        <p class="aviso-linha" id="mn-erro"></p>
+        <button class="btn" id="mn-salvar">Marcar como agendado</button>
+      </div>
+
+      <div class="bloco">
+        <div class="cal-cab" id="cal-cab"></div>
+        <div class="cal-grade" id="cal-grade"></div>
+        <div class="cal-legenda" id="cal-legenda"></div>
+      </div>
+
+      <div class="bloco">
+        <h3 id="ag-titulo-dia">Horários do dia</h3>
+        <div id="ag-lista"></div>
+      </div>
+
+      <div class="bloco">
+        <h3>Meus horários de atendimento</h3>
+        <p class="desc">É o que o site usa para oferecer horários às clientes.</p>
+        <div id="ag-horarios"></div>
+      </div>
+    </div>
+
+    <!-- PROFISSIONAIS -->
+    <div class="pg esconde" id="pg-equipe">
+      <h1 class="titulo-pg">Profissionais</h1>
+      <p class="legenda">Quem trabalha no studio. Cada uma aparece no site com seu próprio WhatsApp e pode ter acesso ao painel.</p>
+
+      <div class="bloco">
+        <h3>Texto da seção no site</h3>
+        <div id="campos-equipe-topo"></div>
+      </div>
+
+      <div class="bloco">
+        <h3>Equipe</h3>
+        <p class="desc">Desmarque “Mostrar no site” para esconder alguém sem apagar o cadastro.</p>
+        <div id="lista-profissionais"></div>
+        <button class="btn" id="add-profissional" style="margin-top:14px">+ Adicionar profissional</button>
+      </div>
+    </div>
+
+    <!-- FINANCEIRO -->
+    <div class="pg esconde" id="pg-caixa">
+      <h1 class="titulo-pg">Financeiro</h1>
+      <p class="legenda">Só você enxerga esta aba. Nada daqui aparece no site.</p>
+
+      <div class="sub-abas">
+        <button class="sub-aba ativa" data-sub="painel">Dashboard</button>
+        <button class="sub-aba" data-sub="lancar">Lançamentos</button>
+      </div>
+
+      <div class="mes-barra">
+        <label for="mes">Mês</label>
+        <input type="month" id="mes">
+        <button class="btn mini" id="mes-hoje">Mês atual</button>
+        <span id="filtro-quem"></span>
+      </div>
+
+      <div class="sub-pg" id="sub-painel">
+        <div class="painel-num" id="numeros"></div>
+
+        <div class="bloco">
+          <div class="cabeca-bloco">
+            <h3>Últimos 6 meses</h3>
+            <span class="desc" id="legenda-grafico"></span>
+          </div>
+          <div id="grafico"></div>
+        </div>
+
+        <div class="bloco">
+          <div class="cabeca-bloco">
+            <h3>Para onde vai o dinheiro</h3>
+            <span class="desc">Custos do mês por categoria</span>
+          </div>
+          <div id="por-categoria"></div>
+        </div>
+
+        <div class="dupla-forms">
+          <div class="bloco">
+            <h3>Serviços que mais renderam</h3>
+            <div id="top-servicos"></div>
+          </div>
+          <div class="bloco">
+            <h3>Comparado ao mês passado</h3>
+            <div id="comparativo"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-pg esconde" id="sub-lancar">
+      <div class="dupla-forms">
+        <div class="bloco">
+          <h3>Registrar atendimento</h3>
+          <p class="desc">O que entrou de dinheiro.</p>
+          <div class="dupla">
+            <div class="campo"><label for="r-data">Data</label><input type="date" id="r-data"></div>
+            <div class="campo"><label for="r-valor">Valor recebido (R$)</label><input type="number" id="r-valor" step="0.01" min="0" placeholder="0,00"></div>
+          </div>
+          <div class="campo"><label for="r-servico">Serviço</label><select id="r-servico"></select></div>
+          <div class="campo"><label for="r-desc">Observação (opcional)</label><input type="text" id="r-desc" placeholder="Nome da cliente, forma de pagamento…"></div>
+          <p class="aviso-linha" id="r-erro"></p>
+          <button class="btn" id="add-receita">Lançar entrada</button>
+        </div>
+
+        <div class="bloco">
+          <h3>Registrar custo</h3>
+          <p class="desc">Material, ferramenta, qualquer gasto do studio.</p>
+          <div class="dupla">
+            <div class="campo"><label for="d-data">Data</label><input type="date" id="d-data"></div>
+            <div class="campo"><label for="d-valor">Valor pago (R$)</label><input type="number" id="d-valor" step="0.01" min="0" placeholder="0,00"></div>
+          </div>
+          <div class="campo"><label for="d-cat">Categoria</label><select id="d-cat">
+            <option>Materiais</option><option>Ferramentas</option><option>Aluguel</option>
+            <option>Energia e água</option><option>Marketing</option><option>Outros</option>
+          </select></div>
+          <div class="campo"><label for="d-desc">O que foi</label><input type="text" id="d-desc" placeholder="Ex.: esmaltes, lixas, cabine de LED"></div>
+          <p class="aviso-linha" id="d-erro"></p>
+          <button class="btn" id="add-despesa">Lançar custo</button>
+        </div>
+      </div>
+
+      <div class="bloco">
+        <h3>Lançamentos do mês</h3>
+        <div id="lista-lancamentos"></div>
+      </div>
+      </div>
+    </div>
+
+    <!-- SERVIÇOS -->
+    <div class="pg esconde" id="pg-servicos">
+      <h1 class="titulo-pg">Serviços</h1>
+      <p class="legenda">O que você cadastrar aqui aparece na seção “Escolha o seu cuidado”. A ordem da lista é a ordem no site.</p>
+      <div class="bloco">
+        <h3>Título da seção</h3>
+        <div id="campos-servicos-topo"></div>
+      </div>
+      <div class="bloco">
+        <h3>Serviços cadastrados</h3>
+        <p class="desc">Desmarque “Mostrar no site” para esconder um serviço sem apagar o que você escreveu.</p>
+        <div id="lista-servicos"></div>
+        <button class="btn" id="add-servico" style="margin-top:14px">+ Adicionar serviço</button>
+      </div>
+    </div>
+
+    <!-- FOTOS -->
+    <div class="pg esconde" id="pg-fotos">
+      <h1 class="titulo-pg">Fotos</h1>
+      <p class="legenda">As fotos são reduzidas automaticamente antes de subir, para o site continuar leve. Onde não houver foto, aparece a moldura com o monograma JA.</p>
+      <div class="bloco">
+        <h3>Fotos das seções</h3>
+        <p class="desc">A foto principal é a primeira coisa que a cliente vê — escolha a melhor.</p>
+        <div class="fotos" id="fotos-secoes"></div>
+      </div>
+      <div class="bloco">
+        <h3>Galeria de trabalhos</h3>
+        <p class="desc">Oito lugares. Fotos de perto, com boa luz, funcionam melhor.</p>
+        <div class="fotos" id="fotos-galeria"></div>
+      </div>
+    </div>
+
+    <!-- APARÊNCIA -->
+    <div class="pg esconde" id="pg-aparencia">
+      <h1 class="titulo-pg">Aparência</h1>
+      <p class="legenda">As demais cores do site (tons suaves, sombras, fundos) são calculadas a partir destas cinco.</p>
+      <div class="bloco">
+        <h3>Cores</h3>
+        <p class="desc">Clique no quadradinho para escolher, ou escreva o código da cor.</p>
+        <div class="cores" id="cores"></div>
+      </div>
+      <div class="bloco">
+        <h3>Fontes e tamanho</h3>
+        <p class="desc">A primeira vale para os títulos, a segunda para o restante do texto.</p>
+        <div class="dupla">
+          <div class="campo"><label for="f-titulo">Fonte dos títulos</label><select id="f-titulo"></select></div>
+          <div class="campo"><label for="f-texto">Fonte dos textos</label><select id="f-texto"></select></div>
+        </div>
+        <div class="campo"><label for="f-base">Tamanho do texto</label>
+          <div class="deslize"><input id="f-base" type="range" min="14" max="20" step="1"><output id="o-base"></output></div>
+        </div>
+        <div class="campo"><label for="f-escala">Tamanho dos títulos</label>
+          <div class="deslize"><input id="f-escala" type="range" min="0.8" max="1.3" step="0.05"><output id="o-escala"></output></div>
+        </div>
+      </div>
+      <div class="bloco">
+        <h3>Prévia</h3>
+        <p class="desc">É assim que fica no site.</p>
+        <div class="previa" id="previa">
+          <div class="rot">Serviços</div>
+          <h4>Escolha o seu cuidado</h4>
+          <p>Cutícula feita com cuidado, formato do seu gosto e esmaltação impecável.</p>
+          <span class="bt">Agendar pelo WhatsApp</span>
+        </div>
+        <div style="padding-bottom:16px"><button class="btn linha mini" id="restaurar-cores">Voltar às cores originais</button></div>
+      </div>
+    </div>
+
+    <!-- CONTATO -->
+    <div class="pg esconde" id="pg-contato">
+      <h1 class="titulo-pg">Contato e links</h1>
+      <p class="legenda">Estes campos alimentam todos os botões do site de uma vez: menu, serviços, rodapé e o botão flutuante.</p>
+      <div id="campos-contato"></div>
+    </div>
+
+    <!-- CONTA -->
+    <div class="pg esconde" id="pg-conta">
+      <h1 class="titulo-pg">Minha conta</h1>
+      <p class="legenda">Você está no painel como <b id="meu-email"></b>.</p>
+      <div class="bloco">
+        <h3>Trocar a senha</h3>
+        <p class="desc">Se fizer muito tempo que você entrou, o Firebase pode pedir que saia e entre de novo antes de trocar.</p>
+        <div class="campo" style="max-width:340px"><label for="n-senha">Nova senha</label><input id="n-senha" type="password" minlength="6" autocomplete="new-password"></div>
+        <p class="erro" id="s-erro"></p>
+        <div style="padding-bottom:16px"><button class="btn" id="trocar-senha">Salvar nova senha</button></div>
+      </div>
+      <div class="bloco">
+        <h3>Fechar o cadastro de novas contas</h3>
+        <p class="desc">Depois que sua conta existe, ninguém mais vira administrador por aqui — mas convém fechar a porta no Firebase: Authentication → Settings → User actions → desmarque "Enable create (sign-up)".</p>
+        <div style="padding-bottom:16px"><a class="btn linha" href="https://console.firebase.google.com/" target="_blank" rel="noopener">Abrir o console do Firebase ↗</a></div>
+      </div>
+    </div>
+  </main>
+
+<!-- Corrigir um lançamento já feito -->
+<div id="edicao" class="modal-adm">
+  <div class="cx">
+    <h3>Corrigir lançamento</h3>
+    <p class="desc">Ajuste o que ficou errado. A alteração já reflete no dashboard.</p>
+    <div class="dupla">
+      <div class="campo"><label for="ed-tipo">Tipo</label>
+        <select id="ed-tipo">
+          <option value="receita">Entrada (faturamento)</option>
+          <option value="despesa">Custo</option>
+        </select></div>
+      <div class="campo"><label for="ed-data">Data</label><input type="date" id="ed-data"></div>
+    </div>
+    <div class="campo"><label for="ed-cat">Serviço / categoria</label><select id="ed-cat"></select></div>
+    <div class="campo esconde" id="ed-cx-outro"><label for="ed-outro">Qual?</label>
+      <input type="text" id="ed-outro" placeholder="Escreva o serviço ou a categoria"></div>
+    <div class="campo"><label for="ed-valor">Valor (R$)</label>
+      <input type="number" id="ed-valor" step="0.01" min="0" placeholder="0,00"></div>
+    <div class="campo"><label for="ed-desc">Observação</label><input type="text" id="ed-desc"></div>
+    <p class="aviso-linha" id="ed-erro"></p>
+    <button class="btn" id="ed-salvar">Salvar correção</button>
+    <button class="btn vazio" id="ed-cancelar" style="margin-top:8px">Cancelar</button>
+  </div>
+</div>
+
+<!-- Fechamento do atendimento: vira lançamento no financeiro -->
+<div id="fechamento" class="modal-adm">
+  <div class="cx">
+    <h3>Atendimento concluído</h3>
+    <p class="desc">Lance o que foi feito para entrar no seu faturamento.</p>
+    <div class="resumo-adm" id="fc-resumo"></div>
+    <div class="campo"><label for="fc-servico">Serviço realizado</label>
+      <select id="fc-servico"></select></div>
+    <div class="campo esconde" id="fc-cx-outro"><label for="fc-outro">Qual serviço?</label>
+      <input type="text" id="fc-outro" placeholder="Ex.: manutenção + nail art"></div>
+    <div class="campo"><label for="fc-valor">Valor recebido (R$)</label>
+      <input type="number" id="fc-valor" step="0.01" min="0" placeholder="0,00"></div>
+    <div class="campo"><label for="fc-obs">Observação (opcional)</label>
+      <input type="text" id="fc-obs" placeholder="Forma de pagamento, detalhes…"></div>
+    <p class="aviso-linha" id="fc-erro"></p>
+    <button class="btn" id="fc-lancar">Lançar no faturamento</button>
+    <button class="btn vazio" id="fc-depois" style="margin-top:8px">Deixar para depois</button>
+  </div>
+</div>
+
+  <div class="barra">
+    <span class="estado" id="estado">Tudo salvo</span>
+    <button class="btn linha" id="descartar">Descartar</button>
+    <button class="btn" id="salvar">Salvar alterações</button>
+  </div>
+</section>
+
+<div id="recado"></div>
+
+<script type="module">
+import { PADRAO, mesclar, migrar, SERVICO_NOVO, PROFISSIONAL_NOVA, DIAS, STATUS, FONTES_TITULO, FONTES_TEXTO, urlDasFontes } from "./assets/padrao.js";
+
+const $  = (s, e = document) => e.querySelector(s);
+const $$ = (s, e = document) => [...e.querySelectorAll(s)];
+
+let FB, CFG, sujo = false, criandoConta = false;
+
+const recado = (texto, ruim = false) => {
+  const r = $("#recado");
+  r.textContent = texto;
+  r.classList.toggle("ruim", ruim);
+  r.classList.add("on");
+  clearTimeout(recado.t);
+  recado.t = setTimeout(() => r.classList.remove("on"), 3200);
+};
+
+const marcarSujo = (v = true) => {
+  sujo = v;
+  $("#estado").textContent = v ? "Você tem alterações não salvas" : "Tudo salvo";
+  $("#estado").classList.toggle("sujo", v);
+};
+
+addEventListener("beforeunload", e => { if(sujo){ e.preventDefault(); e.returnValue = ""; } });
+
+/* ============================================================
+   ENTRADA
+   ============================================================ */
+(async () => {
+  try{
+    FB = await import("./assets/firebase.js");
+  }catch(e){
+    $("#carregando").innerHTML = "Não deu para falar com o Firebase.<br>Confira as chaves em <b>assets/chaves.js</b>.";
+    console.error(e);
+    return;
+  }
+
+  let temAdmin = true;
+  try { temAdmin = await FB.jaTemAdmin(); }
+  catch(e){ console.warn("Não deu para checar o primeiro acesso:", e); }
+
+  FB.aoMudarLogin(async (user) => {
+    if(criandoConta) return;
+    if(!user){
+      $("#carregando").classList.add("esconde");
+      $(temAdmin ? "#form-entrar" : "#form-criar").classList.remove("esconde");
+      return;
+    }
+    if(await FB.ehAdmin(user.uid)){
+      await abrirPainel(user);
+    }else{
+      await FB.sair();
+      $("#carregando").classList.add("esconde");
+      $("#form-entrar").classList.remove("esconde");
+      $("#e-erro").textContent = "Esta conta não tem acesso ao painel.";
+    }
+  });
+})();
+
+/* criar o primeiro administrador */
+$("#form-criar").addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+  const email = $("#c-email").value.trim();
+  const s1 = $("#c-senha").value, s2 = $("#c-senha2").value;
+  const erro = $("#c-erro");
+  if(s1 !== s2) return erro.textContent = "As duas senhas estão diferentes.";
+  if(s1.length < 6) return erro.textContent = "A senha precisa ter pelo menos 6 caracteres.";
+  erro.textContent = "";
+
+  const bt = ev.submitter; bt.disabled = true; bt.textContent = "Criando…";
+  criandoConta = true;
+  try{
+    const user = await FB.criarPrimeiroAdmin(email, s1);
+    criandoConta = false;
+    await abrirPainel(user);
+    recado("Conta criada. Bem-vinda ao painel!");
+  }catch(e){
+    criandoConta = false;
+    erro.textContent = FB.explicarErro(e);
+    console.error(e);
+  }finally{
+    bt.disabled = false; bt.textContent = "Criar minha conta";
+  }
+});
+
+/* login */
+$("#form-entrar").addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+  const bt = ev.submitter; bt.disabled = true; bt.textContent = "Entrando…";
+  $("#e-erro").textContent = "";
+  try{
+    await FB.entrar($("#e-email").value.trim(), $("#e-senha").value);
+  }catch(e){
+    $("#e-erro").textContent = FB.explicarErro(e);
+  }finally{
+    bt.disabled = false; bt.textContent = "Entrar";
+  }
+});
+
+$("#esqueci").addEventListener("click", async () => {
+  const email = $("#e-email").value.trim();
+  if(!email) return $("#e-erro").textContent = "Escreva seu e-mail acima primeiro.";
+  try{
+    await FB.recuperarSenha(email);
+    $("#e-erro").textContent = "";
+    recado("Link de nova senha enviado para o seu e-mail.");
+  }catch(e){ $("#e-erro").textContent = FB.explicarErro(e); }
+});
+
+$("#sair").addEventListener("click", async () => {
+  if(sujo && !confirm("Você tem alterações não salvas. Sair mesmo assim?")) return;
+  marcarSujo(false);
+  await FB.sair();
+  location.reload();
+});
+
+/* ============================================================
+   ABERTURA DO PAINEL
+   ============================================================ */
+let PERFIL = null;      // dados da conta logada
+let SOU_DONA = true;    // administradora: só ela cria acessos novos
+let MEU_PID = "";       // id da profissional ligada a esta conta
+
+/** Todas as profissionais mexem no site inteiro: textos, fotos, serviços,
+    avaliações. O que é individual é o financeiro — sempre o da própria
+    conta — e a criação de acessos, que segue com a administradora. */
+function ajustarPermissoes(){
+  $$(".aba").forEach(b => b.classList.remove("esconde"));
+}
+
+async function abrirPainel(user){
+  $("#entrada").classList.add("esconde");
+  $("#painel").classList.remove("esconde");
+  $("#meu-email").textContent = user.email || "";
+
+  try{ PERFIL = await FB.meuPerfil(user.uid); }catch(e){ PERFIL = null; }
+  SOU_DONA = !PERFIL || PERFIL.papel !== "profissional";
+  MEU_PID  = PERFIL?.profissionalId || "";
+  ajustarPermissoes();
+
+  let salvo = null;
+  try { salvo = await FB.lerConfig(); }
+  catch(e){ recado("Não deu para ler as configurações.", true); }
+  CFG = migrar(mesclar(PADRAO, salvo || {}));
+
+  montarTextos();
+  montarContato();
+  montarAparencia();
+  await montarFotos();
+  await recarregarAcessos();
+  montarProfissionais();
+  montarServicos();
+  checarVinculo();
+  montarHorariosDeAtendimento();
+  atualizarSeletorDeServicoDaAgenda();
+  MES_AG = mesAtual(); DIA_SEL = hojeISO();
+  $("#mn-data").value = hojeISO();
+  await carregarAgenda();
+  $("#mes").value = mesAtual();
+  $("#r-data").value = $("#d-data").value = hojeISO();
+  atualizarSeletorServicos();
+  await carregarCaixa();
+  await carregarAvaliacoes();
+  marcarSujo(false);
+}
+
+/* navegação por abas */
+$$(".aba").forEach(b => b.addEventListener("click", () => {
+  $$(".aba").forEach(x => x.classList.toggle("on", x === b));
+  $$(".pg").forEach(p => p.classList.toggle("esconde", p.id !== "pg-" + b.dataset.aba));
+  scrollTo({ top: 0 });
+}));
+
+/* ============================================================
+   CAMPOS GENÉRICOS
+   ============================================================ */
+const pegar = (caminho) => caminho.split(".").reduce((o, k) => o?.[k], CFG);
+const definir = (caminho, valor) => {
+  const partes = caminho.split(".");
+  const ultima = partes.pop();
+  partes.reduce((o, k) => o[k], CFG)[ultima] = valor;
+  marcarSujo();
+};
+
+/* <br> vira quebra de linha na edição, e volta a ser <br> ao salvar */
+const paraTela  = (t) => String(t ?? "").replace(/<br\s*\/?>/gi, "\n");
+const paraSite  = (t) => String(t ?? "").trim().replace(/\n+/g, "<br>");
+
+function campo(caminho, rotulo, tipo = "texto", ajuda = ""){
+  const id = "cp-" + caminho.replace(/\./g, "-");
+  const valor = paraTela(pegar(caminho));
+  const entrada = tipo === "area"
+    ? `<textarea id="${id}">${valor.replace(/</g, "&lt;")}</textarea>`
+    : `<input id="${id}" type="text" value="${String(valor).replace(/"/g, "&quot;")}">`;
+  return `<div class="campo"><label for="${id}">${rotulo}</label>${entrada}${ajuda ? `<div class="ajuda">${ajuda}</div>` : ""}</div>`;
+}
+
+function ligarCampos(raiz){
+  $$("input[type=text],textarea", raiz).forEach(el => {
+    if(!el.id.startsWith("cp-")) return;
+    const caminho = el.id.slice(3).replace(/-/g, ".");
+    el.addEventListener("input", () => {
+      if(caminho.endsWith(".duracao")){
+        // agenda precisa de número: 60, não "60"
+        definir(caminho, Math.max(15, parseInt(el.value, 10) || 60));
+        const espelho = el.closest(".dupla")?.querySelector("input[disabled]");
+        if(espelho) espelho.value = duracaoTxt(Math.max(15, parseInt(el.value, 10) || 60));
+        return;
+      }
+      definir(caminho, el.tagName === "TEXTAREA" ? paraSite(el.value) : el.value.trim());
+    });
+  });
+}
+
+/* ============================================================
+   ABA TEXTOS
+   ============================================================ */
+function montarTextos(){
+  const b = (titulo, desc, html) => `<div class="bloco"><h3>${titulo}</h3><p class="desc">${desc}</p>${html}</div>`;
+  let h = "";
+
+  h += b("Marca", "Aparece no topo, no rodapé e no título da aba do navegador.",
+    `<div class="dupla">
+      ${campo("marca.nome1", "Nome — primeira parte")}
+      ${campo("marca.nome2", "Nome — parte em destaque")}
+      ${campo("marca.local", "Cidade")}
+      ${campo("marca.slogan", "Assinatura do rodapé")}
+    </div>${campo("marca.resumo", "Frase do rodapé", "area")}`);
+
+  h += b("Primeira dobra", "O que a cliente lê antes de rolar a página.",
+    `${campo("hero.rotulo", "Etiqueta pequena")}
+     <div class="dupla">
+      ${campo("hero.titulo1", "Título — linha 1")}
+      ${campo("hero.titulo2", "Título — linha 2")}
+     </div>
+     ${campo("hero.titulo3", "Título — linha 3 (em itálico rosa)")}
+     ${campo("hero.texto", "Parágrafo", "area")}
+     <div class="dupla">
+      ${campo("hero.btn1", "Botão principal")}
+      ${campo("hero.btn2", "Botão secundário")}
+      ${campo("hero.selo1", "Selo 1")}
+      ${campo("hero.selo2", "Selo 2")}
+     </div>`);
+
+  h += b("Sobre o studio", "A seção que apresenta você.",
+    `<div class="dupla">${campo("sobre.rotulo", "Etiqueta")}${campo("sobre.titulo", "Título")}</div>
+     ${campo("sobre.p1", "Primeiro parágrafo", "area")}
+     ${campo("sobre.p2", "Segundo parágrafo", "area")}
+     <div class="dupla">${campo("sobre.profissional", "Nome no selo redondo")}${campo("sobre.cargo", "Função no selo redondo")}</div>
+     ${[0,1,2].map(i => `<div class="dupla">${campo(`sobre.pontos.${i}.titulo`, `Ponto ${i+1} — título`)}${campo(`sobre.pontos.${i}.texto`, `Ponto ${i+1} — descrição`)}</div>`).join("")}`);
+
+  h += b("Por que as clientes voltam", "Os quatro quadros da faixa escura.",
+    `<div class="dupla">${campo("diferenciais.rotulo", "Etiqueta")}${campo("diferenciais.titulo", "Título")}</div>
+     ${[0,1,2,3].map(i => `<div class="dupla">${campo(`diferenciais.itens.${i}.titulo`, `Quadro ${i+1} — título`)}${campo(`diferenciais.itens.${i}.texto`, `Quadro ${i+1} — texto`, "area")}</div>`).join("")}`);
+
+  h += b("Galeria, depoimentos e finais", "Os títulos das últimas seções.",
+    `<div class="dupla">
+      ${campo("galeria.rotulo", "Galeria — etiqueta")}${campo("galeria.titulo", "Galeria — título")}
+      ${campo("galeria.botao", "Galeria — botão")}
+      ${campo("depoimentos.rotulo", "Depoimentos — etiqueta")}${campo("depoimentos.titulo", "Depoimentos — título")}
+      ${campo("depoimentos.botao", "Depoimentos — botão")}
+     </div>
+     ${campo("depoimentos.convite", "Convite para avaliar", "area")}
+     <div class="dupla">
+      ${campo("local.rotulo", "Localização — etiqueta")}${campo("local.titulo", "Localização — título")}
+      ${campo("final.rotulo", "Chamada final — etiqueta")}${campo("final.titulo", "Chamada final — título")}
+      ${campo("final.botao", "Chamada final — botão")}
+     </div>
+     ${campo("final.texto", "Chamada final — parágrafo", "area")}`);
+
+  h += b("Letreiro", "A faixa que corre logo abaixo da primeira dobra. Separe por vírgula.",
+    campo("letreiro_txt", "Palavras", "area"));
+
+  const raiz = $("#campos-textos");
+  raiz.innerHTML = h;
+
+  // o letreiro é um caso à parte (vira lista)
+  const cl = $("#cp-letreiro_txt");
+  cl.value = CFG.letreiro.join(", ");
+  cl.addEventListener("input", () => {
+    CFG.letreiro = cl.value.split(",").map(s => s.trim()).filter(Boolean);
+    marcarSujo();
+  });
+
+  ligarCampos(raiz);
+}
+
+/* ============================================================
+   ABA CONTATO
+   ============================================================ */
+function montarContato(){
+  const raiz = $("#campos-contato");
+  raiz.innerHTML = `
+    <div class="bloco"><h3>WhatsApp</h3><p class="desc">O número precisa ter 55 + DDD + número, só dígitos.</p>
+      <div class="dupla">
+        ${campo("contato.whatsapp", "Número para o link", "texto", "Exemplo: 5593991797198")}
+        ${campo("contato.whatsappTexto", "Como aparece escrito", "texto", "Exemplo: (93) 9179-7198")}
+      </div>
+      ${campo("contato.mensagem", "Mensagem que já vem digitada", "area")}
+    </div>
+    <div class="bloco"><h3>Instagram</h3><p class="desc">O endereço completo do perfil.</p>
+      <div class="dupla">
+        ${campo("contato.instagram", "Endereço do perfil")}
+        ${campo("contato.instagramUsuario", "Arroba que aparece no site")}
+      </div>
+    </div>
+    <div class="bloco"><h3>Endereço</h3><p class="desc">A busca alimenta o mapa que aparece na página; o link é o botão "Abrir no Google Maps".</p>
+      <div class="dupla">
+        ${campo("contato.endereco", "Endereço escrito")}
+        ${campo("contato.horario", "Horário de atendimento")}
+        ${campo("contato.mapsBusca", "Busca do mapa", "texto", "Nome e cidade, como você buscaria no Google Maps")}
+        ${campo("contato.mapsLink", "Link do Google Maps")}
+      </div>
+    </div>`;
+  ligarCampos(raiz);
+}
+
+/* ============================================================
+   ABA APARÊNCIA
+   ============================================================ */
+const CORES = [
+  ["corFundo",    "Fundo da página"],
+  ["corTexto",    "Cor do texto"],
+  ["corPrimaria", "Cor principal"],
+  ["corDourada",  "Cor dos detalhes"],
+  ["corEscura",   "Faixas escuras"]
+];
+
+function montarAparencia(){
+  $("#cores").innerHTML = CORES.map(([k, r]) => `
+    <label class="cor">
+      <input type="color" data-cor="${k}" value="${CFG.aparencia[k]}">
+      <div><b>${r}</b><input type="text" data-hex="${k}" value="${CFG.aparencia[k]}" maxlength="7"></div>
+    </label>`).join("");
+
+  $$("[data-cor]").forEach(el => el.addEventListener("input", () => {
+    CFG.aparencia[el.dataset.cor] = el.value;
+    $(`[data-hex="${el.dataset.cor}"]`).value = el.value;
+    marcarSujo(); previa();
+  }));
+  $$("[data-hex]").forEach(el => el.addEventListener("input", () => {
+    if(!/^#[0-9a-f]{6}$/i.test(el.value)) return;
+    CFG.aparencia[el.dataset.hex] = el.value;
+    $(`[data-cor="${el.dataset.hex}"]`).value = el.value;
+    marcarSujo(); previa();
+  }));
+
+  $("#f-titulo").innerHTML = FONTES_TITULO.map(f => `<option ${f.nome === CFG.aparencia.fonteTitulos ? "selected" : ""}>${f.nome}</option>`).join("");
+  $("#f-texto").innerHTML  = FONTES_TEXTO.map(f => `<option ${f.nome === CFG.aparencia.fonteTexto ? "selected" : ""}>${f.nome}</option>`).join("");
+  $("#f-titulo").addEventListener("change", e => { CFG.aparencia.fonteTitulos = e.target.value; marcarSujo(); previa(); });
+  $("#f-texto").addEventListener("change",  e => { CFG.aparencia.fonteTexto   = e.target.value; marcarSujo(); previa(); });
+
+  $("#f-base").value = CFG.aparencia.tamanhoBase;
+  $("#f-escala").value = CFG.aparencia.escalaTitulos;
+  $("#f-base").addEventListener("input", e => { CFG.aparencia.tamanhoBase = +e.target.value; marcarSujo(); previa(); });
+  $("#f-escala").addEventListener("input", e => { CFG.aparencia.escalaTitulos = +e.target.value; marcarSujo(); previa(); });
+
+  $("#restaurar-cores").addEventListener("click", () => {
+    CFG.aparencia = { ...PADRAO.aparencia };
+    montarAparencia(); marcarSujo(); previa();
+    recado("Cores e fontes originais restauradas. Salve para valer no site.");
+  });
+
+  previa();
+}
+
+function previa(){
+  const a = CFG.aparencia;
+  const p = $("#previa");
+  const fontes = $("#previa-fontes") || Object.assign(document.head.appendChild(document.createElement("link")), { id: "previa-fontes", rel: "stylesheet" });
+  fontes.href = urlDasFontes(a.fonteTitulos, a.fonteTexto);
+
+  p.style.background = a.corFundo;
+  p.style.color = a.corTexto;
+  p.style.fontSize = a.tamanhoBase + "px";
+  $(".rot", p).style.color = a.corPrimaria;
+  $("h4", p).style.fontFamily = `'${a.fonteTitulos}', serif`;
+  $("h4", p).style.fontSize = (1.9 * (a.escalaTitulos || 1)) + "rem";
+  p.style.fontFamily = `'${a.fonteTexto}', sans-serif`;
+  const bt = $(".bt", p);
+  bt.style.background = a.corEscura;
+  bt.style.color = a.corFundo;
+  $("#o-base").value = a.tamanhoBase + "px";
+  $("#o-escala").value = Math.round(a.escalaTitulos * 100) + "%";
+}
+
+/* ============================================================
+   ABA FOTOS
+   ============================================================ */
+const ROTULOS_FOTO = {
+  hero:  "Foto principal",
+  sobre: "Foto do studio"
+};
+
+/* reduz a imagem no navegador antes de guardar */
+function comprimir(arquivo, larguraMax = 1200, alvoKB = 380){
+  return new Promise((ok, falha) => {
+    const leitor = new FileReader();
+    leitor.onerror = () => falha(new Error("Não deu para ler o arquivo."));
+    leitor.onload = () => {
+      const img = new Image();
+      img.onerror = () => falha(new Error("Esse arquivo não parece uma imagem."));
+      img.onload = () => {
+        const escala = Math.min(1, larguraMax / img.width);
+        const c = document.createElement("canvas");
+        c.width  = Math.round(img.width * escala);
+        c.height = Math.round(img.height * escala);
+        c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+        let q = 0.78, saida = c.toDataURL("image/jpeg", q);
+        while(saida.length / 1024 > alvoKB && q > 0.35){
+          q -= 0.08;
+          saida = c.toDataURL("image/jpeg", q);
+        }
+        ok(saida);
+      };
+      img.src = leitor.result;
+    };
+    leitor.readAsDataURL(arquivo);
+  });
+}
+
+let cacheMidia = {};
+
+/** Cartão de foto reaproveitado pelas abas Fotos e Serviços. */
+function cartaoFoto(chave, rotulo, ref){
+  const url = FB.resolverFoto(ref, cacheMidia);
+  return `<div class="foto" data-chave="${chave}">
+    <div class="quadro" style="${url ? `background-image:url('${url.replace(/'/g, "%27")}')` : ""}">${url ? "" : "JA"}</div>
+    <div class="corpo">
+      <b>${rotulo}</b>
+      <input type="text" placeholder="ou cole o endereço de uma foto" value="${ref?.startsWith("midia:") ? "" : (ref || "")}">
+      <div class="acoes">
+        <button class="btn mini enviar">Enviar foto</button>
+        <button class="btn mini perigo tirar" ${ref ? "" : "disabled"}>Tirar</button>
+      </div>
+      <span class="progresso"></span>
+      <input type="file" accept="image/*">
+    </div>
+  </div>`;
+}
+
+/** Guarda em cache todas as fotos usadas no site (seções, galeria e serviços). */
+async function carregarCacheDeFotos(){
+  try{
+    const refs = [
+      ...Object.values(CFG.imagens),
+      ...CFG.galeriaFotos,
+      ...CFG.servicos.itens.map(i => i.foto),
+      ...(CFG.profissionais || []).map(p => p.foto)
+    ];
+    cacheMidia = await FB.lerVariasMidias(FB.idsDeMidia(refs));
+  }catch(e){ console.warn(e); }
+}
+
+/* ============================================================
+   ABA SERVIÇOS
+   ============================================================ */
+function montarServicos(){
+  const topo = $("#campos-servicos-topo");
+  topo.innerHTML = `<div class="dupla">${campo("servicos.rotulo", "Etiqueta")}${campo("servicos.titulo", "Título")}</div>
+    ${campo("servicos.nota", "Frase sobre os valores", "area")}`;
+  ligarCampos(topo);
+
+  const lista = $("#lista-servicos");
+  const itens = CFG.servicos.itens;
+
+  if(!itens.length){
+    lista.innerHTML = `<p class="desc">Nenhum serviço cadastrado. Use o botão abaixo para criar o primeiro.</p>`;
+    return;
+  }
+
+  lista.innerHTML = itens.map((it, i) => `
+    <div class="serv-adm ${it.visivel === false ? "escondido" : ""}" data-i="${i}">
+      ${cartaoFoto(`servicos.itens.${i}.foto`, "Foto do serviço", it.foto)}
+      <div class="dados">
+        <div class="cabeca">
+          <span class="posicao">${i + 1}º na página</span>
+          <label class="ver"><input type="checkbox" class="ver-servico" ${it.visivel === false ? "" : "checked"}> Mostrar no site</label>
+          <span class="ordem">
+            <button class="btn mini subir" ${i === 0 ? "disabled" : ""} title="Subir">↑</button>
+            <button class="btn mini descer" ${i === itens.length - 1 ? "disabled" : ""} title="Descer">↓</button>
+            <button class="btn mini perigo excluir">Excluir</button>
+          </span>
+        </div>
+        <div class="dupla">
+          ${campo(`servicos.itens.${i}.nome`, "Nome do serviço")}
+          ${campo(`servicos.itens.${i}.preco`, "Preço")}
+        </div>
+        <div class="dupla">
+          ${campo(`servicos.itens.${i}.duracao`, "Duração em minutos")}
+          <div class="campo">
+            <label>Tempo reservado na agenda</label>
+            <input type="text" value="${duracaoTxt(+it.duracao || 60)}" disabled>
+          </div>
+        </div>
+        <div class="campo">
+          <label>Quem faz</label>
+          <select class="dono-servico">
+            <option value="">Qualquer uma das profissionais</option>
+            ${CFG.profissionais.map(p =>
+              `<option value="${p.id}" ${it.profissionalId === p.id ? "selected" : ""}>${escaparTxt(p.nome)}</option>`).join("")}
+          </select>
+        </div>
+        ${campo(`servicos.itens.${i}.texto`, "Descrição", "area")}
+      </div>
+    </div>`).join("");
+
+  ligarCampos(lista);
+  atualizarSeletorServicos();
+  $$(".foto", lista).forEach(ligarFoto);
+
+  $$(".serv-adm", lista).forEach(cartao => {
+    const i = +cartao.dataset.i;
+
+    $(".dono-servico", cartao).addEventListener("change", e => {
+      CFG.servicos.itens[i].profissionalId = e.target.value;
+      marcarSujo();
+    });
+
+    $(".ver-servico", cartao).addEventListener("change", e => {
+      CFG.servicos.itens[i].visivel = e.target.checked;
+      cartao.classList.toggle("escondido", !e.target.checked);
+      marcarSujo();
+    });
+
+    const mover = (destino) => {
+      const l = CFG.servicos.itens;
+      [l[i], l[destino]] = [l[destino], l[i]];
+      marcarSujo();
+      montarServicos();
+    };
+    $(".subir", cartao).addEventListener("click", () => { if(i > 0) mover(i - 1); });
+    $(".descer", cartao).addEventListener("click", () => { if(i < CFG.servicos.itens.length - 1) mover(i + 1); });
+
+    $(".excluir", cartao).addEventListener("click", () => {
+      const nome = CFG.servicos.itens[i].nome || "este serviço";
+      if(!confirm(`Excluir "${nome}"? Isso não pode ser desfeito depois de salvar.`)) return;
+      const foto = CFG.servicos.itens[i].foto;
+      CFG.servicos.itens.splice(i, 1);
+      if(foto?.startsWith("midia:")) FB.apagarMidia(foto);
+      marcarSujo();
+      montarServicos();
+    });
+  });
+}
+
+$("#add-servico").addEventListener("click", () => {
+  const novo = SERVICO_NOVO();
+  if(MEU_PID) novo.profissionalId = MEU_PID;   // já nasce no nome de quem criou
+  CFG.servicos.itens.push(novo);
+  marcarSujo();
+  montarServicos();
+  const ultimo = $("#lista-servicos").lastElementChild;
+  ultimo?.scrollIntoView({ behavior: "smooth", block: "center" });
+  $("input[type=text]", $(".dados", ultimo))?.focus();
+});
+
+async function montarFotos(){
+  await carregarCacheDeFotos();
+
+  const cartao = cartaoFoto;
+
+  $("#fotos-secoes").innerHTML = Object.entries(ROTULOS_FOTO)
+    .map(([k, r]) => cartao("imagens." + k, r, CFG.imagens[k])).join("");
+  $("#fotos-galeria").innerHTML = CFG.galeriaFotos
+    .map((ref, i) => cartao("galeriaFotos." + i, "Trabalho " + (i + 1), ref)).join("");
+
+  $$(".foto", $("#pg-fotos")).forEach(ligarFoto);
+}
+
+function ligarFoto(cartao){
+  const chave = cartao.dataset.chave;
+  const arquivo = $("input[type=file]", cartao);
+  const texto   = $("input[type=text]", cartao);
+  const quadro  = $(".quadro", cartao);
+  const passo   = $(".progresso", cartao);
+  const btTirar = $(".tirar", cartao);
+
+  const pintar = (url) => {
+    quadro.style.backgroundImage = url ? `url('${url.replace(/'/g, "%27")}')` : "";
+    quadro.textContent = url ? "" : "JA";
+    btTirar.disabled = !url;
+  };
+
+  $(".enviar", cartao).addEventListener("click", () => arquivo.click());
+
+  arquivo.addEventListener("change", async () => {
+    const f = arquivo.files[0];
+    if(!f) return;
+    passo.textContent = "Preparando a foto…";
+    try{
+      const galeria = chave.startsWith("galeriaFotos");
+      const dataUrl = await comprimir(f, galeria ? 900 : 1200, galeria ? 240 : 380);
+      passo.textContent = "Enviando…";
+      const antigo = pegar(chave);
+      const ref = await FB.guardarMidia(dataUrl);
+      cacheMidia[ref.slice(6)] = dataUrl;
+      definir(chave, ref);
+      texto.value = "";
+      pintar(dataUrl);
+      if(antigo?.startsWith("midia:")) FB.apagarMidia(antigo);
+      passo.textContent = "";
+      recado("Foto enviada. Salve para ela aparecer no site.");
+    }catch(e){
+      passo.textContent = "";
+      recado(e.message || "Não deu para enviar a foto.", true);
+      console.error(e);
+    }finally{
+      arquivo.value = "";
+    }
+  });
+
+  texto.addEventListener("input", () => {
+    const v = texto.value.trim();
+    definir(chave, v);
+    pintar(v);
+  });
+
+  btTirar.addEventListener("click", () => {
+    const antigo = pegar(chave);
+    if(antigo?.startsWith("midia:")) FB.apagarMidia(antigo);
+    definir(chave, "");
+    texto.value = "";
+    pintar("");
+  });
+}
+
+/* ============================================================
+   AVALIAÇÕES
+   ============================================================ */
+const quando = (t) => t?.seconds ? new Date(t.seconds * 1000).toLocaleDateString("pt-BR") : "";
+const seguro = (t) => String(t ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+
+async function carregarAvaliacoes(){
+  let lista = [];
+  try{ lista = await FB.todasAvaliacoes(); }
+  catch(e){ recado("Não deu para ler as avaliações.", true); console.error(e); }
+
+  const pendentes = lista.filter(a => !a.aprovado);
+  const aprovadas = lista.filter(a => a.aprovado);
+
+  const selo = $("#conta-pendentes");
+  selo.textContent = pendentes.length;
+  selo.classList.toggle("esconde", pendentes.length === 0);
+
+  const bloco = (a) => `
+    <div class="av ${a.aprovado ? "" : "pendente"}" data-id="${a.id}">
+      <div class="topo">
+        <span class="nome">${seguro(a.nome)}</span>
+        <span class="estrelas">${"★".repeat(a.nota)}${"☆".repeat(5 - a.nota)}</span>
+        <span class="data">${quando(a.criadoEm)}</span>
+      </div>
+      <p>${seguro(a.texto)}</p>
+      <div class="acoes">
+        ${a.aprovado
+          ? `<button class="btn linha mini" data-acao="esconder">Tirar do site</button>`
+          : `<button class="btn mini" data-acao="aprovar">Publicar no site</button>`}
+        <button class="btn perigo mini" data-acao="excluir">Excluir</button>
+      </div>
+    </div>`;
+
+  $("#lista-pendentes").innerHTML = pendentes.length
+    ? pendentes.map(bloco).join("")
+    : `<div class="vazio">Nenhuma avaliação esperando. Quando uma cliente enviar, ela aparece aqui.</div>`;
+  $("#lista-aprovadas").innerHTML = aprovadas.length
+    ? aprovadas.map(bloco).join("")
+    : `<div class="vazio">Nenhuma avaliação publicada ainda.</div>`;
+
+  $$(".av [data-acao]").forEach(bt => bt.addEventListener("click", async () => {
+    const id = bt.closest(".av").dataset.id;
+    const acao = bt.dataset.acao;
+    if(acao === "excluir" && !confirm("Excluir esta avaliação? Não dá para desfazer.")) return;
+    bt.disabled = true;
+    try{
+      if(acao === "aprovar")  await FB.aprovarAvaliacao(id, true);
+      if(acao === "esconder") await FB.aprovarAvaliacao(id, false);
+      if(acao === "excluir")  await FB.excluirAvaliacao(id);
+      await carregarAvaliacoes();
+      recado(acao === "aprovar" ? "Publicada no site." : acao === "esconder" ? "Tirada do site." : "Avaliação excluída.");
+    }catch(e){
+      bt.disabled = false;
+      recado(FB.explicarErro(e), true);
+    }
+  }));
+}
+
+/* ============================================================
+   ABA AGENDA
+   Cada profissional vê só a agenda dela. Pedido feito pelo site
+   entra como "aguardando" e não tranca o horário até ser validado.
+   ============================================================ */
+const mmAg  = (h) => { const [a, b] = h.split(":").map(Number); return a * 60 + b; };
+const hhmmAg = (m) => `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
+const somaDias = (isoData, n) => {
+  const [a, m, d] = isoData.split("-").map(Number);
+  const x = new Date(a, m - 1, d + n);
+  return x.toLocaleDateString("sv-SE");
+};
+const diaBonito = (isoData) => {
+  const [a, m, d] = isoData.split("-").map(Number);
+  return new Date(a, m - 1, d).toLocaleDateString("pt-BR",
+    { weekday: "short", day: "2-digit", month: "short" }).replace(/\./g, "");
+};
+const duracaoTxt = (min) => {
+  const h = Math.floor(min / 60), r = min % 60;
+  return h && r ? `${h}h${String(r).padStart(2, "0")}` : h ? `${h}h` : `${r} min`;
+};
+
+let AGENDA = [];        // agendamentos do mês que está na tela
+let PENDENTES = [];     // pedidos aguardando validação, de qualquer data
+let NOMES = {};         // id do agendamento → dados da cliente
+let MES_AG = "";        // mês do calendário, "AAAA-MM"
+let DIA_SEL = "";       // dia aberto embaixo do calendário
+
+function souSemAgenda(){ return !MEU_PID; }
+
+/** Se a conta ainda não está ligada a uma profissional, pede para escolher. */
+function checarVinculo(){
+  const caixa = $("#sem-vinculo");
+  if(MEU_PID){ caixa.classList.add("esconde"); return; }
+
+  caixa.classList.remove("esconde");
+  if(!SOU_DONA){
+    caixa.innerHTML = `<b>Sua conta ainda não está ligada a uma profissional.</b><br>
+      Peça para a administradora abrir a aba Profissionais e criar/vincular o seu acesso.`;
+    return;
+  }
+  caixa.innerHTML = `<b>Qual dessas profissionais é você?</b><br>
+    A agenda e o financeiro precisam saber para separar o que é seu.
+    <br><select id="quem-sou">
+      <option value="">Escolha…</option>
+      ${CFG.profissionais.map(p => `<option value="${p.id}">${escaparTxt(p.nome)}</option>`).join("")}
+    </select>`;
+  $("#quem-sou").addEventListener("change", async e => {
+    if(!e.target.value) return;
+    try{
+      await FB.definirMinhaProfissional(FB.auth.currentUser.uid, e.target.value);
+      MEU_PID = e.target.value;
+      if(PERFIL) PERFIL.profissionalId = MEU_PID;
+      checarVinculo();
+      montarHorariosDeAtendimento();
+      atualizarSeletorDeServicoDaAgenda();
+      await carregarAgenda();
+      recado("Pronto — agenda ligada ao seu nome.");
+    }catch(err){ recado(FB.explicarErro(err), true); }
+  });
+}
+
+const primeiroDia = (mes) => mes + "-01";
+const ultimoDiaMes = (mes) => {
+  const [a, m] = mes.split("-").map(Number);
+  return `${mes}-${String(new Date(a, m, 0).getDate()).padStart(2, "0")}`;
+};
+const nomeDoMes = (mes) => {
+  const [a, m] = mes.split("-").map(Number);
+  const t = new Date(a, m - 1, 1).toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+  return t.charAt(0).toUpperCase() + t.slice(1);
+};
+
+/** Carrega o mês do calendário e, junto, os pedidos pendentes de qualquer data. */
+async function carregarAgenda(){
+  if(souSemAgenda()){
+    $("#cal-grade").innerHTML = ""; $("#ag-lista").innerHTML = "";
+    $("#ag-pendentes-cx").classList.add("esconde");
+    return;
+  }
+  MES_AG = MES_AG || mesAtual();
+  $("#ag-mes-nome").textContent = nomeDoMes(MES_AG);
+
+  const [mes, pend] = await Promise.all([
+    FB.agendaEntre(MEU_PID, primeiroDia(MES_AG), ultimoDiaMes(MES_AG)).catch(e => e),
+    FB.pendentesDe(MEU_PID).catch(() => [])
+  ]);
+
+  if(mes instanceof Error || !Array.isArray(mes)){
+    AGENDA = [];
+    const link = (mes?.message || "").match(/https:\/\/console\.firebase\.google\.com\/[^\s)]+/)?.[0];
+    $("#cal-grade").innerHTML = link
+      ? `<div class="aviso-caixa" style="grid-column:1/-1;margin:0">
+           <b>Falta criar um índice no Firestore.</b><br>
+           A agenda consulta os horários de uma profissional dentro de um período, e o Firestore
+           precisa de um índice para isso. É só criar uma vez.<br>
+           <a href="${link}" target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;text-decoration:underline">
+             Abrir o Firebase e criar o índice →</a><br>
+           <span class="desc">Depois de criar, espere um minuto e recarregue esta página.</span>
+         </div>`
+      : `<p class="desc" style="grid-column:1/-1">${escaparTxt(FB.explicarErro(mes))}</p>`;
+    console.error(mes);
+  }else{
+    AGENDA = mes;
+  }
+  PENDENTES = pend;
+
+  // nomes das clientes (volume pequeno: uma leitura por agendamento novo)
+  const tudo = [...AGENDA, ...PENDENTES];
+  await Promise.all(tudo.filter(a => !(a.id in NOMES)).map(async a => {
+    NOMES[a.id] = (await FB.dadosDaCliente(a.id)) || {};
+  }));
+
+  if(!DIA_SEL || !DIA_SEL.startsWith(MES_AG)){
+    DIA_SEL = MES_AG === mesAtual() ? hojeISO() : primeiroDia(MES_AG);
+  }
+  desenharAgenda();
+}
+
+/** Junta o mês visível com os pendentes de fora dele, sem repetir. */
+function todosVisiveis(){
+  const mapa = new Map();
+  [...AGENDA, ...PENDENTES].forEach(a => mapa.set(a.id, a));
+  return [...mapa.values()];
+}
+
+function desenharAgenda(){
+  desenharPendentes();
+  desenharCalendario();
+  desenharDia();
+}
+
+function desenharPendentes(){
+  const cx = $("#ag-pendentes-cx");
+  if(!PENDENTES.length){ cx.classList.add("esconde"); $("#ag-contador").textContent = ""; return; }
+  cx.classList.remove("esconde");
+  $("#ag-contador").textContent =
+    `${PENDENTES.length} ${PENDENTES.length === 1 ? "pedido" : "pedidos"}`;
+
+  const hoje = hojeISO();
+  $("#ag-pendentes").innerHTML = PENDENTES.map(a => {
+    const cli = NOMES[a.id] || {};
+    const passou = a.data < hoje;
+    return `<div class="hora-linha" data-id="${a.id}">
+      <span class="quando">
+        <b>${a.inicio}</b>
+        <small>${diaBonito(a.data)}${passou ? " · já passou" : ""}</small>
+      </span>
+      <span class="oque">
+        <b>${escaparTxt(cli.nome || "Cliente")}</b>
+        <small>${escaparTxt(a.servico || "")} · ${duracaoTxt(a.duracao)}${cli.telefone ? " · " + escaparTxt(cli.telefone) : ""}</small>
+      </span>
+      <span class="acoes">
+        <button class="btn mini validar">Validar</button>
+        <button class="btn mini perigo cancelar">Cancelar</button>
+        <button class="btn mini ir-dia" data-dia="${a.data}">Ver no dia</button>
+      </span>
+    </div>`;
+  }).join("");
+  ligarAcoesDaAgenda($("#ag-pendentes"));
+}
+
+function desenharCalendario(){
+  $("#cal-cab").innerHTML = DIAS.map(d => `<span>${d.curto}</span>`).join("");
+
+  const [ano, mes] = MES_AG.split("-").map(Number);
+  const inicio = new Date(ano, mes - 1, 1);
+  const recuo = inicio.getDay();                  // domingo = 0
+  const total = new Date(ano, mes, 0).getDate();
+  const celulas = Math.ceil((recuo + total) / 7) * 7;
+  const hoje = hojeISO();
+  const doMes = todosVisiveis();
+
+  let html = "";
+  for(let i = 0; i < celulas; i++){
+    const d = new Date(ano, mes - 1, 1 - recuo + i);
+    const iso = d.toLocaleDateString("sv-SE");
+    const fora = !iso.startsWith(MES_AG);
+    const itens = doMes.filter(a => a.data === iso && a.status !== "cancelado")
+                       .sort((x, y) => x.inicio.localeCompare(y.inicio));
+    const pend = itens.filter(a => a.status === "aguardando").length;
+
+    html += `<button class="cal-dia${fora ? " fora" : ""}${iso === hoje ? " hoje" : ""}${iso === DIA_SEL ? " sel" : ""}"
+      data-dia="${iso}"${pend ? ' data-pend="1"' : ""}>
+      <span class="n">${d.getDate()}</span>
+      <span class="chips">
+        ${itens.slice(0, 3).map(a => {
+          const st = STATUS[a.status] || STATUS.aguardando;
+          return `<i class="chip" style="--c:${st.cor}">${a.inicio}</i>`;
+        }).join("")}
+        ${itens.length > 3 ? `<i class="mais">+${itens.length - 3}</i>` : ""}
+      </span>
+    </button>`;
+  }
+  $("#cal-grade").innerHTML = html;
+
+  $("#cal-legenda").innerHTML = Object.entries(STATUS)
+    .filter(([k]) => k !== "cancelado")
+    .map(([, v]) => `<span><i style="background:${v.cor}"></i>${v.rotulo}</span>`).join("");
+
+  $$("#cal-grade .cal-dia").forEach(b => b.addEventListener("click", () => {
+    const iso = b.dataset.dia;
+    if(!iso.startsWith(MES_AG)){ MES_AG = iso.slice(0, 7); DIA_SEL = iso; return carregarAgenda(); }
+    DIA_SEL = iso;
+    desenharCalendario();
+    desenharDia();
+  }));
+}
+
+function desenharDia(){
+  const doDia = todosVisiveis().filter(a => a.data === DIA_SEL)
+    .sort((x, y) => x.inicio.localeCompare(y.inicio));
+
+  $("#ag-titulo-dia").textContent = "Horários de " + diaBonito(DIA_SEL);
+
+  $("#ag-lista").innerHTML = doDia.length ? doDia.map(a => {
+    const st = STATUS[a.status] || STATUS.aguardando;
+    const cli = NOMES[a.id] || {};
+    return `<div class="hora-linha" data-id="${a.id}">
+      <span class="quando"><b>${a.inicio}</b><small>até ${a.fim} · ${duracaoTxt(a.duracao)}</small></span>
+      <span class="oque">
+        <b>${escaparTxt(cli.nome || "Cliente")}</b>
+        <small>${escaparTxt(a.servico || "")}${cli.telefone ? " · " + escaparTxt(cli.telefone) : ""}</small>
+      </span>
+      <span class="marca-status"><i style="background:${st.cor}"></i>${st.rotulo}</span>
+      <span class="acoes">
+        ${a.status === "aguardando" ? `<button class="btn mini validar">Validar</button>` : ""}
+        ${a.status === "agendado"   ? `<button class="btn mini concluir">Concluir</button>` : ""}
+        ${a.status !== "cancelado" && a.status !== "concluido" ? `<button class="btn mini perigo cancelar">Cancelar</button>` : ""}
+        ${a.status === "concluido" && !a.faturado ? `<button class="btn mini lancar">Lançar valor</button>` : ""}
+        <button class="btn mini perigo excluir-ag">Excluir</button>
+      </span>
+    </div>`;
+  }).join("") : `<p class="desc">Nenhum horário neste dia. Use “+ Marcar horário” para encaixar alguém.</p>`;
+
+  ligarAcoesDaAgenda($("#ag-lista"));
+}
+
+
+function ligarAcoesDaAgenda(raiz){
+  $$(".hora-linha", raiz).forEach(linha => {
+    const id = linha.dataset.id;
+    const item = todosVisiveis().find(a => a.id === id);
+    if(!item) return;
+
+    const mudar = async (status) => {
+      try{
+        await FB.mudarStatus(id, status);
+        item.status = status;
+        // sai (ou entra) da lista de pendentes conforme o novo estado
+        PENDENTES = PENDENTES.filter(a => a.id !== id);
+        const noMes = AGENDA.find(a => a.id === id);
+        if(noMes) noMes.status = status;
+        else if(item.data.startsWith(MES_AG)) AGENDA.push(item);
+        desenharAgenda();
+        recado(status === "agendado" ? "Horário validado e trancado na agenda."
+             : status === "cancelado" ? "Agendamento cancelado — o horário voltou a ficar livre."
+             : "Atendimento concluído.");
+        if(status === "concluido") abrirLancamentoDoAtendimento(item);
+      }catch(e){ recado(FB.explicarErro(e), true); }
+    };
+
+    $(".validar", linha)?.addEventListener("click", () => mudar("agendado"));
+    $(".cancelar", linha)?.addEventListener("click", () => {
+      if(confirm("Cancelar este agendamento?")) mudar("cancelado");
+    });
+    $(".concluir", linha)?.addEventListener("click", () => mudar("concluido"));
+    $(".lancar", linha)?.addEventListener("click", () => abrirLancamentoDoAtendimento(item));
+    $(".ir-dia", linha)?.addEventListener("click", (e) => {
+      const iso = e.target.dataset.dia;
+      DIA_SEL = iso;
+      if(!iso.startsWith(MES_AG)){ MES_AG = iso.slice(0, 7); return carregarAgenda(); }
+      desenharAgenda();
+      $("#ag-titulo-dia").scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+
+    $(".excluir-ag", linha)?.addEventListener("click", async () => {
+      if(!confirm("Excluir este horário da agenda?")) return;
+      try{
+        await FB.apagarAgendamento(id);
+        AGENDA = AGENDA.filter(a => a.id !== id);
+        PENDENTES = PENDENTES.filter(a => a.id !== id);
+        desenharAgenda();
+      }catch(e){ recado(FB.explicarErro(e), true); }
+    });
+  });
+}
+
+/** Ao concluir, pergunta o que foi feito e quanto entrou. Vai direto pro caixa. */
+function abrirLancamentoDoAtendimento(item){
+  const cli = NOMES[item.id] || {};
+  $("#fc-resumo").innerHTML = `
+    <div><span>Cliente</span><b>${escaparTxt(cli.nome || "Cliente")}</b></div>
+    <div><span>Dia</span><b>${diaBonito(item.data)} · ${item.inicio}</b></div>`;
+  // lista os serviços dela, com o do agendamento já escolhido
+  const meus = CFG.servicos.itens.filter(sv =>
+    (sv.nome || "").trim() && (!sv.profissionalId || sv.profissionalId === MEU_PID));
+  const sel = $("#fc-servico");
+  sel.innerHTML = meus.map(sv =>
+    `<option value="${escaparTxt(sv.nome)}" data-preco="${escaparTxt(sv.preco || "")}">${escaparTxt(sv.nome)}</option>`
+  ).join("") + `<option value="__outro">Outro serviço…</option>`;
+
+  const combina = meus.some(sv => sv.nome === item.servico);
+  sel.value = combina ? item.servico : (meus.length ? meus[0].nome : "__outro");
+  $("#fc-cx-outro").classList.toggle("esconde", sel.value !== "__outro");
+  $("#fc-outro").value = combina ? "" : (item.servico || "");
+
+  $("#fc-valor").value = valorSugerido(sel.selectedOptions[0]?.dataset.preco);
+  $("#fc-erro").textContent = "";
+  $("#fechamento").classList.add("aberto");
+  $("#fechamento").dataset.id = item.id;
+  setTimeout(() => $("#fc-valor").focus(), 250);
+}
+
+/* ---- horários de atendimento da profissional ---- */
+function montarHorariosDeAtendimento(){
+  const alvo = $("#ag-horarios");
+  const eu = CFG.profissionais.find(p => p.id === MEU_PID);
+  if(!eu){ alvo.innerHTML = `<p class="desc">Escolha quem você é para configurar seus horários.</p>`; return; }
+
+  alvo.innerHTML = DIAS.map(d => {
+    const h = eu.horarios[d.id] || { ativo: false, de: "09:00", ate: "18:00" };
+    return `<div class="h-dia ${h.ativo ? "" : "off"}" data-dia="${d.id}">
+      <label><input type="checkbox" class="h-ativo" ${h.ativo ? "checked" : ""}> ${d.nome}</label>
+      <input type="time" class="h-de" value="${h.de}" step="900">
+      <input type="time" class="h-ate" value="${h.ate}" step="900">
+      <span class="desc">${h.ativo ? "atendendo" : "fechado"}</span>
+    </div>`;
+  }).join("") + `
+    <div class="dupla" style="margin-top:18px">
+      <div class="campo"><label>Almoço — de</label><input type="time" id="h-alm-de" value="${eu.almoco.de}" step="900"></div>
+      <div class="campo"><label>Almoço — até</label><input type="time" id="h-alm-ate" value="${eu.almoco.ate}" step="900"></div>
+    </div>
+    <label style="display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--tinta);text-transform:none;letter-spacing:0">
+      <input type="checkbox" id="h-alm-ativo" ${eu.almoco.ativo ? "checked" : ""}> Fecho para o almoço
+    </label>
+    <div class="dupla" style="margin-top:18px">
+      <div class="campo"><label>Grade de horários (min)</label><input type="number" id="h-intervalo" min="15" step="15" value="${eu.intervalo}"></div>
+      <div class="campo"><label>Antecedência mínima (horas)</label><input type="number" id="h-antec" min="0" step="1" value="${eu.antecedenciaHoras}"></div>
+    </div>`;
+
+  const anotar = () => {
+    $$("#ag-horarios .h-dia").forEach(l => {
+      const d = l.dataset.dia;
+      const ativo = $(".h-ativo", l).checked;
+      eu.horarios[d] = { ativo, de: $(".h-de", l).value || "09:00", ate: $(".h-ate", l).value || "18:00" };
+      l.classList.toggle("off", !ativo);
+      $(".desc", l).textContent = ativo ? "atendendo" : "fechado";
+    });
+    eu.almoco = { ativo: $("#h-alm-ativo").checked, de: $("#h-alm-de").value, ate: $("#h-alm-ate").value };
+    eu.intervalo = Math.max(15, +$("#h-intervalo").value || 30);
+    eu.antecedenciaHoras = Math.max(0, +$("#h-antec").value || 0);
+    marcarSujo();
+  };
+  $$("#ag-horarios input").forEach(i => i.addEventListener("change", anotar));
+}
+
+/* ---- marcar na mão ---- */
+function atualizarSeletorDeServicoDaAgenda(){
+  const sel = $("#mn-servico");
+  const meus = CFG.servicos.itens.filter(s => !s.profissionalId || s.profissionalId === MEU_PID);
+  sel.innerHTML = meus.map(s =>
+    `<option value="${escaparTxt(s.nome)}" data-dur="${+s.duracao || 60}">${escaparTxt(s.nome)}</option>`).join("")
+    + `<option value="Outro" data-dur="60">Outro</option>`;
+  sel.addEventListener("change", () => {
+    $("#mn-dur").value = sel.selectedOptions[0]?.dataset.dur || 60;
+  }, { once: true });
+  $("#mn-dur").value = meus[0] ? (+meus[0].duracao || 60) : 60;
+}
+
+$("#ag-novo").addEventListener("click", () => {
+  $("#ag-form-novo").classList.toggle("esconde");
+  $("#mn-data").value = DIA_SEL || hojeISO();
+});
+
+$("#mn-salvar").addEventListener("click", async () => {
+  const erro = $("#mn-erro");
+  if(souSemAgenda()) return erro.textContent = "Escolha quem você é antes de marcar horários.";
+  const cliente = $("#mn-cliente").value.trim();
+  const data = $("#mn-data").value;
+  const hora = $("#mn-hora").value;
+  const dur = +$("#mn-dur").value;
+  if(cliente.length < 2) return erro.textContent = "Escreva o nome da cliente.";
+  if(!data || !hora)     return erro.textContent = "Informe data e hora.";
+  if(!(dur >= 15))       return erro.textContent = "A duração precisa ser de pelo menos 15 minutos.";
+  erro.textContent = "";
+
+  const fim = hhmmAg(mmAg(hora) + dur);
+  let doDia = [];
+  try{ doDia = await FB.agendaDoDia(MEU_PID, data); }catch(e){ console.warn(e); }
+  const conflito = doDia.find(a => a.status === "agendado" || a.status === "concluido"
+    ? mmAg(hora) < mmAg(a.fim) && mmAg(fim) > mmAg(a.inicio) : false);
+  if(conflito) return erro.textContent = `Bate com o horário de ${conflito.inicio} às ${conflito.fim}.`;
+
+  const bt = $("#mn-salvar");
+  bt.disabled = true; bt.textContent = "Marcando…";
+  try{
+    await FB.pedirHorario({
+      profissionalId: MEU_PID, data, inicio: hora, fim, duracao: dur,
+      servico: $("#mn-servico").value, cliente, telefone: $("#mn-tel").value.trim(),
+      status: "agendado"
+    });
+    $("#mn-cliente").value = ""; $("#mn-tel").value = "";
+    $("#ag-form-novo").classList.add("esconde");
+    NOMES = {};
+    if(!data.startsWith(MES_AG)){ MES_AG = data.slice(0, 7); }
+    DIA_SEL = data;
+    await carregarAgenda();
+    recado("Horário marcado e trancado na agenda.");
+  }catch(e){ erro.textContent = FB.explicarErro(e); console.error(e); }
+  finally{ bt.disabled = false; bt.textContent = "Marcar como agendado"; }
+});
+
+/** Tira um número do texto do preço ("R$ 120,00" → 120). Vazio se não der. */
+function valorSugerido(preco){
+  const m = String(preco || "").replace(/\./g, "").match(/(\d+(?:,\d{1,2})?)/);
+  return m ? m[1].replace(",", ".") : "";
+}
+
+$("#fc-servico").addEventListener("change", e => {
+  const outro = e.target.value === "__outro";
+  $("#fc-cx-outro").classList.toggle("esconde", !outro);
+  if(outro){ $("#fc-outro").focus(); return; }
+  if(!$("#fc-valor").value) $("#fc-valor").value = valorSugerido(e.target.selectedOptions[0]?.dataset.preco);
+});
+
+const fecharFechamento = () => $("#fechamento").classList.remove("aberto");
+$("#fc-depois").addEventListener("click", fecharFechamento);
+$("#fechamento").addEventListener("click", e => { if(e.target.id === "fechamento") fecharFechamento(); });
+
+$("#fc-lancar").addEventListener("click", async () => {
+  const id = $("#fechamento").dataset.id;
+  const item = AGENDA.find(a => a.id === id);
+  const valor = parseFloat($("#fc-valor").value);
+  const erro = $("#fc-erro");
+  if($("#fc-servico").value === "__outro" && $("#fc-outro").value.trim().length < 2)
+    return erro.textContent = "Escreva qual foi o serviço.";
+  if(!(valor > 0)) return erro.textContent = "Digite o valor recebido.";
+  erro.textContent = "";
+
+  const bt = $("#fc-lancar");
+  bt.disabled = true; bt.textContent = "Lançando…";
+  try{
+    const cli = NOMES[id] || {};
+    await FB.salvarLancamento(FB.auth.currentUser.uid, {
+      tipo: "receita",
+      data: item.data,
+      valor,
+      descricao: [cli.nome, $("#fc-obs").value.trim()].filter(Boolean).join(" · ").slice(0, 120),
+      categoria: ($("#fc-servico").value === "__outro"
+        ? $("#fc-outro").value.trim()
+        : $("#fc-servico").value) || item.servico || "Atendimento"
+    });
+    await FB.mudarStatus(id, "concluido", { faturado: true, valor });
+    item.faturado = true; item.valor = valor;
+    desenharAgenda();
+    fecharFechamento();
+    await carregarCaixa();
+    recado("Lançado no faturamento.");
+  }catch(e){ erro.textContent = FB.explicarErro(e); console.error(e); }
+  finally{ bt.disabled = false; bt.textContent = "Lançar no faturamento"; }
+});
+
+const andarMes = (n) => { MES_AG = mesAtras(MES_AG, -n); DIA_SEL = ""; carregarAgenda(); };
+$("#ag-ant").addEventListener("click", () => andarMes(-1));
+$("#ag-prox").addEventListener("click", () => andarMes(1));
+$("#ag-hoje").addEventListener("click", () => {
+  MES_AG = mesAtual(); DIA_SEL = hojeISO(); carregarAgenda();
+});
+
+/* ============================================================
+   ABA PROFISSIONAIS
+   Cadastro da equipe e criação do acesso de cada uma ao painel.
+   ============================================================ */
+let ACESSOS = [];   // contas do painel, para saber quem já tem login
+
+async function recarregarAcessos(){
+  if(!SOU_DONA) return;
+  try{ ACESSOS = await FB.listarAcessos(); }
+  catch(e){ ACESSOS = []; console.warn(e); }
+}
+
+const acessoDe = (profId) => ACESSOS.find(a => a.profissionalId === profId);
+
+function montarProfissionais(){
+  const topo = $("#campos-equipe-topo");
+  topo.innerHTML = `<div class="dupla">${campo("equipe.rotulo", "Etiqueta")}${campo("equipe.titulo", "Título")}</div>
+    ${campo("equipe.texto", "Frase de apoio", "area")}`;
+  ligarCampos(topo);
+
+  const lista = $("#lista-profissionais");
+  const time = CFG.profissionais;
+
+  lista.innerHTML = time.map((p, i) => {
+    const acesso = acessoDe(p.id);
+    return `
+    <div class="prof-adm ${p.visivel === false ? "escondido" : ""}" data-i="${i}" data-pid="${p.id}">
+      ${cartaoFoto(`profissionais.${i}.foto`, "Foto da profissional", p.foto)}
+      <div class="dados">
+        <div class="cabeca">
+          <label class="ver"><input type="checkbox" class="ver-prof" ${p.visivel === false ? "" : "checked"}> Mostrar no site</label>
+          <button class="btn mini perigo excluir-prof" ${time.length <= 1 ? "disabled" : ""}>Excluir</button>
+        </div>
+        <div class="dupla">
+          ${campo(`profissionais.${i}.nome`, "Nome")}
+          ${campo(`profissionais.${i}.funcao`, "Função")}
+        </div>
+        ${campo(`profissionais.${i}.bio`, "Frase de apresentação", "area")}
+        <div class="dupla">
+          ${campo(`profissionais.${i}.whatsapp`, "WhatsApp (só números, com 55)")}
+          ${campo(`profissionais.${i}.instagram`, "Endereço do Instagram")}
+        </div>
+
+        <div class="acesso">
+          <div class="estado">
+            <span class="bolinha ${acesso ? "on" : ""}"></span>
+            ${acesso
+              ? `Acesso ao painel: <b>${escaparTxt(acesso.email || "")}</b>`
+              : "Sem acesso ao painel"}
+            ${acesso && acesso.papel === "profissional"
+              ? `<button class="btn mini perigo tirar-acesso" data-uid="${acesso.uid}" style="margin-left:auto">Remover acesso</button>` : ""}
+          </div>
+          ${(acesso || !SOU_DONA) ? "" : `
+            <button class="btn mini abrir-acesso">Criar acesso para ela</button>
+            <div class="form-acesso">
+              <p class="desc" style="margin-top:12px">Ela vai entrar no mesmo endereço do painel, com este e-mail e senha. Poderá lançar o próprio financeiro e cuidar dos serviços dela.</p>
+              <div class="dupla">
+                <div class="campo"><label>E-mail</label><input type="email" class="ac-email" placeholder="email@exemplo.com"></div>
+                <div class="campo"><label>Senha (mín. 6)</label><input type="password" class="ac-senha" placeholder="senha inicial"></div>
+              </div>
+              <p class="aviso-linha ac-erro"></p>
+              <button class="btn mini criar-acesso">Criar acesso</button>
+              <details style="margin-top:12px">
+                <summary class="desc" style="cursor:pointer">Já criei a conta no Console do Firebase</summary>
+                <div class="campo" style="margin-top:10px"><label>UID da conta</label><input type="text" class="ac-uid" placeholder="cole o UID"></div>
+                <button class="btn mini vincular-acesso">Vincular</button>
+              </details>
+            </div>`}
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+
+  ligarCampos(lista);
+  $$(".foto", lista).forEach(ligarFoto);
+
+  $$(".prof-adm", lista).forEach(cartao => {
+    const i = +cartao.dataset.i;
+    const pid = cartao.dataset.pid;
+
+    $(".ver-prof", cartao).addEventListener("change", e => {
+      CFG.profissionais[i].visivel = e.target.checked;
+      cartao.classList.toggle("escondido", !e.target.checked);
+      marcarSujo();
+    });
+
+    $(".excluir-prof", cartao).addEventListener("click", () => {
+      const p = CFG.profissionais[i];
+      if(acessoDe(p.id)) return alert("Remova o acesso ao painel antes de excluir esta profissional.");
+      if(!confirm(`Excluir ${p.nome || "esta profissional"}? Os serviços dela ficam sem dono.`)) return;
+      if(p.foto?.startsWith("midia:")) FB.apagarMidia(p.foto);
+      CFG.servicos.itens.forEach(s => { if(s.profissionalId === p.id) s.profissionalId = ""; });
+      CFG.profissionais.splice(i, 1);
+      marcarSujo();
+      montarProfissionais();
+      montarServicos();
+    });
+
+    $(".abrir-acesso", cartao)?.addEventListener("click", () => {
+      $(".form-acesso", cartao).classList.toggle("aberto");
+    });
+
+    $(".criar-acesso", cartao)?.addEventListener("click", async () => {
+      const email = $(".ac-email", cartao).value.trim();
+      const senha = $(".ac-senha", cartao).value;
+      const erro  = $(".ac-erro", cartao);
+      if(!email) return erro.textContent = "Digite o e-mail dela.";
+      if(senha.length < 6) return erro.textContent = "A senha precisa de pelo menos 6 caracteres.";
+      erro.textContent = "";
+
+      const bt = $(".criar-acesso", cartao);
+      bt.disabled = true; bt.textContent = "Criando…";
+      try{
+        await FB.criarAcessoProfissional({
+          email, senha,
+          nome: CFG.profissionais[i].nome,
+          profissionalId: pid
+        });
+        await recarregarAcessos();
+        montarProfissionais();
+        recado("Acesso criado. Passe o e-mail e a senha para ela.");
+      }catch(e){
+        erro.textContent = FB.explicarErro(e);
+        if(e.uidCriado){
+          // o login foi criado; só faltou ligar ao painel
+          const cx = $(".ac-uid", cartao);
+          cx.value = e.uidCriado;
+          $("details", cartao).open = true;
+          erro.textContent += ' O login foi criado — corrija as regras e clique em "Vincular".';
+        }
+        console.error(e);
+      }finally{
+        bt.disabled = false; bt.textContent = "Criar acesso";
+      }
+    });
+
+    $(".vincular-acesso", cartao)?.addEventListener("click", async () => {
+      const uid = $(".ac-uid", cartao).value.trim();
+      const erro = $(".ac-erro", cartao);
+      if(uid.length < 10) return erro.textContent = "Cole o UID que aparece no Console.";
+      try{
+        await FB.vincularAcesso({
+          uid, email: $(".ac-email", cartao).value.trim(),
+          nome: CFG.profissionais[i].nome, profissionalId: pid
+        });
+        await recarregarAcessos();
+        montarProfissionais();
+        recado("Conta vinculada.");
+      }catch(e){ erro.textContent = FB.explicarErro(e); }
+    });
+
+    $(".tirar-acesso", cartao)?.addEventListener("click", async (e) => {
+      if(!confirm("Remover o acesso desta profissional ao painel?")) return;
+      try{
+        await FB.removerAcesso(e.target.dataset.uid);
+        await recarregarAcessos();
+        montarProfissionais();
+        recado("Acesso removido. A conta continua existindo no Firebase — apague por lá se quiser.");
+      }catch(err){ recado(FB.explicarErro(err), true); }
+    });
+  });
+}
+
+$("#add-profissional").addEventListener("click", () => {
+  CFG.profissionais.push(PROFISSIONAL_NOVA());
+  marcarSujo();
+  montarProfissionais();
+  $("#lista-profissionais").lastElementChild?.scrollIntoView({ behavior: "smooth", block: "center" });
+});
+
+/* ============================================================
+   ABA FINANCEIRO
+   Guarda entradas e custos em lancamentos/{id} e calcula
+   faturamento, lucro e o dízimo do mês escolhido.
+   ============================================================ */
+const dinheiro = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+const MESES = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
+
+const hojeISO = () => new Date().toLocaleDateString("sv-SE");        // AAAA-MM-DD no fuso local
+const mesAtual = () => hojeISO().slice(0, 7);                        // AAAA-MM
+const ultimoDia = (mes) => {
+  const [a, m] = mes.split("-").map(Number);
+  return `${mes}-${String(new Date(a, m, 0).getDate()).padStart(2, "0")}`;
+};
+const mesAtras = (mes, n) => {
+  const [a, m] = mes.split("-").map(Number);
+  const d = new Date(a, m - 1 - n, 1);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+};
+
+let lancamentos = [];        // últimos 6 meses, já carregados
+let baseDizimo = "faturamento";
+/** Etiqueta de quem é este caixa — deixa claro que o número é só dela. */
+function montarDonoDoCaixa(){
+  const nome = CFG.profissionais.find(p => p.id === MEU_PID)?.nome
+            || PERFIL?.nome || $("#meu-email").textContent || "";
+  $("#filtro-quem").innerHTML = nome
+    ? `<span class="dono-caixa">Lançamentos de <b>${escaparTxt(nome)}</b></span>` : "";
+}
+
+async function carregarCaixa(){
+  const mes = $("#mes").value || mesAtual();
+  const inicio = mesAtras(mes, 5) + "-01";
+  const fim = ultimoDia(mes);
+
+  try{
+    // sempre e só a conta que está logada
+    lancamentos = await FB.lancamentosEntre(FB.auth.currentUser.uid, inicio, fim);
+  }catch(e){
+    lancamentos = [];
+    recado(FB.explicarErro(e), true);
+    console.error(e);
+  }
+  montarDonoDoCaixa();
+  desenharCaixa();
+}
+
+function somaDoMes(mes){
+  const doMes = lancamentos.filter(l => l.data?.startsWith(mes));
+  const entra = doMes.filter(l => l.tipo === "receita").reduce((s, l) => s + (+l.valor || 0), 0);
+  const sai   = doMes.filter(l => l.tipo === "despesa").reduce((s, l) => s + (+l.valor || 0), 0);
+  return { entra, sai, lucro: entra - sai, itens: doMes };
+}
+
+function desenharCaixa(){
+  const mes = $("#mes").value || mesAtual();
+  const { entra, sai, lucro, itens } = somaDoMes(mes);
+  const dizimo = (baseDizimo === "lucro" ? Math.max(0, lucro) : entra) * 0.10;
+  const margem = entra > 0 ? Math.round((lucro / entra) * 100) : 0;
+
+  $("#numeros").innerHTML = `
+    <div class="num">
+      <b>Faturamento</b>
+      <span class="v">${dinheiro.format(entra)}</span>
+      <small>${itens.filter(i => i.tipo === "receita").length} atendimento(s)</small>
+    </div>
+    <div class="num">
+      <b>Custos</b>
+      <span class="v">${dinheiro.format(sai)}</span>
+      <small>materiais e demais gastos</small>
+    </div>
+    <div class="num">
+      <b>Lucro real</b>
+      <span class="v ${lucro < 0 ? "negativo" : ""}">${dinheiro.format(lucro)}</span>
+      <small>${entra > 0 ? `margem de ${margem}%` : "sem entradas no mês"}</small>
+    </div>
+    <div class="num destaque">
+      <b>Dízimo (10%)</b>
+      <span class="v">${dinheiro.format(dizimo)}</span>
+      <small>
+        <label style="cursor:pointer;display:inline-flex;gap:5px;align-items:center">
+          <input type="radio" name="base-dizimo" value="faturamento" ${baseDizimo === "faturamento" ? "checked" : ""}> do faturamento
+        </label>
+        <label style="cursor:pointer;display:inline-flex;gap:5px;align-items:center;margin-left:8px">
+          <input type="radio" name="base-dizimo" value="lucro" ${baseDizimo === "lucro" ? "checked" : ""}> do lucro
+        </label>
+      </small>
+    </div>`;
+
+  $$('input[name="base-dizimo"]').forEach(r => r.addEventListener("change", () => {
+    baseDizimo = r.value;
+    desenharCaixa();
+  }));
+
+  /* gráfico dos 6 meses */
+  const meses = [5,4,3,2,1,0].map(n => mesAtras(mes, n));
+  const dados = meses.map(m => ({ m, ...somaDoMes(m) }));
+  const teto = Math.max(...dados.map(d => Math.max(d.entra, d.sai)), 1);
+
+  $("#legenda-grafico").innerHTML =
+    `<span class="chave"><i style="background:var(--rosa)"></i> entradas</span>
+     <span class="chave"><i style="background:var(--borda)"></i> custos</span>`;
+
+  $("#grafico").innerHTML = dados.map(d => `
+    <div class="col">
+      <div class="barras" title="${MESES[+d.m.slice(5) - 1]}: entrou ${dinheiro.format(d.entra)}, saiu ${dinheiro.format(d.sai)}">
+        <span class="b ent" style="height:${Math.round(d.entra / teto * 120)}px"></span>
+        <span class="b sai" style="height:${Math.round(d.sai / teto * 120)}px"></span>
+      </div>
+      <span class="rot">${MESES[+d.m.slice(5) - 1]}</span>
+    </div>`).join("");
+
+  /* custos por categoria */
+  const custos = itens.filter(i => i.tipo === "despesa");
+  const porCat = {};
+  custos.forEach(c => { porCat[c.categoria || "Outros"] = (porCat[c.categoria || "Outros"] || 0) + (+c.valor || 0); });
+  const cats = Object.entries(porCat).sort((a, b) => b[1] - a[1]);
+  const tetoCat = Math.max(1, ...cats.map(c => c[1]));
+  $("#por-categoria").innerHTML = cats.length ? cats.map(([nome, v]) => `
+    <div class="cat">
+      <span class="nm">${escaparTxt(nome)}</span>
+      <span class="barra"><i style="width:${Math.round(v / tetoCat * 100)}%"></i></span>
+      <span class="vl">${dinheiro.format(v)}</span>
+    </div>`).join("") : `<p class="desc">Nenhum custo lançado neste mês.</p>`;
+
+  /* serviços que mais renderam */
+  const receitas = itens.filter(i => i.tipo === "receita");
+  const porServ = {};
+  receitas.forEach(r => { porServ[r.categoria || "Atendimento"] = (porServ[r.categoria || "Atendimento"] || 0) + (+r.valor || 0); });
+  const servs = Object.entries(porServ).sort((a, b) => b[1] - a[1]).slice(0, 6);
+  const tetoServ = Math.max(1, ...servs.map(x => x[1]));
+  $("#top-servicos").innerHTML = servs.length ? servs.map(([nome, v]) => `
+    <div class="cat">
+      <span class="nm">${escaparTxt(nome)}</span>
+      <span class="barra"><i style="width:${Math.round(v / tetoServ * 100)}%"></i></span>
+      <span class="vl">${dinheiro.format(v)}</span>
+    </div>`).join("") : `<p class="desc">Nenhuma entrada lançada neste mês.</p>`;
+
+  /* comparativo com o mês anterior */
+  const ant = somaDoMes(mesAtras(mes, 1));
+  const linha = (nome, agora, antes) => {
+    const dif = antes > 0 ? Math.round((agora - antes) / antes * 100) : (agora > 0 ? 100 : 0);
+    const cls = dif > 0 ? "sobe" : dif < 0 ? "desce" : "";
+    return `<div class="comp">
+      <span class="nm">${nome}</span>
+      <span class="vl">${dinheiro.format(agora)}</span>
+      <span class="var ${cls}">${dif > 0 ? "+" : ""}${dif}%</span>
+    </div>`;
+  };
+  $("#comparativo").innerHTML =
+    linha("Faturamento", entra, ant.entra) +
+    linha("Custos", sai, ant.sai) +
+    linha("Lucro", lucro, ant.lucro) +
+    `<p class="desc" style="margin:12px 0 0">Comparado com ${MESES[+mesAtras(mes,1).slice(5) - 1]}.</p>`;
+
+  /* lista do mês */
+  const alvo = $("#lista-lancamentos");
+  if(!itens.length){
+    alvo.innerHTML = `<p class="desc">Nenhum lançamento neste mês ainda.</p>`;
+    return;
+  }
+  alvo.innerHTML = itens
+    .sort((a, b) => b.data.localeCompare(a.data))
+    .map(l => {
+      const entrada = l.tipo === "receita";
+      return `<div class="lanc" data-id="${l.id}" data-uid="${l.uid}">
+        <span class="dia">${l.data.slice(8)}/${l.data.slice(5,7)}</span>
+        <span class="txt">
+          <b>${escaparTxt(l.descricao || l.categoria || (entrada ? "Atendimento" : "Custo"))}</b>
+          <small>${escaparTxt(l.categoria || (entrada ? "Atendimento" : "Custo"))}</small>
+        </span>
+        <span class="val ${entrada ? "ent" : "sai"}">${entrada ? "+" : "−"} ${dinheiro.format(l.valor)}</span>
+        <button class="btn mini editar-lanc">Editar</button>
+        <button class="btn mini perigo apagar-lanc">Excluir</button>
+      </div>`;
+    }).join("");
+
+  $$(".editar-lanc", alvo).forEach(bt => bt.addEventListener("click", () => {
+    const id = bt.closest(".lanc").dataset.id;
+    abrirEdicao(lancamentos.find(l => l.id === id));
+  }));
+
+  $$(".apagar-lanc", alvo).forEach(bt => bt.addEventListener("click", async () => {
+    const linha = bt.closest(".lanc");
+    if(!confirm("Excluir este lançamento?")) return;
+    bt.disabled = true;
+    try{
+      await FB.excluirLancamento(linha.dataset.uid, linha.dataset.id);
+      lancamentos = lancamentos.filter(l => l.id !== linha.dataset.id);
+      desenharCaixa();
+      recado("Lançamento excluído.");
+    }catch(e){ recado(FB.explicarErro(e), true); bt.disabled = false; }
+  }));
+}
+
+const escaparTxt = (t) => String(t ?? "").replace(/[&<>"']/g, ch =>
+  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+
+/* lista de serviços no seletor de entrada */
+function atualizarSeletorServicos(){
+  const sel = $("#r-servico");
+  const escolhido = sel.value;
+  sel.innerHTML = CFG.servicos.itens
+    .map(i => `<option>${escaparTxt(i.nome)}</option>`).join("") + `<option>Outro</option>`;
+  if(escolhido) sel.value = escolhido;
+}
+
+async function lancar(tipo){
+  const p = tipo === "receita" ? "r" : "d";
+  const erro = $(`#${p}-erro`);
+  const data = $(`#${p}-data`).value;
+  const valor = parseFloat($(`#${p}-valor`).value);
+
+  if(!data) return erro.textContent = "Escolha a data.";
+  if(!(valor > 0)) return erro.textContent = "Digite um valor maior que zero.";
+  const descricao = $(`#${p}-desc`).value.trim();
+  if(tipo === "despesa" && !descricao) return erro.textContent = "Escreva o que foi comprado.";
+  erro.textContent = "";
+
+  const bt = $(tipo === "receita" ? "#add-receita" : "#add-despesa");
+  bt.disabled = true; bt.textContent = "Lançando…";
+  try{
+    await FB.salvarLancamento(FB.auth.currentUser.uid, {
+      tipo, data, valor,
+      descricao,
+      categoria: tipo === "receita" ? $("#r-servico").value : $("#d-cat").value
+    });
+    $(`#${p}-valor`).value = ""; $(`#${p}-desc`).value = "";
+    await carregarCaixa();
+    recado(tipo === "receita" ? "Entrada lançada." : "Custo lançado.");
+  }catch(e){
+    erro.textContent = FB.explicarErro(e);
+    console.error(e);
+  }finally{
+    bt.disabled = false;
+    bt.textContent = tipo === "receita" ? "Lançar entrada" : "Lançar custo";
+  }
+}
+
+$("#add-receita").addEventListener("click", () => lancar("receita"));
+$("#add-despesa").addEventListener("click", () => lancar("despesa"));
+/* ---- corrigir um lançamento já feito ---- */
+const CATEGORIAS_CUSTO = ["Materiais", "Ferramentas", "Aluguel", "Energia e água", "Marketing", "Outros"];
+
+/** Preenche a lista de categorias conforme o tipo, mantendo a atual escolhida. */
+function montarCategoriasDaEdicao(tipo, atual){
+  const opcoes = tipo === "receita"
+    ? CFG.servicos.itens
+        .filter(sv => (sv.nome || "").trim() && (!sv.profissionalId || sv.profissionalId === MEU_PID))
+        .map(sv => sv.nome)
+    : CATEGORIAS_CUSTO.slice();
+
+  const conhecida = atual && opcoes.includes(atual);
+  if(atual && !conhecida) opcoes.push(atual);      // não perde o que já estava gravado
+
+  $("#ed-cat").innerHTML = opcoes.map(o =>
+    `<option value="${escaparTxt(o)}">${escaparTxt(o)}</option>`).join("")
+    + `<option value="__outro">Outro…</option>`;
+  $("#ed-cat").value = atual || opcoes[0] || "__outro";
+  $("#ed-cx-outro").classList.toggle("esconde", $("#ed-cat").value !== "__outro");
+}
+
+function abrirEdicao(l){
+  if(!l) return;
+  const m = $("#edicao");
+  m.dataset.id = l.id;
+  $("#ed-tipo").value = l.tipo;
+  $("#ed-data").value = l.data;
+  $("#ed-valor").value = l.valor;
+  $("#ed-desc").value = l.descricao || "";
+  $("#ed-outro").value = "";
+  $("#ed-erro").textContent = "";
+  montarCategoriasDaEdicao(l.tipo, l.categoria || "");
+  m.classList.add("aberto");
+  setTimeout(() => $("#ed-valor").focus(), 250);
+}
+
+const fecharEdicao = () => $("#edicao").classList.remove("aberto");
+$("#ed-cancelar").addEventListener("click", fecharEdicao);
+$("#edicao").addEventListener("click", e => { if(e.target.id === "edicao") fecharEdicao(); });
+
+$("#ed-tipo").addEventListener("change", e => montarCategoriasDaEdicao(e.target.value, ""));
+$("#ed-cat").addEventListener("change", e => {
+  const outro = e.target.value === "__outro";
+  $("#ed-cx-outro").classList.toggle("esconde", !outro);
+  if(outro) $("#ed-outro").focus();
+});
+
+$("#ed-salvar").addEventListener("click", async () => {
+  const id = $("#edicao").dataset.id;
+  const erro = $("#ed-erro");
+  const valor = parseFloat($("#ed-valor").value);
+  const data = $("#ed-data").value;
+  const cat = $("#ed-cat").value === "__outro" ? $("#ed-outro").value.trim() : $("#ed-cat").value;
+
+  if(!data) return erro.textContent = "Escolha a data.";
+  if(!(valor > 0)) return erro.textContent = "O valor precisa ser maior que zero.";
+  if(!cat) return erro.textContent = "Escolha ou escreva o serviço/categoria.";
+  erro.textContent = "";
+
+  const bt = $("#ed-salvar");
+  bt.disabled = true; bt.textContent = "Salvando…";
+  try{
+    const dados = {
+      tipo: $("#ed-tipo").value,
+      data,
+      valor,
+      categoria: cat.slice(0, 40),
+      descricao: $("#ed-desc").value.trim().slice(0, 120)
+    };
+    await FB.atualizarLancamento(FB.auth.currentUser.uid, id, dados);
+    fecharEdicao();
+    await carregarCaixa();          // se mudou de mês, some da lista atual — é o esperado
+    recado("Lançamento corrigido.");
+  }catch(e){ erro.textContent = FB.explicarErro(e); console.error(e); }
+  finally{ bt.disabled = false; bt.textContent = "Salvar correção"; }
+});
+
+$$(".sub-aba").forEach(b => b.addEventListener("click", () => {
+  $$(".sub-aba").forEach(x => x.classList.toggle("ativa", x === b));
+  $("#sub-painel").classList.toggle("esconde", b.dataset.sub !== "painel");
+  $("#sub-lancar").classList.toggle("esconde", b.dataset.sub !== "lancar");
+}));
+
+$("#mes").addEventListener("change", carregarCaixa);
+$("#mes-hoje").addEventListener("click", () => { $("#mes").value = mesAtual(); carregarCaixa(); });
+
+/* ============================================================
+   SALVAR
+   ============================================================ */
+$("#salvar").addEventListener("click", async () => {
+  const bt = $("#salvar");
+  bt.disabled = true; bt.textContent = "Salvando…";
+  try{
+    await FB.salvarConfig(CFG);
+    marcarSujo(false);
+    recado("Salvo. Recarregue o site para ver.");
+  }catch(e){
+    recado(FB.explicarErro(e), true);
+    console.error(e);
+  }finally{
+    bt.disabled = false; bt.textContent = "Salvar alterações";
+  }
+});
+
+$("#descartar").addEventListener("click", async () => {
+  if(sujo && !confirm("Descartar as alterações que você fez desde o último salvamento?")) return;
+  const salvo = await FB.lerConfig();
+  CFG = migrar(mesclar(PADRAO, salvo || {}));
+  montarTextos(); montarContato(); montarAparencia(); await montarFotos();
+  montarProfissionais(); montarServicos();
+  montarHorariosDeAtendimento(); atualizarSeletorDeServicoDaAgenda();
+  marcarSujo(false);
+  recado("Alterações descartadas.");
+});
+
+/* trocar senha */
+$("#trocar-senha").addEventListener("click", async () => {
+  const nova = $("#n-senha").value;
+  const erro = $("#s-erro");
+  if(nova.length < 6) return erro.textContent = "A senha precisa ter pelo menos 6 caracteres.";
+  erro.textContent = "";
+  try{
+    await FB.trocarSenha(nova);
+    $("#n-senha").value = "";
+    recado("Senha trocada.");
+  }catch(e){ erro.textContent = FB.explicarErro(e); }
+});
+</script>
+</body>
+</html>

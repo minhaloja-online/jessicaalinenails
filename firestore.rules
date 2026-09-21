@@ -1,0 +1,148 @@
+rules_version = '2';
+
+// ============================================================
+//  JESSICA ALINE NAILS — regras do Firestore
+//  Cole no Console do Firebase → Firestore Database → Regras → Publicar.
+//
+//  Resumo:
+//   · Qualquer visitante LÊ o conteúdo do site e as avaliações aprovadas.
+//   · Qualquer visitante ENVIA avaliação, mas sempre como não aprovada.
+//   · Só quem está em admins/{uid} altera qualquer coisa.
+//   · A conta de administrador só pode ser criada UMA vez.
+// ============================================================
+
+service cloud.firestore {
+  match /databases/{banco}/documents {
+
+    function ehAdmin() {
+      return request.auth != null
+        && exists(/databases/$(banco)/documents/admins/$(request.auth.uid));
+    }
+
+    function ehDona() {
+      // .get("papel", "dona") não quebra em contas antigas, criadas antes
+      // de o campo existir — sem isso a regra recusa tudo silenciosamente.
+      return request.auth != null
+        && exists(/databases/$(banco)/documents/admins/$(request.auth.uid))
+        && get(/databases/$(banco)/documents/admins/$(request.auth.uid))
+             .data.get("papel", "dona") != "profissional";
+    }
+
+    // Qual profissional é a conta logada (vazio se ninguém se identificou).
+    function minhaProfissional() {
+      return request.auth != null
+        && exists(/databases/$(banco)/documents/admins/$(request.auth.uid))
+        ? get(/databases/$(banco)/documents/admins/$(request.auth.uid)).data.get("profissionalId", "")
+        : "";
+    }
+
+    function souDestaAgenda(pid) {
+      return pid != "" && minhaProfissional() == pid;
+    }
+
+    function portaAberta() {
+      return !exists(/databases/$(banco)/documents/meta/bootstrap);
+    }
+
+    // ---- Conteúdo do site: textos, cores, fontes, contatos ----
+    match /config/{doc} {
+      allow read:  if true;
+      allow write: if ehAdmin();
+    }
+
+    // ---- Fotos enviadas pelo painel (imagem comprimida) ----
+    match /midia/{id} {
+      allow read:   if true;
+      allow create: if ehAdmin() && request.resource.data.dados is string
+                    && request.resource.data.dados.size() < 900000;
+      allow delete: if ehAdmin();
+      allow update: if false;
+    }
+
+    // ---- Avaliações das clientes ----
+    match /reviews/{id} {
+      allow read: if resource.data.aprovado == true || ehAdmin();
+
+      allow create: if request.resource.data.keys().hasOnly(['nome','nota','texto','aprovado','criadoEm'])
+                    && request.resource.data.aprovado == false
+                    && request.resource.data.nome is string
+                    && request.resource.data.nome.size() >= 2
+                    && request.resource.data.nome.size() <= 40
+                    && request.resource.data.texto is string
+                    && request.resource.data.texto.size() >= 10
+                    && request.resource.data.texto.size() <= 400
+                    && request.resource.data.nota is number
+                    && request.resource.data.nota >= 1
+                    && request.resource.data.nota <= 5;
+
+      allow update, delete: if ehAdmin();
+    }
+
+
+    // ---- Agenda ----
+    // A ocupação é pública: o site precisa saber que horário já está tomado.
+    // O documento não tem nome nem telefone — isso fica em privado/cliente,
+    // que só a profissional daquela agenda consegue abrir.
+    match /agendamentos/{id} {
+      allow read: if true;
+
+      allow create: if request.resource.data.keys().hasOnly(
+                        ['profissionalId','data','inicio','fim','duracao','servico','status','criadoEm'])
+                    && request.resource.data.profissionalId is string
+                    && request.resource.data.data is string
+                    && request.resource.data.data.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+                    && request.resource.data.inicio.matches('^[0-9]{2}:[0-9]{2}$')
+                    && request.resource.data.fim.matches('^[0-9]{2}:[0-9]{2}$')
+                    && request.resource.data.duracao is number
+                    && request.resource.data.duracao > 0
+                    && request.resource.data.duracao <= 720
+                    && request.resource.data.servico.size() <= 60
+                    // pelo site a cliente só consegue PEDIR; quem agenda é a profissional
+                    && (request.resource.data.status == "aguardando"
+                        || souDestaAgenda(request.resource.data.profissionalId));
+
+      allow update, delete: if souDestaAgenda(resource.data.profissionalId);
+
+      match /privado/{doc} {
+        allow create: if request.resource.data.keys().hasOnly(['nome','telefone'])
+                      && request.resource.data.nome is string
+                      && request.resource.data.nome.size() <= 60;
+        allow read, update, delete: if souDestaAgenda(
+          get(/databases/$(banco)/documents/agendamentos/$(id)).data.profissionalId);
+      }
+    }
+
+    // ---- Quem pode entrar no painel ----
+    match /admins/{uid} {
+      // cada profissional confere o próprio acesso; a dona vê todas
+      allow get:  if request.auth != null && (request.auth.uid == uid || ehDona());
+      allow list: if ehDona();
+
+      // o PRIMEIRO cadastro vira dona; depois disso, só ela cria acessos
+      allow create: if request.auth != null
+                    && ((request.auth.uid == uid && portaAberta()) || ehDona());
+
+      allow update: if ehDona();
+      allow delete: if ehDona() && request.auth.uid != uid;
+
+      // ---- Caixa de cada profissional ----
+      // Cada uma lê e lança SÓ o próprio movimento — nem a administradora
+      // enxerga o caixa da outra. Não é regra de tela: é o servidor que recusa.
+      match /lancamentos/{id} {
+        allow read, write: if request.auth != null && request.auth.uid == uid;
+      }
+    }
+
+    // ---- Trava do primeiro acesso ----
+    match /meta/bootstrap {
+      allow read:   if true;
+      allow create: if request.auth != null && portaAberta();
+      allow update, delete: if false;
+    }
+
+    // ---- Nada além do que está acima ----
+    match /{documento=**} {
+      allow read, write: if false;
+    }
+  }
+}

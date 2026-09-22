@@ -15,12 +15,12 @@
    e a agenda ficam indisponíveis.
    ============================================================ */
 export const CHAVES_FIREBASE = {
-  apiKey: "AIzaSyBeywZHYyq52WOszUsFr9LN5drHEhgMjNw",
-  authDomain: "jessicaalinenails.firebaseapp.com",
-  projectId: "jessicaalinenails",
-  storageBucket: "jessicaalinenails.firebasestorage.app",
-  messagingSenderId: "133495226637",
-  appId: "1:133495226637:web:f56417e53aa318da417044"
+  apiKey:            "COLE_AQUI",
+  authDomain:        "COLE_AQUI",
+  projectId:         "COLE_AQUI",
+  storageBucket:     "COLE_AQUI",
+  messagingSenderId: "COLE_AQUI",
+  appId:             "COLE_AQUI"
 };
 
 /* Versão do SDK do Firebase. Se um dia precisar atualizar,

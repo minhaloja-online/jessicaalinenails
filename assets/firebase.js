@@ -247,6 +247,134 @@ export const atualizarLancamento = (uid, id, dados) =>
 export const excluirLancamento = (uid, id) =>
   deleteDoc(doc(db, "admins", uid, "lancamentos", id));
 
+/* ---------- A RECEBER (cliente paga depois) ----------
+   Fica em lancamentos/{id} com tipo "receber": não entra em
+   faturamento nenhum enquanto não for pago.
+     data       dia do atendimento
+     previsao   "AAAA-MM-DD" — quando a cliente combinou pagar
+     cliente    nome            telefone  WhatsApp (opcional)
+     valor      quanto ainda falta receber
+     valorOriginal  quanto era no começo
+   Ao receber tudo, o próprio documento vira "receita" com a data
+   do pagamento (e guarda dataAtendimento). Pagamento parcial gera
+   uma receita nova e abate o valor do que continua pendente.     */
+
+export async function salvarAReceber(uid, d){
+  return addDoc(collection(db, "admins", uid, "lancamentos"), {
+    tipo: "receber",
+    data: d.data,
+    previsao: d.previsao,
+    valor: Number(d.valor),
+    valorOriginal: Number(d.valor),
+    cliente: String(d.cliente || "").trim().slice(0, 60),
+    telefone: String(d.telefone || "").trim().slice(0, 30),
+    descricao: String(d.descricao || "").trim().slice(0, 120),
+    categoria: String(d.categoria || "").trim().slice(0, 40),
+    ...(d.agendamentoId ? { agendamentoId: d.agendamentoId } : {}),
+    criadoEm: serverTimestamp()
+  });
+}
+
+/** Tudo que ainda está pendente, de qualquer data. */
+export async function listarAReceber(uid){
+  const r = await getDocs(query(collection(db, "admins", uid, "lancamentos"),
+    where("tipo", "==", "receber"), limit(1000)));
+  return r.docs.map(d => ({ id: d.id, uid, ...d.data() }));
+}
+
+/** Recebimentos que vieram de um "a receber" (para o histórico). */
+export async function listarRecebidosDeFiado(uid){
+  const r = await getDocs(query(collection(db, "admins", uid, "lancamentos"),
+    where("deFiado", "==", true), limit(1000)));
+  return r.docs.map(d => ({ id: d.id, uid, ...d.data() }));
+}
+
+/** Registra o pagamento de um valor pendente — total ou parcial. */
+export async function registrarRecebimento(uid, pendente, { data, valor, forma, novaPrevisao }){
+  const ref = doc(db, "admins", uid, "lancamentos", pendente.id);
+  const obs = [pendente.cliente, pendente.descricao, forma].filter(Boolean).join(" · ").slice(0, 120);
+  const falta = Math.round((pendente.valor - valor) * 100) / 100;
+
+  if(falta <= 0){
+    // quitou: o próprio documento vira entrada, no dia em que o dinheiro chegou
+    await updateDoc(ref, {
+      tipo: "receita", data, valor: Number(valor), descricao: obs,
+      deFiado: true, dataAtendimento: pendente.data, previsao: pendente.previsao,
+      recebidoEm: serverTimestamp()
+    });
+    return;
+  }
+  const lote = writeBatch(db);
+  lote.set(doc(collection(db, "admins", uid, "lancamentos")), {
+    tipo: "receita", data, valor: Number(valor),
+    descricao: `${obs} · parcial`.slice(0, 120),
+    categoria: pendente.categoria || "Atendimento",
+    cliente: pendente.cliente || "", deFiado: true, parcial: true,
+    dataAtendimento: pendente.data, origemId: pendente.id,
+    criadoEm: serverTimestamp()
+  });
+  lote.update(ref, { valor: falta, ...(novaPrevisao ? { previsao: novaPrevisao } : {}) });
+  await lote.commit();
+}
+
+/* ---------- COMPRAS PARCELADAS ----------
+   Uma compra em N vezes vira N lançamentos de custo, um em cada
+   mês — assim cada mês do dashboard carrega só a parcela dele.
+   As parcelas da mesma compra compartilham:
+     parcelado  true
+     grupoId    identificador da compra
+     parcela    1, 2, 3…      parcelas   total de parcelas
+     valorTotal valor da compra inteira                         */
+
+const col = (uid) => collection(db, "admins", uid, "lancamentos");
+
+/** Grava todas as parcelas de uma vez (ou nenhuma, se algo falhar). */
+export async function salvarCompraParcelada(uid, parcelas){
+  const lote = writeBatch(db);
+  parcelas.forEach(p => lote.set(doc(col(uid)), {
+    tipo: "despesa",
+    data: p.data,
+    valor: Number(p.valor),
+    descricao: String(p.descricao || "").trim().slice(0, 120),
+    categoria: String(p.categoria || "").trim().slice(0, 40),
+    parcelado: true,
+    grupoId: p.grupoId,
+    parcela: p.parcela,
+    parcelas: p.parcelas,
+    valorTotal: Number(p.valorTotal),
+    criadoEm: serverTimestamp()
+  }));
+  await lote.commit();
+}
+
+/** Todas as parcelas de todas as compras parceladas da conta. */
+export async function parcelasDaConta(uid){
+  const r = await getDocs(query(col(uid), where("parcelado", "==", true), limit(2000)));
+  return r.docs.map(d => ({ id: d.id, uid, ...d.data() }));
+}
+
+/** As parcelas de uma compra específica. */
+export async function parcelasDoGrupo(uid, grupoId){
+  const r = await getDocs(query(col(uid), where("grupoId", "==", grupoId)));
+  return r.docs.map(d => ({ id: d.id, uid, ...d.data() }));
+}
+
+/** Altera várias parcelas de uma vez: [{ id, dados }]. */
+export async function atualizarParcelas(uid, mudancas){
+  const lote = writeBatch(db);
+  mudancas.forEach(m => lote.update(doc(db, "admins", uid, "lancamentos", m.id), m.dados));
+  await lote.commit();
+}
+
+/** Apaga a compra inteira (todas as parcelas). */
+export async function excluirCompraParcelada(uid, grupoId){
+  const itens = await parcelasDoGrupo(uid, grupoId);
+  const lote = writeBatch(db);
+  itens.forEach(i => lote.delete(doc(db, "admins", uid, "lancamentos", i.id)));
+  await lote.commit();
+  return itens.length;
+}
+
 /* ---------- ACESSO AO PAINEL ---------- */
 
 /** Já existe administrador? (leitura pública, usada na tela de login) */

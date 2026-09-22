@@ -271,6 +271,51 @@ input,textarea,select{ font:inherit; }
 }
 .lanc .val.ent{ color:#2E7D5B; }
 .lanc .val.sai{ color:#B4453F; }
+.etq-parc{ display:inline-block; font-size:.62rem; letter-spacing:.06em; padding:1px 7px; border-radius:999px; background:rgba(154,144,174,.18); color:var(--tinta); margin-left:6px; vertical-align:1px; }
+
+/* ---------- A RECEBER ---------- */
+.sub-aba .selo{ margin-left:6px; }
+.receber{ border-top:1px solid var(--borda); padding:13px 0; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.receber .nm{ flex:1; min-width:180px; }
+.receber .nm b{ font-weight:500; font-size:.92rem; display:block; }
+.receber .nm small{ font-size:.72rem; color:var(--suave); }
+.receber .prev{ font-size:.74rem; white-space:nowrap; padding:3px 9px; border-radius:999px; background:var(--porcelana); color:var(--suave); }
+.receber .prev.atraso{ background:rgba(180,69,63,.12); color:#B4453F; font-weight:500; }
+.receber .prev.hoje{ background:rgba(200,168,107,.2); color:var(--tinta); font-weight:500; }
+.receber .prev.ok{ background:rgba(46,125,91,.12); color:#2E7D5B; }
+.receber .vl{ font-family:var(--display); font-size:1.05rem; white-space:nowrap; min-width:92px; text-align:right; }
+.receber .acoes{ display:flex; gap:6px; flex-wrap:wrap; }
+.receber.pago{ opacity:.62; }
+.alerta-receber{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; background:rgba(180,69,63,.08); border:1px solid rgba(180,69,63,.3); border-radius:12px; padding:11px 14px; margin-bottom:16px; font-size:.84rem; }
+.alerta-receber span{ flex:1; min-width:200px; }
+
+/* ---------- PARCELAMENTO ---------- */
+.seg{ display:inline-flex; gap:4px; background:rgba(36,28,26,.05); padding:4px; border-radius:12px; }
+.seg button{ padding:8px 16px; border-radius:9px; font-size:.74rem; letter-spacing:.08em; color:var(--suave); }
+.seg button.on{ background:var(--branco); color:var(--tinta); box-shadow:0 1px 4px rgba(36,28,26,.1); }
+.previa-parc{ background:var(--porcelana); border:1px dashed var(--borda); border-radius:10px; padding:10px 13px; font-size:.8rem; margin:-2px 0 14px; line-height:1.55; }
+.previa-parc:empty{ display:none; }
+.previa-parc b{ font-weight:500; }
+.previa-parc .meses{ display:flex; flex-wrap:wrap; gap:4px; margin-top:7px; }
+.previa-parc .meses span{ font-size:.66rem; padding:2px 7px; border-radius:6px; background:var(--branco); border:1px solid var(--borda); color:var(--suave); }
+
+.resumo-parc{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-bottom:14px; }
+.resumo-parc div{ background:var(--porcelana); border-radius:12px; padding:12px 14px; }
+.resumo-parc b{ display:block; font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color:var(--suave); font-weight:500; margin-bottom:5px; }
+.resumo-parc span{ font-family:var(--display); font-size:1.25rem; }
+
+.compra{ border-top:1px solid var(--borda); padding:14px 0; display:grid; gap:9px; }
+.compra .topo{ display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; }
+.compra .topo .nm{ flex:1; min-width:160px; }
+.compra .topo .nm b{ font-weight:500; font-size:.92rem; display:block; }
+.compra .topo .nm small{ font-size:.72rem; color:var(--suave); }
+.compra .topo .tot{ font-family:var(--display); font-size:1.05rem; white-space:nowrap; }
+.compra .prog{ height:8px; border-radius:4px; background:rgba(36,28,26,.07); overflow:hidden; }
+.compra .prog i{ display:block; height:100%; background:var(--rosa); }
+.compra.quitada .prog i{ background:#2E7D5B; }
+.compra .pe{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-size:.76rem; color:var(--suave); }
+.compra .pe .info{ flex:1; min-width:180px; }
+.compra .pe .info b{ color:var(--tinta); font-weight:500; }
 
 /* ---------- SERVIÇOS ---------- */
 .serv-adm{ display:grid; grid-template-columns:190px 1fr; gap:16px; align-items:start;
@@ -485,6 +530,7 @@ input,textarea,select{ font:inherit; }
       <div class="sub-abas">
         <button class="sub-aba ativa" data-sub="painel">Dashboard</button>
         <button class="sub-aba" data-sub="lancar">Lançamentos</button>
+        <button class="sub-aba" data-sub="receber">A receber <span class="selo esconde" id="selo-receber"></span></button>
       </div>
 
       <div class="mes-barra">
@@ -495,6 +541,7 @@ input,textarea,select{ font:inherit; }
       </div>
 
       <div class="sub-pg" id="sub-painel">
+        <div id="alerta-receber"></div>
         <div class="painel-num" id="numeros"></div>
 
         <div class="bloco">
@@ -529,10 +576,23 @@ input,textarea,select{ font:inherit; }
       <div class="dupla-forms">
         <div class="bloco">
           <h3>Registrar atendimento</h3>
-          <p class="desc">O que entrou de dinheiro.</p>
+          <p class="desc">O que entrou de dinheiro — ou o que a cliente vai pagar depois.</p>
+          <div class="campo"><label>Pagamento</label>
+            <div class="seg" id="r-forma">
+              <button type="button" data-forma="agora" class="on">Recebido</button>
+              <button type="button" data-forma="depois">Vai pagar depois</button>
+            </div>
+          </div>
           <div class="dupla">
-            <div class="campo"><label for="r-data">Data</label><input type="date" id="r-data"></div>
-            <div class="campo"><label for="r-valor">Valor recebido (R$)</label><input type="number" id="r-valor" step="0.01" min="0" placeholder="0,00"></div>
+            <div class="campo"><label for="r-data" id="r-rot-data">Data</label><input type="date" id="r-data"></div>
+            <div class="campo"><label for="r-valor" id="r-rot-valor">Valor recebido (R$)</label><input type="number" id="r-valor" step="0.01" min="0" placeholder="0,00"></div>
+          </div>
+          <div class="esconde" id="r-cx-depois">
+            <div class="campo"><label for="r-cliente">Cliente</label><input type="text" id="r-cliente" placeholder="Nome de quem vai pagar"></div>
+            <div class="dupla">
+              <div class="campo"><label for="r-tel">WhatsApp (opcional)</label><input type="text" id="r-tel" inputmode="tel" placeholder="(93) 99999-9999"></div>
+              <div class="campo"><label for="r-previsao">Previsão de pagamento</label><input type="date" id="r-previsao"></div>
+            </div>
           </div>
           <div class="campo"><label for="r-servico">Serviço</label><select id="r-servico"></select></div>
           <div class="campo"><label for="r-desc">Observação (opcional)</label><input type="text" id="r-desc" placeholder="Nome da cliente, forma de pagamento…"></div>
@@ -543,9 +603,26 @@ input,textarea,select{ font:inherit; }
         <div class="bloco">
           <h3>Registrar custo</h3>
           <p class="desc">Material, ferramenta, qualquer gasto do studio.</p>
+          <div class="campo"><label>Forma de pagamento</label>
+            <div class="seg" id="d-forma">
+              <button type="button" data-forma="vista" class="on">À vista</button>
+              <button type="button" data-forma="parcelado">Parcelado</button>
+            </div>
+          </div>
           <div class="dupla">
-            <div class="campo"><label for="d-data">Data</label><input type="date" id="d-data"></div>
-            <div class="campo"><label for="d-valor">Valor pago (R$)</label><input type="number" id="d-valor" step="0.01" min="0" placeholder="0,00"></div>
+            <div class="campo"><label for="d-data" id="d-rot-data">Data</label><input type="date" id="d-data"></div>
+            <div class="campo"><label for="d-valor" id="d-rot-valor">Valor pago (R$)</label><input type="number" id="d-valor" step="0.01" min="0" placeholder="0,00"></div>
+          </div>
+          <div class="esconde" id="d-cx-parc">
+            <div class="dupla">
+              <div class="campo"><label for="d-parcelas">Parcelas</label><select id="d-parcelas"></select></div>
+              <div class="campo"><label for="d-inicio">1ª parcela</label>
+                <select id="d-inicio">
+                  <option value="0">No mês da compra</option>
+                  <option value="1">No mês seguinte</option>
+                </select></div>
+            </div>
+            <div class="previa-parc" id="d-previa"></div>
           </div>
           <div class="campo"><label for="d-cat">Categoria</label><select id="d-cat">
             <option>Materiais</option><option>Ferramentas</option><option>Aluguel</option>
@@ -561,6 +638,32 @@ input,textarea,select{ font:inherit; }
         <h3>Lançamentos do mês</h3>
         <div id="lista-lancamentos"></div>
       </div>
+
+      <div class="bloco">
+        <div class="cabeca-bloco">
+          <h3>Compras parceladas</h3>
+          <label class="desc" style="cursor:pointer;display:inline-flex;gap:6px;align-items:center;margin:0">
+            <input type="checkbox" id="mostrar-quitadas"> mostrar as já quitadas
+          </label>
+        </div>
+        <p class="desc">Cada parcela entra como custo no mês dela. Aqui você acompanha quanto já foi pago e quanto ainda falta.</p>
+        <div id="resumo-parceladas"></div>
+        <div id="lista-parceladas"></div>
+      </div>
+      </div>
+
+      <div class="sub-pg esconde" id="sub-receber">
+        <div class="bloco">
+          <div class="cabeca-bloco">
+            <h3>Clientes que vão pagar depois</h3>
+            <label class="desc" style="cursor:pointer;display:inline-flex;gap:6px;align-items:center;margin:0">
+              <input type="checkbox" id="mostrar-recebidos"> mostrar os já recebidos
+            </label>
+          </div>
+          <p class="desc">Não depende do mês escolhido acima. O valor só entra no faturamento no dia em que você marcar como recebido.</p>
+          <div id="resumo-receber"></div>
+          <div id="lista-receber"></div>
+        </div>
       </div>
     </div>
 
@@ -663,6 +766,7 @@ input,textarea,select{ font:inherit; }
   <div class="cx">
     <h3>Corrigir lançamento</h3>
     <p class="desc">Ajuste o que ficou errado. A alteração já reflete no dashboard.</p>
+    <div class="aviso esconde" id="ed-parc-aviso"></div>
     <div class="dupla">
       <div class="campo"><label for="ed-tipo">Tipo</label>
         <select id="ed-tipo">
@@ -677,9 +781,55 @@ input,textarea,select{ font:inherit; }
     <div class="campo"><label for="ed-valor">Valor (R$)</label>
       <input type="number" id="ed-valor" step="0.01" min="0" placeholder="0,00"></div>
     <div class="campo"><label for="ed-desc">Observação</label><input type="text" id="ed-desc"></div>
+    <label class="esconde" id="ed-cx-todas" style="display:flex;gap:8px;align-items:flex-start;font-size:.8rem;margin:-4px 0 14px;cursor:pointer">
+      <input type="checkbox" id="ed-todas" checked style="margin-top:3px">
+      <span>Aplicar categoria e observação a todas as parcelas desta compra (o valor e a data mudam só nesta parcela)</span>
+    </label>
     <p class="aviso-linha" id="ed-erro"></p>
     <button class="btn" id="ed-salvar">Salvar correção</button>
     <button class="btn vazio" id="ed-cancelar" style="margin-top:8px">Cancelar</button>
+  </div>
+</div>
+
+<!-- Receber de uma cliente que ficou devendo -->
+<div id="recebimento" class="modal-adm">
+  <div class="cx">
+    <h3>Registrar recebimento</h3>
+    <p class="desc">Entra no faturamento na data em que o dinheiro chegou.</p>
+    <div class="resumo-adm" id="rb-resumo"></div>
+    <div class="dupla">
+      <div class="campo"><label for="rb-data">Recebido em</label><input type="date" id="rb-data"></div>
+      <div class="campo"><label for="rb-valor">Valor recebido (R$)</label><input type="number" id="rb-valor" step="0.01" min="0"></div>
+    </div>
+    <div class="campo"><label for="rb-forma">Forma de pagamento</label>
+      <select id="rb-forma"><option>Pix</option><option>Dinheiro</option><option>Cartão de débito</option><option>Cartão de crédito</option><option>Outro</option></select></div>
+    <div class="campo esconde" id="rb-cx-nova"><label for="rb-nova">Nova previsão para o restante</label><input type="date" id="rb-nova"></div>
+    <p class="desc" id="rb-dica" style="margin:-4px 0 12px"></p>
+    <p class="aviso-linha" id="rb-erro"></p>
+    <button class="btn" id="rb-salvar">Confirmar recebimento</button>
+    <button class="btn vazio" id="rb-cancelar" style="margin-top:8px">Cancelar</button>
+  </div>
+</div>
+
+<!-- Corrigir um valor a receber -->
+<div id="ed-receber" class="modal-adm">
+  <div class="cx">
+    <h3>Editar valor a receber</h3>
+    <p class="desc">Mudou o combinado? Ajuste aqui.</p>
+    <div class="campo"><label for="er-cliente">Cliente</label><input type="text" id="er-cliente"></div>
+    <div class="dupla">
+      <div class="campo"><label for="er-tel">WhatsApp</label><input type="text" id="er-tel" inputmode="tel"></div>
+      <div class="campo"><label for="er-previsao">Previsão de pagamento</label><input type="date" id="er-previsao"></div>
+    </div>
+    <div class="dupla">
+      <div class="campo"><label for="er-valor">Valor a receber (R$)</label><input type="number" id="er-valor" step="0.01" min="0"></div>
+      <div class="campo"><label for="er-data">Data do atendimento</label><input type="date" id="er-data"></div>
+    </div>
+    <div class="campo"><label for="er-servico">Serviço</label><input type="text" id="er-servico"></div>
+    <div class="campo"><label for="er-desc">Observação</label><input type="text" id="er-desc"></div>
+    <p class="aviso-linha" id="er-erro"></p>
+    <button class="btn" id="er-salvar">Salvar</button>
+    <button class="btn vazio" id="er-cancelar" style="margin-top:8px">Cancelar</button>
   </div>
 </div>
 
@@ -693,8 +843,15 @@ input,textarea,select{ font:inherit; }
       <select id="fc-servico"></select></div>
     <div class="campo esconde" id="fc-cx-outro"><label for="fc-outro">Qual serviço?</label>
       <input type="text" id="fc-outro" placeholder="Ex.: manutenção + nail art"></div>
-    <div class="campo"><label for="fc-valor">Valor recebido (R$)</label>
+    <div class="campo"><label>Pagamento</label>
+      <div class="seg" id="fc-forma">
+        <button type="button" data-forma="agora" class="on">Pagou agora</button>
+        <button type="button" data-forma="depois">Vai pagar depois</button>
+      </div></div>
+    <div class="campo"><label for="fc-valor" id="fc-rot-valor">Valor recebido (R$)</label>
       <input type="number" id="fc-valor" step="0.01" min="0" placeholder="0,00"></div>
+    <div class="campo esconde" id="fc-cx-previsao"><label for="fc-previsao">Previsão de pagamento</label>
+      <input type="date" id="fc-previsao"></div>
     <div class="campo"><label for="fc-obs">Observação (opcional)</label>
       <input type="text" id="fc-obs" placeholder="Forma de pagamento, detalhes…"></div>
     <p class="aviso-linha" id="fc-erro"></p>
@@ -1707,6 +1864,8 @@ function abrirLancamentoDoAtendimento(item){
 
   $("#fc-valor").value = valorSugerido(sel.selectedOptions[0]?.dataset.preco);
   $("#fc-erro").textContent = "";
+  $("#fc-previsao").value = "";
+  escolherFormaFechamento("agora");
   $("#fechamento").classList.add("aberto");
   $("#fechamento").dataset.id = item.id;
   setTimeout(() => $("#fc-valor").focus(), 250);
@@ -1835,30 +1994,44 @@ $("#fc-lancar").addEventListener("click", async () => {
   const erro = $("#fc-erro");
   if($("#fc-servico").value === "__outro" && $("#fc-outro").value.trim().length < 2)
     return erro.textContent = "Escreva qual foi o serviço.";
-  if(!(valor > 0)) return erro.textContent = "Digite o valor recebido.";
+  const depois = FORMA_FECHAMENTO === "depois";
+  if(!(valor > 0)) return erro.textContent = depois ? "Digite o valor que ela vai pagar." : "Digite o valor recebido.";
+  if(depois && !$("#fc-previsao").value) return erro.textContent = "Escolha a previsão de pagamento.";
   erro.textContent = "";
 
   const bt = $("#fc-lancar");
   bt.disabled = true; bt.textContent = "Lançando…";
   try{
     const cli = NOMES[id] || {};
-    await FB.salvarLancamento(FB.auth.currentUser.uid, {
-      tipo: "receita",
-      data: item.data,
-      valor,
-      descricao: [cli.nome, $("#fc-obs").value.trim()].filter(Boolean).join(" · ").slice(0, 120),
-      categoria: ($("#fc-servico").value === "__outro"
+    const categoria = ($("#fc-servico").value === "__outro"
         ? $("#fc-outro").value.trim()
-        : $("#fc-servico").value) || item.servico || "Atendimento"
-    });
-    await FB.mudarStatus(id, "concluido", { faturado: true, valor });
+        : $("#fc-servico").value) || item.servico || "Atendimento";
+    if(depois){
+      await FB.salvarAReceber(FB.auth.currentUser.uid, {
+        data: item.data, valor, categoria,
+        previsao: $("#fc-previsao").value,
+        cliente: cli.nome || "Cliente",
+        telefone: cli.telefone || "",
+        descricao: $("#fc-obs").value.trim(),
+        agendamentoId: id
+      });
+    }else{
+      await FB.salvarLancamento(FB.auth.currentUser.uid, {
+        tipo: "receita",
+        data: item.data,
+        valor,
+        descricao: [cli.nome, $("#fc-obs").value.trim()].filter(Boolean).join(" · ").slice(0, 120),
+        categoria
+      });
+    }
+    await FB.mudarStatus(id, "concluido", { faturado: true, valor, ...(depois ? { aReceber: true } : {}) });
     item.faturado = true; item.valor = valor;
     desenharAgenda();
     fecharFechamento();
     await carregarCaixa();
-    recado("Lançado no faturamento.");
+    recado(depois ? "Anotado em A receber." : "Lançado no faturamento.");
   }catch(e){ erro.textContent = FB.explicarErro(e); console.error(e); }
-  finally{ bt.disabled = false; bt.textContent = "Lançar no faturamento"; }
+  finally{ bt.disabled = false; bt.textContent = FORMA_FECHAMENTO === "depois" ? "Anotar a receber" : "Lançar no faturamento"; }
 });
 
 const andarMes = (n) => { MES_AG = mesAtras(MES_AG, -n); DIA_SEL = ""; carregarAgenda(); };
@@ -2083,10 +2256,11 @@ async function carregarCaixa(){
   }
   montarDonoDoCaixa();
   desenharCaixa();
+  await Promise.all([carregarParceladas(), carregarAReceber()]);
 }
 
 function somaDoMes(mes){
-  const doMes = lancamentos.filter(l => l.data?.startsWith(mes));
+  const doMes = lancamentos.filter(l => l.data?.startsWith(mes) && l.tipo !== "receber");
   const entra = doMes.filter(l => l.tipo === "receita").reduce((s, l) => s + (+l.valor || 0), 0);
   const sai   = doMes.filter(l => l.tipo === "despesa").reduce((s, l) => s + (+l.valor || 0), 0);
   return { entra, sai, lucro: entra - sai, itens: doMes };
@@ -2102,12 +2276,16 @@ function desenharCaixa(){
     <div class="num">
       <b>Faturamento</b>
       <span class="v">${dinheiro.format(entra)}</span>
-      <small>${itens.filter(i => i.tipo === "receita").length} atendimento(s)</small>
+      <small>${itens.filter(i => i.tipo === "receita").length} atendimento(s)${
+        totalAReceber() > 0 ? ` · ${dinheiro.format(totalAReceber())} a receber` : ""}</small>
     </div>
     <div class="num">
       <b>Custos</b>
       <span class="v">${dinheiro.format(sai)}</span>
-      <small>materiais e demais gastos</small>
+      <small>${(() => {
+        const p = itens.filter(i => i.tipo === "despesa" && i.parcelado).reduce((s, i) => s + (+i.valor || 0), 0);
+        return p > 0 ? `inclui ${dinheiro.format(p)} em parcelas` : "materiais e demais gastos";
+      })()}</small>
     </div>
     <div class="num">
       <b>Lucro real</b>
@@ -2203,11 +2381,13 @@ function desenharCaixa(){
     .sort((a, b) => b.data.localeCompare(a.data))
     .map(l => {
       const entrada = l.tipo === "receita";
+      const etq = l.parcelado ? `<span class="etq-parc">parcela ${l.parcela}/${l.parcelas}</span>` : "";
       return `<div class="lanc" data-id="${l.id}" data-uid="${l.uid}">
         <span class="dia">${l.data.slice(8)}/${l.data.slice(5,7)}</span>
         <span class="txt">
-          <b>${escaparTxt(l.descricao || l.categoria || (entrada ? "Atendimento" : "Custo"))}</b>
-          <small>${escaparTxt(l.categoria || (entrada ? "Atendimento" : "Custo"))}</small>
+          <b>${escaparTxt(l.descricao || l.categoria || (entrada ? "Atendimento" : "Custo"))}${etq}</b>
+          <small>${escaparTxt(l.categoria || (entrada ? "Atendimento" : "Custo"))}${l.parcelado ? ` · compra de ${dinheiro.format(l.valorTotal || 0)}` : ""}${
+            l.deFiado && l.dataAtendimento ? ` · atendida em ${l.dataAtendimento.slice(8)}/${l.dataAtendimento.slice(5, 7)}, pagou depois` : ""}</small>
         </span>
         <span class="val ${entrada ? "ent" : "sai"}">${entrada ? "+" : "−"} ${dinheiro.format(l.valor)}</span>
         <button class="btn mini editar-lanc">Editar</button>
@@ -2222,6 +2402,13 @@ function desenharCaixa(){
 
   $$(".apagar-lanc", alvo).forEach(bt => bt.addEventListener("click", async () => {
     const linha = bt.closest(".lanc");
+    const l = lancamentos.find(x => x.id === linha.dataset.id);
+    if(l?.parcelado){
+      bt.disabled = true;
+      const ok = await excluirCompra(l.grupoId, l.descricao, l.parcelas);
+      if(!ok) bt.disabled = false;
+      return;
+    }
     if(!confirm("Excluir este lançamento?")) return;
     bt.disabled = true;
     try{
@@ -2257,23 +2444,49 @@ async function lancar(tipo){
   if(tipo === "despesa" && !descricao) return erro.textContent = "Escreva o que foi comprado.";
   erro.textContent = "";
 
+  const fiado = tipo === "receita" && FORMA_RECEITA === "depois";
+  if(fiado){
+    if($("#r-cliente").value.trim().length < 2) return erro.textContent = "Escreva o nome da cliente.";
+    if(!$("#r-previsao").value) return erro.textContent = "Escolha a previsão de pagamento.";
+  }
+  const parcelado = tipo === "despesa" && FORMA_CUSTO === "parcelado";
   const bt = $(tipo === "receita" ? "#add-receita" : "#add-despesa");
   bt.disabled = true; bt.textContent = "Lançando…";
   try{
-    await FB.salvarLancamento(FB.auth.currentUser.uid, {
-      tipo, data, valor,
-      descricao,
-      categoria: tipo === "receita" ? $("#r-servico").value : $("#d-cat").value
-    });
+    if(fiado){
+      await FB.salvarAReceber(FB.auth.currentUser.uid, {
+        data, valor, descricao,
+        previsao: $("#r-previsao").value,
+        cliente: $("#r-cliente").value,
+        telefone: $("#r-tel").value,
+        categoria: $("#r-servico").value
+      });
+      $("#r-cliente").value = ""; $("#r-tel").value = ""; $("#r-previsao").value = "";
+    }else if(parcelado){
+      const plano = planoDeParcelas(data, valor, +$("#d-parcelas").value, +$("#d-inicio").value);
+      const grupoId = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+      await FB.salvarCompraParcelada(FB.auth.currentUser.uid, plano.map(x => ({
+        ...x, grupoId, descricao, categoria: $("#d-cat").value, valorTotal: valor
+      })));
+    }else{
+      await FB.salvarLancamento(FB.auth.currentUser.uid, {
+        tipo, data, valor,
+        descricao,
+        categoria: tipo === "receita" ? $("#r-servico").value : $("#d-cat").value
+      });
+    }
     $(`#${p}-valor`).value = ""; $(`#${p}-desc`).value = "";
+    if(tipo === "despesa") atualizarPreviaParcelas();
     await carregarCaixa();
-    recado(tipo === "receita" ? "Entrada lançada." : "Custo lançado.");
+    recado(fiado ? "Anotado em A receber." : tipo === "receita" ? "Entrada lançada."
+      : parcelado ? `Compra lançada em ${$("#d-parcelas").value} parcelas.` : "Custo lançado.");
   }catch(e){
     erro.textContent = FB.explicarErro(e);
     console.error(e);
   }finally{
     bt.disabled = false;
-    bt.textContent = tipo === "receita" ? "Lançar entrada" : "Lançar custo";
+    bt.textContent = tipo === "receita" ? (FORMA_RECEITA === "depois" ? "Anotar a receber" : "Lançar entrada")
+      : FORMA_CUSTO === "parcelado" ? "Lançar compra parcelada" : "Lançar custo";
   }
 }
 
@@ -2311,6 +2524,14 @@ function abrirEdicao(l){
   $("#ed-outro").value = "";
   $("#ed-erro").textContent = "";
   montarCategoriasDaEdicao(l.tipo, l.categoria || "");
+  const parc = !!l.parcelado;
+  m.dataset.grupo = parc ? l.grupoId : "";
+  $("#ed-tipo").disabled = parc;                       // parcela é sempre custo
+  $("#ed-parc-aviso").classList.toggle("esconde", !parc);
+  $("#ed-cx-todas").classList.toggle("esconde", !parc);
+  $("#ed-todas").checked = true;
+  if(parc) $("#ed-parc-aviso").innerHTML =
+    `Esta é a <b>parcela ${l.parcela} de ${l.parcelas}</b> de uma compra de ${dinheiro.format(l.valorTotal || 0)}.`;
   m.classList.add("aberto");
   setTimeout(() => $("#ed-valor").focus(), 250);
 }
@@ -2348,7 +2569,20 @@ $("#ed-salvar").addEventListener("click", async () => {
       categoria: cat.slice(0, 40),
       descricao: $("#ed-desc").value.trim().slice(0, 120)
     };
-    await FB.atualizarLancamento(FB.auth.currentUser.uid, id, dados);
+    const grupo = $("#edicao").dataset.grupo;
+    if(grupo){
+      dados.tipo = "despesa";
+      const uid = FB.auth.currentUser.uid;
+      await FB.atualizarLancamento(uid, id, dados);
+      if($("#ed-todas").checked){
+        const irmas = (await FB.parcelasDoGrupo(uid, grupo)).filter(x => x.id !== id);
+        if(irmas.length) await FB.atualizarParcelas(uid, irmas.map(x => ({
+          id: x.id, dados: { categoria: dados.categoria, descricao: dados.descricao }
+        })));
+      }
+    }else{
+      await FB.atualizarLancamento(FB.auth.currentUser.uid, id, dados);
+    }
     fecharEdicao();
     await carregarCaixa();          // se mudou de mês, some da lista atual — é o esperado
     recado("Lançamento corrigido.");
@@ -2356,10 +2590,454 @@ $("#ed-salvar").addEventListener("click", async () => {
   finally{ bt.disabled = false; bt.textContent = "Salvar correção"; }
 });
 
+/* ============================================================
+   A RECEBER
+   Atendimento feito agora, pago depois. Fica como tipo "receber"
+   (fora do faturamento) até ela pagar; aí vira entrada na data
+   em que o dinheiro chegou.
+   ============================================================ */
+let FORMA_RECEITA = "agora";
+let FORMA_FECHAMENTO = "agora";
+let aReceber = [];
+let recebidosDeFiado = [];
+
+const totalAReceber = () => aReceber.reduce((s, r) => s + (+r.valor || 0), 0);
+const diaCurto = (iso) => iso ? `${iso.slice(8)}/${iso.slice(5, 7)}/${iso.slice(2, 4)}` : "";
+const diasEntre = (a, b) => Math.round((new Date(b + "T12:00") - new Date(a + "T12:00")) / 864e5);
+
+/* alternância no formulário de atendimento */
+$$("#r-forma button").forEach(b => b.addEventListener("click", () => {
+  FORMA_RECEITA = b.dataset.forma;
+  $$("#r-forma button").forEach(x => x.classList.toggle("on", x === b));
+  const depois = FORMA_RECEITA === "depois";
+  $("#r-cx-depois").classList.toggle("esconde", !depois);
+  $("#r-rot-data").textContent = depois ? "Data do atendimento" : "Data";
+  $("#r-rot-valor").textContent = depois ? "Valor a receber (R$)" : "Valor recebido (R$)";
+  $("#add-receita").textContent = depois ? "Anotar a receber" : "Lançar entrada";
+  $("#r-erro").textContent = "";
+}));
+
+/* alternância no fechamento do atendimento (agenda) */
+function escolherFormaFechamento(forma){
+  FORMA_FECHAMENTO = forma;
+  $$("#fc-forma button").forEach(x => x.classList.toggle("on", x.dataset.forma === forma));
+  const depois = forma === "depois";
+  $("#fc-cx-previsao").classList.toggle("esconde", !depois);
+  $("#fc-rot-valor").textContent = depois ? "Valor a receber (R$)" : "Valor recebido (R$)";
+  $("#fc-lancar").textContent = depois ? "Anotar a receber" : "Lançar no faturamento";
+}
+$$("#fc-forma button").forEach(b => b.addEventListener("click", () => escolherFormaFechamento(b.dataset.forma)));
+
+async function carregarAReceber(){
+  const uid = FB.auth.currentUser.uid;
+  try{
+    [aReceber, recebidosDeFiado] = await Promise.all([
+      FB.listarAReceber(uid),
+      $("#mostrar-recebidos").checked ? FB.listarRecebidosDeFiado(uid) : Promise.resolve([])
+    ]);
+  }catch(e){
+    aReceber = []; recebidosDeFiado = [];
+    console.error(e);
+  }
+  desenharAReceber();
+  desenharCaixa();          // o card de faturamento mostra o total pendente
+  desenharAlertaReceber();
+}
+
+function situacao(previsao, hoje){
+  if(!previsao) return { cls: "", txt: "sem previsão" };
+  const d = diasEntre(hoje, previsao);
+  if(d < 0)  return { cls: "atraso", txt: `atrasado ${-d} dia${d === -1 ? "" : "s"}` };
+  if(d === 0) return { cls: "hoje", txt: "vence hoje" };
+  if(d <= 7) return { cls: "", txt: `em ${d} dia${d === 1 ? "" : "s"} · ${diaCurto(previsao)}` };
+  return { cls: "", txt: `previsto ${diaCurto(previsao)}` };
+}
+
+function desenharAlertaReceber(){
+  const hoje = hojeISO();
+  const atrasados = aReceber.filter(r => r.previsao && r.previsao < hoje);
+  const hojeVence = aReceber.filter(r => r.previsao === hoje);
+  const selo = $("#selo-receber");
+  const n = atrasados.length + hojeVence.length;
+  selo.textContent = n; selo.classList.toggle("esconde", !n);
+
+  if(!n){ $("#alerta-receber").innerHTML = ""; return; }
+  const partes = [];
+  if(atrasados.length) partes.push(`<b>${atrasados.length}</b> pagamento${atrasados.length > 1 ? "s" : ""} atrasado${atrasados.length > 1 ? "s" : ""} (${dinheiro.format(atrasados.reduce((s, r) => s + r.valor, 0))})`);
+  if(hojeVence.length) partes.push(`<b>${hojeVence.length}</b> previsto${hojeVence.length > 1 ? "s" : ""} para hoje`);
+  $("#alerta-receber").innerHTML = `<div class="alerta-receber">
+    <span>${partes.join(" e ")}.</span>
+    <button class="btn mini linha" id="ir-receber">Ver a receber</button></div>`;
+  $("#ir-receber").addEventListener("click", () => $('.sub-aba[data-sub="receber"]').click());
+}
+
+function desenharAReceber(){
+  const hoje = hojeISO();
+  const mes = mesAtual();
+  const atrasado = aReceber.filter(r => r.previsao && r.previsao < hoje);
+  const doMes = aReceber.filter(r => r.previsao >= hoje && r.previsao.startsWith(mes));
+
+  $("#resumo-receber").innerHTML = aReceber.length ? `
+    <div class="resumo-parc">
+      <div><b>Total a receber</b><span>${dinheiro.format(totalAReceber())}</span></div>
+      <div><b>Atrasado</b><span style="${atrasado.length ? "color:#B4453F" : ""}">${dinheiro.format(atrasado.reduce((s, r) => s + r.valor, 0))}</span></div>
+      <div><b>Previsto ainda em ${MESES[+mes.slice(5) - 1]}</b><span>${dinheiro.format(doMes.reduce((s, r) => s + r.valor, 0))}</span></div>
+    </div>` : "";
+
+  const pend = aReceber.slice().sort((a, b) => (a.previsao || "9").localeCompare(b.previsao || "9"));
+  const alvo = $("#lista-receber");
+  let h = pend.map(r => {
+    const st = situacao(r.previsao, hoje);
+    const pago = (r.valorOriginal || r.valor) - r.valor;
+    return `<div class="receber" data-id="${r.id}">
+      <span class="nm"><b>${escaparTxt(r.cliente || "Cliente")}</b>
+        <small>${escaparTxt(r.categoria || "Atendimento")} · atendida em ${diaCurto(r.data)}${
+          pago > 0.004 ? ` · já pagou ${dinheiro.format(pago)} de ${dinheiro.format(r.valorOriginal)}` : ""}${
+          r.descricao ? " · " + escaparTxt(r.descricao) : ""}</small></span>
+      <span class="prev ${st.cls}">${st.txt}</span>
+      <span class="vl">${dinheiro.format(r.valor)}</span>
+      <span class="acoes">
+        <button class="btn mini receber-bt">Recebi</button>
+        ${linkCobranca(r) ? `<a class="btn mini linha" href="${linkCobranca(r)}" target="_blank" rel="noopener">Cobrar</a>` : ""}
+        <button class="btn mini linha editar-rc">Editar</button>
+        <button class="btn mini perigo apagar-rc">Excluir</button>
+      </span>
+    </div>`;
+  }).join("");
+
+  if($("#mostrar-recebidos").checked && recebidosDeFiado.length){
+    h += recebidosDeFiado.sort((a, b) => b.data.localeCompare(a.data)).slice(0, 60).map(r => `
+      <div class="receber pago">
+        <span class="nm"><b>${escaparTxt(r.cliente || (r.descricao || "").split(" · ")[0] || "Cliente")}</b>
+          <small>${escaparTxt(r.categoria || "Atendimento")} · atendida em ${diaCurto(r.dataAtendimento)}${r.parcial ? " · pagamento parcial" : ""}</small></span>
+        <span class="prev ok">recebido ${diaCurto(r.data)}${r.previsao && r.data > r.previsao ? ` · ${diasEntre(r.previsao, r.data)}d após o previsto` : ""}</span>
+        <span class="vl">${dinheiro.format(r.valor)}</span>
+      </div>`).join("");
+  }
+
+  alvo.innerHTML = h || `<p class="desc">Ninguém devendo por enquanto. Ao registrar um atendimento, escolha “Vai pagar depois”.</p>`;
+
+  $$(".receber-bt", alvo).forEach(bt => bt.addEventListener("click", () =>
+    abrirRecebimento(aReceber.find(r => r.id === bt.closest(".receber").dataset.id))));
+  $$(".editar-rc", alvo).forEach(bt => bt.addEventListener("click", () =>
+    abrirEdicaoReceber(aReceber.find(r => r.id === bt.closest(".receber").dataset.id))));
+  $$(".apagar-rc", alvo).forEach(bt => bt.addEventListener("click", async () => {
+    const r = aReceber.find(x => x.id === bt.closest(".receber").dataset.id);
+    if(!confirm(`Excluir o valor a receber de ${r.cliente} (${dinheiro.format(r.valor)})?\n\nUse isto só se foi lançado por engano ou se ela não vai mais pagar.`)) return;
+    bt.disabled = true;
+    try{
+      await FB.excluirLancamento(FB.auth.currentUser.uid, r.id);
+      await carregarAReceber();
+      recado("Excluído.");
+    }catch(e){ recado(FB.explicarErro(e), true); bt.disabled = false; }
+  }));
+}
+
+/** Link do WhatsApp com um lembrete educado já escrito. */
+function linkCobranca(r){
+  let n = String(r.telefone || "").replace(/\D/g, "");
+  if(n.length < 10) return "";
+  if(!n.startsWith("55")) n = "55" + n;
+  const nome = (r.cliente || "").trim().split(/\s+/)[0];
+  const hoje = hojeISO();
+  const quando = !r.previsao ? "" : r.previsao < hoje
+    ? `, que tínhamos combinado para ${diaCurto(r.previsao).slice(0, 5)}`
+    : `, combinado para ${diaCurto(r.previsao).slice(0, 5)}`;
+  const txt = `Oi${nome ? ", " + nome : ""}! Tudo bem? 💅 Passando só para lembrar do pagamento de ${r.categoria || "atendimento"} (${dinheiro.format(r.valor)})${quando}. Qualquer coisa me avisa. Obrigada!`;
+  return `https://wa.me/${n}?text=${encodeURIComponent(txt)}`;
+}
+
+$("#mostrar-recebidos").addEventListener("change", carregarAReceber);
+
+/* ---- modal: registrar recebimento ---- */
+function abrirRecebimento(r){
+  if(!r) return;
+  const m = $("#recebimento");
+  m.dataset.id = r.id;
+  $("#rb-resumo").innerHTML = `
+    <div><span>Cliente</span><b>${escaparTxt(r.cliente || "Cliente")}</b></div>
+    <div><span>Serviço</span><b>${escaparTxt(r.categoria || "Atendimento")}</b></div>
+    <div><span>Falta receber</span><b>${dinheiro.format(r.valor)}</b></div>`;
+  $("#rb-data").value = hojeISO();
+  $("#rb-valor").value = r.valor;
+  $("#rb-nova").value = "";
+  $("#rb-erro").textContent = "";
+  atualizarDicaRecebimento();
+  m.classList.add("aberto");
+  setTimeout(() => $("#rb-valor").focus(), 250);
+}
+
+function atualizarDicaRecebimento(){
+  const r = aReceber.find(x => x.id === $("#recebimento").dataset.id);
+  const v = parseFloat($("#rb-valor").value);
+  const parcial = r && v > 0 && v < r.valor - 0.004;
+  $("#rb-cx-nova").classList.toggle("esconde", !parcial);
+  $("#rb-dica").textContent = parcial
+    ? `Pagamento parcial: ${dinheiro.format(r.valor - v)} continuam em A receber.` : "";
+}
+$("#rb-valor").addEventListener("input", atualizarDicaRecebimento);
+
+const fecharRecebimento = () => $("#recebimento").classList.remove("aberto");
+$("#rb-cancelar").addEventListener("click", fecharRecebimento);
+$("#recebimento").addEventListener("click", e => { if(e.target.id === "recebimento") fecharRecebimento(); });
+
+$("#rb-salvar").addEventListener("click", async () => {
+  const r = aReceber.find(x => x.id === $("#recebimento").dataset.id);
+  const erro = $("#rb-erro");
+  const data = $("#rb-data").value;
+  const valor = parseFloat($("#rb-valor").value);
+  if(!data) return erro.textContent = "Escolha a data do recebimento.";
+  if(!(valor > 0)) return erro.textContent = "Digite o valor recebido.";
+  if(valor > r.valor + 0.004 && !confirm(`O valor é maior que o pendente (${dinheiro.format(r.valor)}). Lançar mesmo assim?`)) return;
+  erro.textContent = "";
+
+  const bt = $("#rb-salvar");
+  bt.disabled = true; bt.textContent = "Salvando…";
+  try{
+    await FB.registrarRecebimento(FB.auth.currentUser.uid, r, {
+      data, valor, forma: $("#rb-forma").value, novaPrevisao: $("#rb-nova").value
+    });
+    fecharRecebimento();
+    await carregarCaixa();
+    recado(valor < r.valor - 0.004 ? "Pagamento parcial registrado." : "Recebido! Já está no faturamento.");
+  }catch(e){ erro.textContent = FB.explicarErro(e); console.error(e); }
+  finally{ bt.disabled = false; bt.textContent = "Confirmar recebimento"; }
+});
+
+/* ---- modal: editar valor a receber ---- */
+function abrirEdicaoReceber(r){
+  if(!r) return;
+  const m = $("#ed-receber");
+  m.dataset.id = r.id;
+  $("#er-cliente").value = r.cliente || "";
+  $("#er-tel").value = r.telefone || "";
+  $("#er-previsao").value = r.previsao || "";
+  $("#er-valor").value = r.valor;
+  $("#er-data").value = r.data;
+  $("#er-servico").value = r.categoria || "";
+  $("#er-desc").value = r.descricao || "";
+  $("#er-erro").textContent = "";
+  m.classList.add("aberto");
+}
+const fecharEdicaoReceber = () => $("#ed-receber").classList.remove("aberto");
+$("#er-cancelar").addEventListener("click", fecharEdicaoReceber);
+$("#ed-receber").addEventListener("click", e => { if(e.target.id === "ed-receber") fecharEdicaoReceber(); });
+
+$("#er-salvar").addEventListener("click", async () => {
+  const id = $("#ed-receber").dataset.id;
+  const r = aReceber.find(x => x.id === id);
+  const erro = $("#er-erro");
+  const valor = parseFloat($("#er-valor").value);
+  const cliente = $("#er-cliente").value.trim();
+  if(cliente.length < 2) return erro.textContent = "Escreva o nome da cliente.";
+  if(!$("#er-previsao").value) return erro.textContent = "Escolha a previsão de pagamento.";
+  if(!$("#er-data").value) return erro.textContent = "Escolha a data do atendimento.";
+  if(!(valor > 0)) return erro.textContent = "O valor precisa ser maior que zero.";
+  erro.textContent = "";
+
+  const bt = $("#er-salvar");
+  bt.disabled = true; bt.textContent = "Salvando…";
+  try{
+    const jaPago = (r.valorOriginal || r.valor) - r.valor;
+    await FB.atualizarLancamento(FB.auth.currentUser.uid, id, {
+      cliente: cliente.slice(0, 60),
+      telefone: $("#er-tel").value.trim().slice(0, 30),
+      previsao: $("#er-previsao").value,
+      data: $("#er-data").value,
+      valor,
+      valorOriginal: Math.round((valor + jaPago) * 100) / 100,
+      categoria: $("#er-servico").value.trim().slice(0, 40),
+      descricao: $("#er-desc").value.trim().slice(0, 120)
+    });
+    fecharEdicaoReceber();
+    await carregarAReceber();
+    recado("Atualizado.");
+  }catch(e){ erro.textContent = FB.explicarErro(e); console.error(e); }
+  finally{ bt.disabled = false; bt.textContent = "Salvar"; }
+});
+
+/* ============================================================
+   COMPRAS PARCELADAS
+   Uma compra em N vezes vira N custos, um por mês, para que
+   cada mês do dashboard carregue só a parcela que cai nele.
+   ============================================================ */
+let FORMA_CUSTO = "vista";
+let parcelasTodas = [];
+
+/** Soma n meses a uma data AAAA-MM-DD, segurando o dia no fim do mês (31/01 + 1 → 28/02). */
+function somarMeses(dataISO, n){
+  const [a, m, d] = dataISO.split("-").map(Number);
+  const alvo = new Date(a, m - 1 + n, 1);
+  const fim = new Date(alvo.getFullYear(), alvo.getMonth() + 1, 0).getDate();
+  return `${alvo.getFullYear()}-${String(alvo.getMonth() + 1).padStart(2, "0")}-${String(Math.min(d, fim)).padStart(2, "0")}`;
+}
+
+/** Divide o total em n parcelas em centavos; a diferença do arredondamento fica na 1ª. */
+function planoDeParcelas(dataCompra, total, n, pulo){
+  const centavos = Math.round(total * 100);
+  const base = Math.floor(centavos / n);
+  const sobra = centavos - base * n;
+  return Array.from({ length: n }, (_, i) => ({
+    parcela: i + 1,
+    parcelas: n,
+    data: somarMeses(dataCompra, i + pulo),
+    valor: (base + (i === 0 ? sobra : 0)) / 100
+  }));
+}
+
+const nomeMes = (iso) => `${MESES[+iso.slice(5, 7) - 1]}/${iso.slice(2, 4)}`;
+
+/* seletor de número de parcelas */
+$("#d-parcelas").innerHTML = Array.from({ length: 23 }, (_, i) => i + 2)
+  .map(n => `<option value="${n}">${n}x</option>`).join("");
+
+function atualizarPreviaParcelas(){
+  const alvo = $("#d-previa");
+  const data = $("#d-data").value;
+  const total = parseFloat($("#d-valor").value);
+  if(FORMA_CUSTO !== "parcelado" || !data || !(total > 0)){
+    alvo.innerHTML = FORMA_CUSTO === "parcelado"
+      ? "Informe a data e o valor total para ver como fica cada mês." : "";
+    return;
+  }
+  const plano = planoDeParcelas(data, total, +$("#d-parcelas").value, +$("#d-inicio").value);
+  const p1 = plano[0].valor, resto = plano[plano.length - 1].valor;
+  const valores = p1 === resto
+    ? `<b>${plano.length}x de ${dinheiro.format(p1)}</b>`
+    : `<b>1x de ${dinheiro.format(p1)} + ${plano.length - 1}x de ${dinheiro.format(resto)}</b>`;
+  alvo.innerHTML = `${valores} — de ${nomeMes(plano[0].data)} a ${nomeMes(plano[plano.length - 1].data)}.
+    <div class="meses">${plano.map(x => `<span>${nomeMes(x.data)} · ${dinheiro.format(x.valor)}</span>`).join("")}</div>`;
+}
+
+$$("#d-forma button").forEach(b => b.addEventListener("click", () => {
+  FORMA_CUSTO = b.dataset.forma;
+  $$("#d-forma button").forEach(x => x.classList.toggle("on", x === b));
+  const parc = FORMA_CUSTO === "parcelado";
+  $("#d-cx-parc").classList.toggle("esconde", !parc);
+  $("#d-rot-data").textContent = parc ? "Data da compra" : "Data";
+  $("#d-rot-valor").textContent = parc ? "Valor total (R$)" : "Valor pago (R$)";
+  $("#add-despesa").textContent = parc ? "Lançar compra parcelada" : "Lançar custo";
+  atualizarPreviaParcelas();
+}));
+["#d-data", "#d-valor", "#d-parcelas", "#d-inicio"].forEach(sel =>
+  $(sel).addEventListener("input", atualizarPreviaParcelas));
+
+/* ---- lista de compras parceladas ---- */
+async function carregarParceladas(){
+  try{
+    parcelasTodas = await FB.parcelasDaConta(FB.auth.currentUser.uid);
+  }catch(e){
+    parcelasTodas = [];
+    console.error(e);
+  }
+  desenharParceladas();
+}
+
+function desenharParceladas(){
+  const hoje = hojeISO();
+  const grupos = {};
+  parcelasTodas.forEach(p => (grupos[p.grupoId] ||= []).push(p));
+
+  const compras = Object.values(grupos).map(ps => {
+    ps.sort((a, b) => a.parcela - b.parcela);
+    const pagas = ps.filter(p => p.data <= hoje);
+    const faltam = ps.filter(p => p.data > hoje);
+    return {
+      grupoId: ps[0].grupoId,
+      descricao: ps[0].descricao,
+      categoria: ps[0].categoria,
+      n: ps.length,
+      total: ps.reduce((s, p) => s + (+p.valor || 0), 0),
+      pago: pagas.reduce((s, p) => s + (+p.valor || 0), 0),
+      falta: faltam.reduce((s, p) => s + (+p.valor || 0), 0),
+      nPagas: pagas.length,
+      inicio: ps[0].data,
+      fim: ps[ps.length - 1].data,
+      proxima: faltam[0]
+    };
+  }).sort((a, b) => (b.falta > 0) - (a.falta > 0) || b.inicio.localeCompare(a.inicio));
+
+  const ativas = compras.filter(c => c.falta > 0);
+  const mesQueVem = mesAtras(mesAtual(), -1);
+  const noProximo = parcelasTodas.filter(p => p.data.startsWith(mesQueVem)).reduce((s, p) => s + (+p.valor || 0), 0);
+
+  $("#resumo-parceladas").innerHTML = compras.length ? `
+    <div class="resumo-parc">
+      <div><b>Compras em aberto</b><span>${ativas.length}</span></div>
+      <div><b>Ainda a pagar</b><span>${dinheiro.format(ativas.reduce((s, c) => s + c.falta, 0))}</span></div>
+      <div><b>Parcelas em ${MESES[+mesQueVem.slice(5) - 1]}</b><span>${dinheiro.format(noProximo)}</span></div>
+    </div>` : "";
+
+  const mostrar = $("#mostrar-quitadas").checked ? compras : ativas;
+  const alvo = $("#lista-parceladas");
+  if(!mostrar.length){
+    alvo.innerHTML = `<p class="desc">${compras.length
+      ? "Nenhuma compra em aberto — todas já foram quitadas."
+      : "Nenhuma compra parcelada ainda. Em “Registrar custo”, escolha Parcelado."}</p>`;
+    return;
+  }
+
+  alvo.innerHTML = mostrar.map(c => {
+    const quitada = c.falta <= 0;
+    const pct = c.total > 0 ? Math.round(c.pago / c.total * 100) : 0;
+    return `<div class="compra ${quitada ? "quitada" : ""}" data-grupo="${escaparTxt(c.grupoId)}">
+      <div class="topo">
+        <span class="nm"><b>${escaparTxt(c.descricao || "Compra parcelada")}</b>
+          <small>${escaparTxt(c.categoria || "Outros")} · ${c.n}x · ${nomeMes(c.inicio)} a ${nomeMes(c.fim)}</small></span>
+        <span class="tot">${dinheiro.format(c.total)}</span>
+      </div>
+      <div class="prog"><i style="width:${pct}%"></i></div>
+      <div class="pe">
+        <span class="info">
+          <b>${c.nPagas} de ${c.n}</b> pagas (${dinheiro.format(c.pago)})
+          ${quitada ? " · quitada ✓"
+            : ` · faltam <b>${dinheiro.format(c.falta)}</b> · próxima em ${c.proxima.data.slice(8)}/${c.proxima.data.slice(5, 7)}/${c.proxima.data.slice(2, 4)}`}
+        </span>
+        ${quitada ? "" : `<button class="btn mini linha quitar-compra" title="Traz as parcelas restantes para hoje">Quitar restante</button>`}
+        <button class="btn mini perigo excluir-compra">Excluir compra</button>
+      </div>
+    </div>`;
+  }).join("");
+
+  $$(".quitar-compra", alvo).forEach(bt => bt.addEventListener("click", async () => {
+    const grupo = bt.closest(".compra").dataset.grupo;
+    const faltam = parcelasTodas.filter(p => p.grupoId === grupo && p.data > hoje);
+    const soma = faltam.reduce((s, p) => s + (+p.valor || 0), 0);
+    if(!confirm(`Quitar as ${faltam.length} parcela(s) restante(s) (${dinheiro.format(soma)})?\n\nElas passam a contar como custo de hoje (${hoje.slice(8)}/${hoje.slice(5, 7)}). Se você teve desconto, ajuste o valor depois em Editar.`)) return;
+    bt.disabled = true;
+    try{
+      await FB.atualizarParcelas(FB.auth.currentUser.uid, faltam.map(p => ({ id: p.id, dados: { data: hoje } })));
+      await carregarCaixa();
+      recado("Compra quitada.");
+    }catch(e){ recado(FB.explicarErro(e), true); bt.disabled = false; }
+  }));
+
+  $$(".excluir-compra", alvo).forEach(bt => bt.addEventListener("click", async () => {
+    const c = compras.find(x => x.grupoId === bt.closest(".compra").dataset.grupo);
+    bt.disabled = true;
+    if(!(await excluirCompra(c.grupoId, c.descricao, c.n))) bt.disabled = false;
+  }));
+}
+
+/** Apaga todas as parcelas de uma compra, depois de confirmar. */
+async function excluirCompra(grupoId, descricao, n){
+  if(!confirm(`Excluir a compra “${descricao || "parcelada"}” inteira?\n\nAs ${n} parcelas saem de todos os meses.`)) return false;
+  try{
+    await FB.excluirCompraParcelada(FB.auth.currentUser.uid, grupoId);
+    await carregarCaixa();
+    recado("Compra excluída.");
+    return true;
+  }catch(e){ recado(FB.explicarErro(e), true); return false; }
+}
+
+$("#mostrar-quitadas").addEventListener("change", desenharParceladas);
+
 $$(".sub-aba").forEach(b => b.addEventListener("click", () => {
   $$(".sub-aba").forEach(x => x.classList.toggle("ativa", x === b));
-  $("#sub-painel").classList.toggle("esconde", b.dataset.sub !== "painel");
-  $("#sub-lancar").classList.toggle("esconde", b.dataset.sub !== "lancar");
+  ["painel", "lancar", "receber"].forEach(n =>
+    $(`#sub-${n}`).classList.toggle("esconde", b.dataset.sub !== n));
+  // "A receber" não depende do mês
+  $(".mes-barra").classList.toggle("esconde", b.dataset.sub === "receber");
 }));
 
 $("#mes").addEventListener("change", carregarCaixa);

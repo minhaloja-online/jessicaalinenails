@@ -121,6 +121,29 @@ O pedido entra como **aguardando validação** e a cliente é levada ao WhatsApp
 
 Situações possíveis: aguardando validação → agendado → concluído, ou cancelado a qualquer momento. Ao marcar **Concluir**, o painel pergunta o que foi feito e quanto entrou, e lança direto no faturamento daquela profissional.
 
+## Clientes que pagam depois (a receber)
+
+Ao registrar um atendimento — em **Financeiro → Lançamentos** ou ao **Concluir** um horário na agenda — escolha **Vai pagar depois** e informe a cliente, o valor e a **previsão de pagamento** (o WhatsApp é opcional).
+
+Esse valor **não entra no faturamento** enquanto não for pago; ele fica na sub-aba **A receber**, ordenado pela previsão, com os atrasados em vermelho. O dashboard avisa quando há pagamento atrasado ou previsto para hoje.
+
+Em cada cliente:
+- **Recebi** — informe a data e o valor. Pagou tudo: entra no faturamento na data do pagamento. Pagou uma parte: a parte entra no faturamento e o restante continua pendente, com nova previsão se quiser.
+- **Cobrar** — abre o WhatsApp dela com um lembrete educado já escrito (aparece só se o número foi preenchido).
+- **Editar** — muda previsão, valor, nome etc.
+
+Também não precisa de índice novo nem mudança nas regras.
+
+## Compras parceladas
+
+Em **Financeiro → Lançamentos → Registrar custo**, escolha **Parcelado**, informe o valor total, o número de parcelas e se a 1ª cai no mês da compra ou no seguinte. O painel mostra a prévia mês a mês antes de lançar.
+
+Cada parcela vira um custo separado no mês dela, então o dashboard de cada mês mostra só o que cai naquele mês. Os centavos que sobram da divisão ficam na 1ª parcela (R$ 100 em 3x = 33,34 + 33,33 + 33,33).
+
+O bloco **Compras parceladas** mostra quanto já foi pago, quanto falta e quanto vence no mês que vem. Ali dá para **Quitar restante** (traz as parcelas futuras para hoje) ou **Excluir compra** (apaga todas as parcelas). Editar uma parcela muda o valor e a data só dela; categoria e observação podem ser aplicadas à compra inteira.
+
+Não precisa de índice novo nem mudança nas regras do Firestore.
+
 ---
 
 ## O visual

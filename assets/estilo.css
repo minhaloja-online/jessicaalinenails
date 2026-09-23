@@ -716,6 +716,13 @@ p{ margin:0 0 1.1em; }
 .rodape li a{ font-size:.94rem; color:var(--tinta); }
 .rodape .contato a{ display:flex; align-items:center; gap:.7rem; }
 .rodape .contato svg{ width:15px; height:15px; color:var(--rosewood); flex:none; }
+/* contatos de cada profissional no rodapé (montados pelo site.js) */
+.rod-prof{ margin-bottom:1.3rem; }
+.rod-prof .nome{ display:block; font-size:.9rem; color:var(--tinta); margin-bottom:.55rem; }
+.rod-prof .nome em{ display:block; font-style:normal; font-size:.72rem; color:var(--tinta-suave); letter-spacing:.04em; }
+.rod-prof ul{ gap:.55rem; }
+.rod-prof a{ display:flex; align-items:center; gap:.7rem; }
+.rod-prof svg{ width:15px; height:15px; color:var(--rosewood); flex:none; }
 
 /* assinatura grande no pé */
 .assinatura{

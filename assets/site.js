@@ -183,7 +183,7 @@ const acharProf = (id) => (CFG.profissionais || []).find(p => p.id === id);
    O pedido nasce como "aguardando validação" e só tranca a agenda
    quando a profissional confirmar no painel.
    ============================================================ */
-const AG = { prof: null, servico: null, data: null, hora: null, link: "" };
+const AG = { prof: null, servico: null, data: null, hora: null, link: "", pedido: "" };
 
 const mm  = (hhmm) => { const [h, m] = hhmm.split(":").map(Number); return h * 60 + m; };
 const hhmm = (min) => `${String(Math.floor(min / 60)).padStart(2, "0")}:${String(min % 60).padStart(2, "0")}`;
@@ -247,14 +247,29 @@ function irParaEtapa(n){
   $("#agendar .caixa").scrollTop = 0;
 }
 
-function abrirAgendamento(servicoNome){
+/** Abre o agendamento.
+    · botão geral "Agendar horário" → escolhe a profissional primeiro
+    · botão do serviço              → escolhe a profissional (só quem faz aquele serviço)
+                                       e o serviço já vem marcado
+    · botão da foto da profissional → pula direto para o serviço          */
+function abrirAgendamento(servicoNome = "", profId = ""){
   const time = equipeVisivel();
   if(!time.length) return;
 
   AG.prof = null; AG.servico = null; AG.data = null; AG.hora = null;
+  AG.pedido = servicoNome || "";
   $("#ag-erro").textContent = "";
 
-  $("#ag-profs").innerHTML = time.map(p => `
+  let opcoes = time;
+  if(servicoNome){
+    const fazem = time.filter(p => servicosDe(p).some(s => s.nome === servicoNome));
+    if(fazem.length) opcoes = fazem;
+  }
+  $("#ag-dica-prof").textContent = servicoNome
+    ? `Quem faz ${servicoNome} no studio. Cada uma tem a sua própria agenda.`
+    : "Cada profissional tem a sua própria agenda.";
+
+  $("#ag-profs").innerHTML = opcoes.map(p => `
     <button class="opcao" data-prof="${p.id}">
       <span class="av" style="${p._foto ? `background-image:url('${p._foto}')` : ""}">${p._foto ? "" : escapar((p.nome || "?")[0])}</span>
       <span class="txt"><b>${escapar(p.nome)}</b><small>${escapar(p.funcao || "")}</small></span>
@@ -263,11 +278,10 @@ function abrirAgendamento(servicoNome){
   $("#agendar").classList.add("aberto");
   document.body.classList.add("travado");
 
-  // com uma só profissional, ou quando o serviço já tem dona, pula etapas
+  // veio do cartão da profissional: ela já está escolhida
+  if(profId && time.some(p => p.id === profId)){ escolherProfissional(profId, servicoNome); return; }
+  // studio com uma profissional só: não há o que escolher
   if(time.length === 1){ escolherProfissional(time[0].id, servicoNome); return; }
-  const dono = servicoNome && acharProf(
-    CFG.servicos.itens.find(s => s.nome === servicoNome)?.profissionalId);
-  if(dono && dono.visivel !== false){ escolherProfissional(dono.id, servicoNome); return; }
   irParaEtapa(1);
 }
 
@@ -410,7 +424,7 @@ function ligarAgendamento(){
 
   $("#ag-profs").addEventListener("click", e => {
     const b = e.target.closest("[data-prof]");
-    if(b) escolherProfissional(b.dataset.prof);
+    if(b) escolherProfissional(b.dataset.prof, AG.pedido);
   });
   $("#ag-servicos").addEventListener("click", e => {
     const b = e.target.closest("[data-servico]");
@@ -507,7 +521,7 @@ function montarEquipe(resolver = (r) => (r?.startsWith("midia:") ? "" : r || "")
       <span class="funcao">${escapar(p.funcao || "")}</span>
       ${p.bio ? `<p class="bio">${escapar(p.bio)}</p>` : ""}
       <div class="contatos">
-        <a class="btn" href="${zapDe(p)}" target="_blank" rel="noopener"><span>Agendar</span></a>
+        <a class="btn" href="#" data-agendar-prof="${p.id}"><span>Agendar</span></a>
         ${p.instagram ? `<a class="so-insta" href="${p.instagram}" target="_blank" rel="noopener" aria-label="Instagram de ${escapar(p.nome)}">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>` : ""}
       </div>
@@ -820,6 +834,12 @@ $("#enviar-av").onclick = async () => {
 
 /* teclado */
   document.addEventListener("click", e => {
+    const daProf = e.target.closest("[data-agendar-prof]");
+    if(daProf){
+      e.preventDefault();
+      abrirAgendamento("", daProf.dataset.agendarProf);
+      return;
+    }
     const marcar = e.target.closest("[data-agendar]");
     if(marcar){
       e.preventDefault();

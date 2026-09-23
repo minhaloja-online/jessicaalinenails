@@ -61,7 +61,7 @@
       <a href="#depoimentos">Depoimentos</a>
       <a href="#local">Onde ficamos</a>
     </nav>
-    <a class="btn magnetico" data-agendar><span data-txt="hero.btn1">Agendar horário</span></a>
+    <a class="btn magnetico" data-agendar><span>Agendar horário</span></a>
     <button class="hamb" id="hamb" aria-label="Abrir menu" aria-expanded="false"><span></span></button>
   </div>
   <div class="progresso" aria-hidden="true"><i id="progresso-fio"></i></div>
@@ -73,7 +73,7 @@
   <a href="#galeria">Galeria</a>
   <a href="#depoimentos">Depoimentos</a>
   <a href="#local">Onde ficamos</a>
-  <a class="zap" data-agendar>Agendar pelo WhatsApp</a>
+  <a class="zap" data-zap>Agendar pelo WhatsApp</a>
 </nav>
 
 <nav class="cartela" id="cartela" aria-label="Navegação por seções">
@@ -104,7 +104,7 @@
       <p class="sub entra d2" data-txt="hero.texto">Um horário por vez, material esterilizado e acabamento que dura semanas. Você escolhe a cor sem pressa — e sai com a unha que imaginou.</p>
 
       <div class="acoes entra d3">
-        <a class="btn magnetico" data-agendar>
+        <a class="btn magnetico" data-zap>
           <span data-txt="hero.btn1">Agendar pelo WhatsApp</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
@@ -239,7 +239,7 @@
       <div class="rotulo" data-txt="final.rotulo">Agendamento</div>
       <h2 data-html="final.titulo">Vamos marcar<br><em>a sua?</em></h2>
       <p class="sub" data-txt="final.texto">Me chame no WhatsApp com o serviço que você quer e eu te mando os horários livres da semana.</p>
-      <a class="btn claro magnetico" data-agendar>
+      <a class="btn claro magnetico" data-zap>
         <span data-txt="final.botao">Falar com o estúdio</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
@@ -320,7 +320,7 @@
     <!-- 1. profissional -->
     <section class="etapa ativa" data-etapa="1">
       <h3 id="ag-tit">Com quem você quer agendar?</h3>
-      <p class="dica">Cada profissional tem a sua própria agenda.</p>
+      <p class="dica" id="ag-dica-prof">Cada profissional tem a sua própria agenda.</p>
       <div id="ag-profs"></div>
     </section>
 
@@ -373,7 +373,7 @@
 <div id="escolher" role="dialog" aria-modal="true" aria-labelledby="escolher-tit">
   <div class="caixa">
     <h3 id="escolher-tit">Com quem você quer agendar?</h3>
-    <p class="dica">Cada profissional tem sua própria agenda.</p>
+    <p class="dica">Você vai direto para o WhatsApp dela.</p>
     <div id="escolher-lista"></div>
     <button class="cancelar" id="fechar-escolher">Cancelar</button>
   </div>

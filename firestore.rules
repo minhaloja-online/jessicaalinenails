@@ -122,14 +122,47 @@ service cloud.firestore {
       allow create: if request.auth != null
                     && ((request.auth.uid == uid && portaAberta()) || ehDona());
 
+      // o percentual do studio fica aqui, e só a dona muda
       allow update: if ehDona();
       allow delete: if ehDona() && request.auth.uid != uid;
 
       // ---- Caixa de cada profissional ----
-      // Cada uma lê e lança SÓ o próprio movimento — nem a administradora
-      // enxerga o caixa da outra. Não é regra de tela: é o servidor que recusa.
+      // Cada profissional lê e lança SÓ o próprio caixa. A dona lê o caixa de
+      // todas, porque a cota do studio sai do faturamento de cada uma.
+      //
+      // Proteções que o servidor garante (não é só a tela):
+      //  · Toda entrada ("receita" / "receber") de profissional leva o
+      //    percentualStudio que a dona definiu no cadastro dela — não dá
+      //    para lançar com percentual menor.
+      //  · A profissional não altera o percentual de um lançamento já feito.
+      //  · Acertos (dinheiro repassado entre as duas) só a dona grava.
       match /lancamentos/{id} {
-        allow read, write: if request.auth != null && request.auth.uid == uid;
+        function souEu(){ return request.auth != null && request.auth.uid == uid; }
+
+        function percentualDaConta(){
+          return get(/databases/$(banco)/documents/admins/$(uid)).data.get("percentualStudio", 0);
+        }
+
+        function percentualCerto(){
+          return !(request.resource.data.tipo in ["receita", "receber"])
+            || request.resource.data.get("percentualStudio", -1) == percentualDaConta();
+        }
+
+        allow read: if souEu() || ehDona();
+
+        allow create: if (souEu()
+                          && request.resource.data.tipo in ["receita", "despesa", "receber"]
+                          && percentualCerto())
+                      || ehDona();
+
+        allow update: if (souEu()
+                          && resource.data.tipo != "acerto"
+                          && request.resource.data.tipo in ["receita", "despesa", "receber"]
+                          && request.resource.data.get("percentualStudio", -1)
+                             == resource.data.get("percentualStudio", -1))
+                      || ehDona();
+
+        allow delete: if (souEu() && resource.data.tipo != "acerto") || ehDona();
       }
     }
 

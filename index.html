@@ -55,7 +55,6 @@
       <small data-txt="marca.local">Estúdio de unhas</small>
     </a>
     <nav class="menu">
-      <a href="#sobre">Sobre</a>
       <a href="#equipe">Equipe</a>
       <a href="#servicos">Serviços</a>
       <a href="#galeria">Galeria</a>
@@ -69,7 +68,6 @@
 </header>
 
 <nav class="painel" id="painel">
-  <a href="#sobre">Sobre</a>
   <a href="#equipe">Equipe</a>
   <a href="#servicos">Serviços</a>
   <a href="#galeria">Galeria</a>
@@ -80,10 +78,8 @@
 
 <nav class="cartela" id="cartela" aria-label="Navegação por seções">
   <button data-ir="inicio"><span class="pt"></span><span class="tx">Início</span></button>
-  <button data-ir="sobre"><span class="pt"></span><span class="tx">Sobre</span></button>
   <button data-ir="equipe"><span class="pt"></span><span class="tx">Equipe</span></button>
   <button data-ir="servicos"><span class="pt"></span><span class="tx">Serviços</span></button>
-  <button data-ir="diferenciais"><span class="pt"></span><span class="tx">Diferenciais</span></button>
   <button data-ir="galeria"><span class="pt"></span><span class="tx">Galeria</span></button>
   <button data-ir="depoimentos"><span class="pt"></span><span class="tx">Depoimentos</span></button>
   <button data-ir="local"><span class="pt"></span><span class="tx">Onde ficamos</span></button>
@@ -142,35 +138,6 @@
 
 <div class="letreiro" aria-hidden="true"><div class="trilha" id="trilha"></div></div>
 
-<!-- ============ SOBRE ============ -->
-<section class="secao sobre" id="sobre">
-  <div class="env">
-    <div class="sobre-texto rev">
-      <div class="rotulo" data-txt="sobre.rotulo">O estúdio</div>
-      <h2 data-html="sobre.titulo">Um horário<br>só seu.</h2>
-      <p class="sub" style="margin-top:1.6rem" data-txt="sobre.p1">Aqui não tem correria nem sala cheia. Cada horário é reservado para uma cliente por vez, com material esterilizado, tempo para escolher a cor com calma e cuidado em cada canto da cutícula.</p>
-      <p class="sub" data-txt="sobre.p2">O Jessica Aline Nails nasceu da ideia de que cuidar das unhas pode ser a melhor parte da semana — e não mais uma coisa correndo na agenda.</p>
-
-      <ul class="pontos">
-        <li><span class="marca-pt"></span><div><b data-txt="sobre.pontos.0.titulo">Atendimento individual</b><small data-txt="sobre.pontos.0.texto">Uma cliente por horário, sem espera e sem sobreposição.</small></div></li>
-        <li><span class="marca-pt"></span><div><b data-txt="sobre.pontos.1.titulo">Esterilização a cada atendimento</b><small data-txt="sobre.pontos.1.texto">Alicates e espátulas passam por autoclave antes de encostarem em você.</small></div></li>
-        <li><span class="marca-pt"></span><div><b data-txt="sobre.pontos.2.titulo">Acabamento que dura</b><small data-txt="sobre.pontos.2.texto">Preparo correto da unha e produtos profissionais para o esmalte durar semanas.</small></div></li>
-      </ul>
-    </div>
-
-    <div class="sobre-arte rev" data-atraso="1">
-      <div class="moldura grao" data-foto="sobre">
-        <div class="foto"></div>
-        <div class="marca"><b>JA</b><small>Foto do estúdio</small></div>
-      </div>
-      <div class="selo-anos">
-        <b data-txt="sobre.profissional">Jessica Aline</b>
-        <small data-txt="sobre.cargo">Nail designer</small>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ============ EQUIPE ============ -->
 <section class="secao clara" id="equipe">
   <div class="env">
@@ -197,52 +164,6 @@
     </div>
 
     <div class="lista-serv" id="grade-serv"><!-- montado a partir do que o painel cadastrou --></div>
-  </div>
-</section>
-
-<!-- ============ DIFERENCIAIS ============ -->
-<section class="secao escuro" id="diferenciais">
-  <div class="env">
-    <div class="dif">
-      <div class="dif-titulo rev">
-        <div class="rotulo" data-txt="diferenciais.rotulo">Por dentro</div>
-        <h2 data-html="diferenciais.titulo">Por que as clientes<br>voltam</h2>
-      </div>
-
-      <div class="dif-lista">
-        <div class="cx rev">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-          <div>
-            <h3 data-txt="diferenciais.itens.0.titulo">Hora marcada de verdade</h3>
-            <p data-txt="diferenciais.itens.0.texto">Seu horário é seu. Nada de chegar e esperar duas clientes na sua frente — a agenda é montada com folga entre um atendimento e outro.</p>
-          </div>
-        </div>
-
-        <div class="cx rev" data-atraso="1">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
-          <div>
-            <h3 data-txt="diferenciais.itens.1.titulo">Higiene sem atalho</h3>
-            <p data-txt="diferenciais.itens.1.texto">Autoclave, descartáveis e bancada limpa a cada cliente.</p>
-          </div>
-        </div>
-
-        <div class="cx rev" data-atraso="2">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l2.2 5.9 6.3.3-4.9 4 1.7 6.1L12 15.8 6.7 19.3l1.7-6.1-4.9-4 6.3-.3z"/></svg></div>
-          <div>
-            <h3 data-txt="diferenciais.itens.2.titulo">Produtos profissionais</h3>
-            <p data-txt="diferenciais.itens.2.texto">Esmaltes e géis de marcas conhecidas, sem economia no que fica na sua unha.</p>
-          </div>
-        </div>
-
-        <div class="cx rev" data-atraso="3">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 20s2-8 8-8 8 8 8 8"/><path d="M9 8.5a3 3 0 106 0 3 3 0 10-6 0"/></svg></div>
-          <div>
-            <h3 data-txt="diferenciais.itens.3.titulo">Sua unha, seu estilo</h3>
-            <p data-txt="diferenciais.itens.3.texto">Clássica e discreta ou cheia de arte — a gente conversa antes de começar e decide junto o formato, o tamanho e a cor.</p>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -343,7 +264,6 @@
       <h4>Navegar</h4>
       <ul>
         <li><a class="link-linha" href="#inicio">Início</a></li>
-        <li><a class="link-linha" href="#sobre">Sobre</a></li>
         <li><a class="link-linha" href="#equipe">Equipe</a></li>
         <li><a class="link-linha" href="#servicos">Serviços</a></li>
         <li><a class="link-linha" href="#galeria">Galeria</a></li>

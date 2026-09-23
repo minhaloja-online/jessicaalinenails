@@ -6,7 +6,9 @@
      config/site        → textos, cores, fontes, contatos, fotos
      midia/{id}         → fotos enviadas pelo painel (comprimidas)
      reviews/{id}       → avaliações das clientes
-     admins/{uid}       → quem pode entrar no painel
+     admins/{uid}       → quem pode entrar no painel (papel e % do studio)
+     admins/{uid}/lancamentos → caixa de cada conta: entradas, custos,
+                          a receber e acertos com o studio
      meta/bootstrap     → trava do primeiro acesso
    ============================================================ */
 import { CHAVES_FIREBASE, VERSAO_SDK } from "./chaves.js";
@@ -229,13 +231,27 @@ export async function lancamentosEntre(uid, inicio, fim){
   return r.docs.map(d => ({ id: d.id, uid, ...d.data() }));
 }
 
-export async function salvarLancamento(uid, { tipo, data, valor, descricao, categoria }){
+/* Campos da divisão com o studio (só em entradas de profissional):
+     percentualStudio  % que vai para a dona, CONGELADO no dia do lançamento —
+                       se a dona mudar o percentual depois, o passado não muda.
+     recebidoPor       "profissional" (Pix/dinheiro na mão dela) ou "studio"
+                       (maquininha/Pix do studio). Define quem deve a quem.
+     forma             Pix, Dinheiro, Débito, Crédito…                        */
+const extrasDivisao = (d) => ({
+  ...(Number.isFinite(d.percentualStudio) ? { percentualStudio: Number(d.percentualStudio) } : {}),
+  ...(d.recebidoPor ? { recebidoPor: d.recebidoPor === "studio" ? "studio" : "profissional" } : {}),
+  ...(d.forma ? { forma: String(d.forma).slice(0, 30) } : {}),
+  ...(d.cliente ? { cliente: String(d.cliente).trim().slice(0, 60) } : {})
+});
+
+export async function salvarLancamento(uid, d){
   return addDoc(collection(db, "admins", uid, "lancamentos"), {
-    tipo,
-    data,
-    valor: Number(valor),
-    descricao: String(descricao || "").trim().slice(0, 120),
-    categoria: String(categoria || "").trim().slice(0, 40),
+    tipo: d.tipo,
+    data: d.data,
+    valor: Number(d.valor),
+    descricao: String(d.descricao || "").trim().slice(0, 120),
+    categoria: String(d.categoria || "").trim().slice(0, 40),
+    ...extrasDivisao(d),
     criadoEm: serverTimestamp()
   });
 }
@@ -271,6 +287,7 @@ export async function salvarAReceber(uid, d){
     descricao: String(d.descricao || "").trim().slice(0, 120),
     categoria: String(d.categoria || "").trim().slice(0, 40),
     ...(d.agendamentoId ? { agendamentoId: d.agendamentoId } : {}),
+    ...(Number.isFinite(d.percentualStudio) ? { percentualStudio: Number(d.percentualStudio) } : {}),
     criadoEm: serverTimestamp()
   });
 }
@@ -290,7 +307,8 @@ export async function listarRecebidosDeFiado(uid){
 }
 
 /** Registra o pagamento de um valor pendente — total ou parcial. */
-export async function registrarRecebimento(uid, pendente, { data, valor, forma, novaPrevisao }){
+export async function registrarRecebimento(uid, pendente, { data, valor, forma, novaPrevisao, recebidoPor, percentualStudio }){
+  const divisao = extrasDivisao({ recebidoPor, forma });
   const ref = doc(db, "admins", uid, "lancamentos", pendente.id);
   const obs = [pendente.cliente, pendente.descricao, forma].filter(Boolean).join(" · ").slice(0, 120);
   const falta = Math.round((pendente.valor - valor) * 100) / 100;
@@ -300,6 +318,7 @@ export async function registrarRecebimento(uid, pendente, { data, valor, forma, 
     await updateDoc(ref, {
       tipo: "receita", data, valor: Number(valor), descricao: obs,
       deFiado: true, dataAtendimento: pendente.data, previsao: pendente.previsao,
+      ...divisao,
       recebidoEm: serverTimestamp()
     });
     return;
@@ -311,6 +330,8 @@ export async function registrarRecebimento(uid, pendente, { data, valor, forma, 
     categoria: pendente.categoria || "Atendimento",
     cliente: pendente.cliente || "", deFiado: true, parcial: true,
     dataAtendimento: pendente.data, origemId: pendente.id,
+    ...divisao,
+    ...(Number.isFinite(percentualStudio) ? { percentualStudio: Number(percentualStudio) } : {}),
     criadoEm: serverTimestamp()
   });
   lote.update(ref, { valor: falta, ...(novaPrevisao ? { previsao: novaPrevisao } : {}) });
@@ -375,6 +396,42 @@ export async function excluirCompraParcelada(uid, grupoId){
   return itens.length;
 }
 
+/* ---------- DIVISÃO COM O STUDIO ----------
+   Cada profissional lança no próprio caixa (admins/{uid}/lancamentos).
+   A dona lê o caixa de todas para calcular a cota do studio.
+   Acertos (dinheiro que passou de uma para a outra) ficam no caixa
+   da profissional com tipo "acerto" — só a dona grava:
+     sentido  "profParaStudio"  ela repassou a cota ao studio
+              "studioParaProf"  o studio pagou a parte dela (ou um vale)   */
+
+/** Todas as entradas já recebidas de uma conta (para o saldo acumulado). */
+export async function receitasDaConta(uid){
+  const r = await getDocs(query(col(uid), where("tipo", "==", "receita"), limit(5000)));
+  return r.docs.map(d => ({ id: d.id, uid, ...d.data() }));
+}
+
+/** Todos os acertos entre a profissional e o studio. */
+export async function acertosDaConta(uid){
+  const r = await getDocs(query(col(uid), where("tipo", "==", "acerto"), limit(2000)));
+  return r.docs.map(d => ({ id: d.id, uid, ...d.data() }));
+}
+
+export async function salvarAcerto(uid, { data, valor, sentido, forma, descricao }){
+  return addDoc(col(uid), {
+    tipo: "acerto",
+    data,
+    valor: Number(valor),
+    sentido: sentido === "studioParaProf" ? "studioParaProf" : "profParaStudio",
+    forma: String(forma || "").slice(0, 30),
+    descricao: String(descricao || "").trim().slice(0, 120),
+    criadoEm: serverTimestamp()
+  });
+}
+
+/** Percentual que vai para o studio. Só a dona consegue gravar (regra do servidor). */
+export const definirPercentual = (uid, percentualStudio) =>
+  updateDoc(doc(db, "admins", uid), { percentualStudio: Number(percentualStudio) });
+
 /* ---------- ACESSO AO PAINEL ---------- */
 
 /** Já existe administrador? (leitura pública, usada na tela de login) */
@@ -414,7 +471,7 @@ export async function listarAcessos(){
 
 /** Cria o login da segunda profissional sem derrubar a sessão de quem
     está logada: a conta nasce num app secundário, isolado deste. */
-export async function criarAcessoProfissional({ email, senha, nome, profissionalId }){
+export async function criarAcessoProfissional({ email, senha, nome, profissionalId, percentualStudio = 0 }){
   const { initializeApp, deleteApp } = App;
   const { getAuth, createUserWithEmailAndPassword, signOut: sair2 } = Auth;
 
@@ -424,7 +481,8 @@ export async function criarAcessoProfissional({ email, senha, nome, profissional
     const cred = await createUserWithEmailAndPassword(auth2, email, senha);
     try{
       await setDoc(doc(db, "admins", cred.user.uid), {
-        email, nome, profissionalId, papel: "profissional", criadoEm: serverTimestamp()
+        email, nome, profissionalId, papel: "profissional",
+        percentualStudio: Number(percentualStudio) || 0, criadoEm: serverTimestamp()
       });
     }catch(e){
       // a conta de login já existe, mas não foi ligada ao painel.
@@ -440,9 +498,10 @@ export async function criarAcessoProfissional({ email, senha, nome, profissional
 }
 
 /** Liga uma conta já criada no Console do Firebase a uma profissional. */
-export async function vincularAcesso({ uid, email, nome, profissionalId }){
+export async function vincularAcesso({ uid, email, nome, profissionalId, percentualStudio = 0 }){
   await setDoc(doc(db, "admins", uid.trim()), {
-    email, nome, profissionalId, papel: "profissional", criadoEm: serverTimestamp()
+    email, nome, profissionalId, papel: "profissional",
+    percentualStudio: Number(percentualStudio) || 0, criadoEm: serverTimestamp()
   }, { merge: true });
 }
 

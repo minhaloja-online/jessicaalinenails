@@ -58,7 +58,7 @@ input,textarea,select{ font:inherit; }
 .texto-link{ display:block; text-align:center; margin-top:14px; font-size:.76rem; color:var(--suave); }
 
 /* ---------- PAINEL ---------- */
-#painel{ display:grid; grid-template-columns:236px 1fr; min-height:100svh; }
+#painel{ display:grid; grid-template-columns:236px minmax(0,1fr); min-height:100svh; }
 .lado{ background:var(--escuro); color:var(--branco); padding:26px 18px; display:flex; flex-direction:column; gap:6px; position:sticky; top:0; height:100svh; }
 .lado .marca{ text-align:left; margin-bottom:24px; }
 .lado .marca b{ color:var(--branco); font-size:1.15rem; }
@@ -193,7 +193,7 @@ input,textarea,select{ font:inherit; }
 /* ---------- DASHBOARD ---------- */
 .cat{ display:flex; align-items:center; gap:12px; padding:9px 0; }
 .cat .nm{ width:120px; flex:none; font-size:.85rem; }
-.cat .barra{ flex:1; height:8px; border-radius:4px; background:rgba(36,28,26,.07); overflow:hidden; }
+.cat .barra{ position:static; display:block; padding:0; border:0; box-shadow:none; flex:1; height:8px; border-radius:4px; background:rgba(36,28,26,.07); overflow:hidden; }
 .cat .barra i{ display:block; height:100%; background:var(--rosa); }
 .cat .vl{ width:104px; text-align:right; flex:none; font-size:.85rem; }
 .comp{ display:flex; align-items:baseline; justify-content:space-between; gap:12px;
@@ -226,8 +226,8 @@ input,textarea,select{ font:inherit; }
 .dono-caixa b{ color:var(--tinta); font-weight:500; }
 .mes-barra input{ padding:8px 10px; border:1px solid var(--borda); border-radius:9px; background:var(--branco); font:inherit; }
 
-.painel-num{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:22px; }
-@media(max-width:900px){ .painel-num{ grid-template-columns:repeat(2,1fr); } }
+.painel-num{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin-bottom:22px; }
+@media(max-width:520px){ .painel-num{ grid-template-columns:repeat(2,1fr); } }
 .num{ border:1px solid var(--borda); border-radius:14px; padding:16px 18px; background:var(--branco); }
 .num b{ display:block; font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--suave); margin-bottom:8px; font-weight:500; }
 .num .v{ font-family:var(--display); font-size:1.75rem; line-height:1; }
@@ -360,8 +360,62 @@ input,textarea,select{ font:inherit; }
 #recado.on{ opacity:1; visibility:visible; transform:translate(-50%,0); }
 #recado.ruim{ background:var(--alerta); }
 
+/* ---------- DIVISÃO COM O STUDIO ---------- */
+.papel{ display:inline-block; font-size:.58rem; letter-spacing:.16em; text-transform:uppercase; padding:3px 9px; border-radius:999px; background:rgba(154,144,174,.22); color:var(--dourado); margin-top:6px; }
+.eq{ border-top:1px solid var(--borda); padding:16px 0; display:grid; gap:12px; }
+.eq:first-of-type{ border-top:0; padding-top:4px; }
+.eq .topo{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.eq .topo .nm{ flex:1; min-width:160px; }
+.eq .topo .nm b{ font-family:var(--display); font-size:1.15rem; font-weight:300; display:block; }
+.eq .topo .nm small{ font-size:.74rem; color:var(--suave); }
+.eq .nums{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:8px; }
+.eq .nums div{ background:var(--porcelana); border-radius:10px; padding:9px 12px; }
+.eq .nums b{ display:block; font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:var(--suave); font-weight:500; margin-bottom:3px; }
+.eq .nums span{ font-family:var(--display); font-size:1.08rem; }
+.eq .nums .studio span{ color:var(--rosa); }
+.eq .acoes{ display:flex; gap:6px; flex-wrap:wrap; }
+.saldo{ display:inline-flex; align-items:center; gap:8px; font-size:.8rem; padding:6px 12px; border-radius:999px; background:var(--porcelana); }
+.saldo.deve{ background:rgba(142,47,74,.1); color:var(--rosa); }
+.saldo.pagar{ background:rgba(185,138,46,.14); color:#8A6417; }
+.saldo.ok{ background:rgba(46,125,91,.12); color:#2E7D5B; }
+.saldo b{ font-weight:500; }
+.barra-div{ display:flex; height:12px; border-radius:6px; overflow:hidden; background:rgba(36,28,26,.07); margin:6px 0 4px; }
+.barra-div i{ display:block; height:100%; }
+.barra-div .st{ background:var(--rosa); }
+.barra-div .pf{ background:var(--dourado); }
+.leg-div{ display:flex; gap:16px; flex-wrap:wrap; font-size:.72rem; color:var(--suave); }
+.leg-div span{ display:inline-flex; align-items:center; gap:6px; }
+.leg-div i{ width:9px; height:9px; border-radius:3px; display:inline-block; }
+.tabela{ width:100%; border-collapse:collapse; font-size:.8rem; }
+.tabela th{ text-align:left; font-size:.58rem; letter-spacing:.12em; text-transform:uppercase; color:var(--suave); font-weight:500; padding:8px 6px; border-bottom:1px solid var(--borda); white-space:nowrap; }
+.tabela td{ padding:8px 6px; border-bottom:1px solid var(--borda); vertical-align:top; }
+.tabela td.n, .tabela th.n{ text-align:right; white-space:nowrap; }
+.tabela tfoot td{ font-weight:500; border-bottom:0; }
+.rolagem{ overflow-x:auto; margin:0 -4px 12px; padding:0 4px; }
+.modal-adm .cx.largo{ width:min(100%,860px); }
+.etq-studio{ display:inline-block; font-size:.6rem; letter-spacing:.06em; padding:1px 7px; border-radius:999px; background:rgba(142,47,74,.1); color:var(--rosa); margin-left:6px; vertical-align:1px; }
+.pct-linha{ display:flex; align-items:flex-end; gap:8px; flex-wrap:wrap; margin-top:10px; }
+.pct-linha .campo{ margin:0; width:150px; }
+.campo input[type=number],.campo input[type=date],.campo input[type=time]{ width:100%; background:var(--porcelana); border:1px solid var(--borda); border-radius:10px; padding:10px 12px; color:var(--tinta); }
+body.sou-dona .so-prof, body.sou-prof .so-dona{ display:none !important; }
+
+/* ---------- IMPRESSÃO DO FECHAMENTO ---------- */
+#impressao{ display:none; }
+@media print{
+  body > *:not(#impressao){ display:none !important; }
+  #impressao{ display:block; color:#000; font-size:12px; padding:0; }
+  #impressao h1{ font-size:22px; margin:0 0 2px; }
+  #impressao .sub{ color:#555; margin:0 0 16px; }
+  #impressao .tabela th, #impressao .tabela td{ border-color:#bbb; }
+  #impressao .totais{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:14px 0; }
+  #impressao .totais div{ border:1px solid #bbb; border-radius:6px; padding:8px; }
+  #impressao .totais b{ display:block; font-size:9px; text-transform:uppercase; letter-spacing:.1em; color:#555; }
+  #impressao .assin{ display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:60px; }
+  #impressao .assin div{ border-top:1px solid #000; padding-top:6px; text-align:center; font-size:11px; }
+}
+
 @media(max-width:860px){
-  #painel{ grid-template-columns:1fr; }
+  #painel{ grid-template-columns:minmax(0,1fr); }
   .lado{ position:static; height:auto; flex-direction:row; flex-wrap:wrap; align-items:center; gap:6px; padding:14px; }
   .lado .marca{ width:100%; margin-bottom:8px; }
   .lado .rodape{ margin:0 0 0 auto; display:flex; }
@@ -406,7 +460,7 @@ input,textarea,select{ font:inherit; }
 <!-- ================= PAINEL ================= -->
 <section id="painel" class="esconde">
   <aside class="lado">
-    <div class="marca"><b>Jessica Aline <i>Nails</i></b><small>Painel do estúdio</small></div>
+    <div class="marca"><b>Jessica Aline <i>Nails</i></b><small>Painel do estúdio</small><br><span class="papel" id="papel"></span></div>
     <button class="aba on" data-aba="avaliacoes">Avaliações <span class="selo esconde" id="conta-pendentes">0</span></button>
     <button class="aba" data-aba="textos">Textos</button>
     <button class="aba" data-aba="servicos">Serviços</button>
@@ -525,10 +579,11 @@ input,textarea,select{ font:inherit; }
     <!-- FINANCEIRO -->
     <div class="pg esconde" id="pg-caixa">
       <h1 class="titulo-pg">Financeiro</h1>
-      <p class="legenda">Só você enxerga esta aba. Nada daqui aparece no site.</p>
+      <p class="legenda" id="legenda-caixa">Só você enxerga esta aba. Nada daqui aparece no site.</p>
 
       <div class="sub-abas">
         <button class="sub-aba ativa" data-sub="painel">Dashboard</button>
+        <button class="sub-aba so-dona" data-sub="studio">Studio e equipe <span class="selo esconde" id="selo-studio"></span></button>
         <button class="sub-aba" data-sub="lancar">Lançamentos</button>
         <button class="sub-aba" data-sub="receber">A receber <span class="selo esconde" id="selo-receber"></span></button>
       </div>
@@ -544,6 +599,14 @@ input,textarea,select{ font:inherit; }
         <div id="alerta-receber"></div>
         <div class="painel-num" id="numeros"></div>
 
+        <div class="bloco so-prof" id="divisao-cx">
+          <div class="cabeca-bloco">
+            <h3>Divisão com o studio</h3>
+            <button class="btn mini linha" id="imprimir-meu">Imprimir meu fechamento</button>
+          </div>
+          <div id="divisao"></div>
+        </div>
+
         <div class="bloco">
           <div class="cabeca-bloco">
             <h3>Últimos 6 meses</h3>
@@ -552,12 +615,21 @@ input,textarea,select{ font:inherit; }
           <div id="grafico"></div>
         </div>
 
-        <div class="bloco">
-          <div class="cabeca-bloco">
-            <h3>Para onde vai o dinheiro</h3>
-            <span class="desc">Custos do mês por categoria</span>
+        <div class="dupla-forms">
+          <div class="bloco">
+            <div class="cabeca-bloco">
+              <h3>Para onde vai o dinheiro</h3>
+              <span class="desc">Custos do mês por categoria</span>
+            </div>
+            <div id="por-categoria"></div>
           </div>
-          <div id="por-categoria"></div>
+          <div class="bloco">
+            <div class="cabeca-bloco">
+              <h3>Como as clientes pagaram</h3>
+              <span class="desc">Entradas do mês</span>
+            </div>
+            <div id="por-forma"></div>
+          </div>
         </div>
 
         <div class="dupla-forms">
@@ -569,6 +641,26 @@ input,textarea,select{ font:inherit; }
             <h3>Comparado ao mês passado</h3>
             <div id="comparativo"></div>
           </div>
+        </div>
+      </div>
+
+      <div class="sub-pg esconde" id="sub-studio">
+        <div id="studio-resumo"></div>
+        <div class="bloco">
+          <div class="cabeca-bloco">
+            <h3>Profissionais parceiras</h3>
+            <button class="btn mini linha" id="studio-csv">Baixar planilha do mês</button>
+          </div>
+          <p class="desc">Cada uma lança os próprios atendimentos. O percentual do studio é o que foi definido no cadastro dela e fica gravado em cada lançamento — mudar o percentual depois não altera o passado.</p>
+          <div id="studio-lista"></div>
+        </div>
+        <div class="bloco">
+          <h3>Como o saldo é calculado</h3>
+          <p class="desc" style="margin-bottom:14px">
+            Quando a cliente paga <b>direto para a profissional</b>, ela fica devendo a cota do studio.
+            Quando paga <b>para o studio</b> (maquininha ou Pix do studio), o studio fica devendo a parte dela.
+            Cada <b>acerto</b> registrado abate o saldo. Saldo zerado = tudo acertado.
+          </p>
         </div>
       </div>
 
@@ -595,6 +687,16 @@ input,textarea,select{ font:inherit; }
             </div>
           </div>
           <div class="campo"><label for="r-servico">Serviço</label><select id="r-servico"></select></div>
+          <div class="dupla" id="r-cx-pgto">
+            <div class="campo"><label for="r-pgto">Forma de pagamento</label>
+              <select id="r-pgto"><option>Pix</option><option>Dinheiro</option><option>Cartão de débito</option><option>Cartão de crédito</option><option>Outro</option></select></div>
+            <div class="campo so-prof"><label>Quem recebeu o dinheiro</label>
+              <div class="seg" id="r-quem">
+                <button type="button" data-quem="profissional" class="on">Eu</button>
+                <button type="button" data-quem="studio">O studio</button>
+              </div></div>
+          </div>
+          <p class="desc so-prof" id="r-dica-cota" style="margin:-4px 0 12px"></p>
           <div class="campo"><label for="r-desc">Observação (opcional)</label><input type="text" id="r-desc" placeholder="Nome da cliente, forma de pagamento…"></div>
           <p class="aviso-linha" id="r-erro"></p>
           <button class="btn" id="add-receita">Lançar entrada</button>
@@ -635,7 +737,10 @@ input,textarea,select{ font:inherit; }
       </div>
 
       <div class="bloco">
-        <h3>Lançamentos do mês</h3>
+        <div class="cabeca-bloco">
+          <h3>Lançamentos do mês</h3>
+          <button class="btn mini linha" id="meu-csv">Baixar planilha</button>
+        </div>
         <div id="lista-lancamentos"></div>
       </div>
 
@@ -803,6 +908,11 @@ input,textarea,select{ font:inherit; }
     </div>
     <div class="campo"><label for="rb-forma">Forma de pagamento</label>
       <select id="rb-forma"><option>Pix</option><option>Dinheiro</option><option>Cartão de débito</option><option>Cartão de crédito</option><option>Outro</option></select></div>
+    <div class="campo so-prof"><label>Quem recebeu</label>
+      <div class="seg" id="rb-quem">
+        <button type="button" data-quem="profissional" class="on">Eu</button>
+        <button type="button" data-quem="studio">O studio</button>
+      </div></div>
     <div class="campo esconde" id="rb-cx-nova"><label for="rb-nova">Nova previsão para o restante</label><input type="date" id="rb-nova"></div>
     <p class="desc" id="rb-dica" style="margin:-4px 0 12px"></p>
     <p class="aviso-linha" id="rb-erro"></p>
@@ -852,11 +962,60 @@ input,textarea,select{ font:inherit; }
       <input type="number" id="fc-valor" step="0.01" min="0" placeholder="0,00"></div>
     <div class="campo esconde" id="fc-cx-previsao"><label for="fc-previsao">Previsão de pagamento</label>
       <input type="date" id="fc-previsao"></div>
+    <div class="dupla" id="fc-cx-pgto">
+      <div class="campo"><label for="fc-pgto">Forma de pagamento</label>
+        <select id="fc-pgto"><option>Pix</option><option>Dinheiro</option><option>Cartão de débito</option><option>Cartão de crédito</option><option>Outro</option></select></div>
+      <div class="campo so-prof"><label>Quem recebeu</label>
+        <div class="seg" id="fc-quem">
+          <button type="button" data-quem="profissional" class="on">Eu</button>
+          <button type="button" data-quem="studio">O studio</button>
+        </div></div>
+    </div>
     <div class="campo"><label for="fc-obs">Observação (opcional)</label>
       <input type="text" id="fc-obs" placeholder="Forma de pagamento, detalhes…"></div>
     <p class="aviso-linha" id="fc-erro"></p>
     <button class="btn" id="fc-lancar">Lançar no faturamento</button>
     <button class="btn vazio" id="fc-depois" style="margin-top:8px">Deixar para depois</button>
+  </div>
+</div>
+
+<!-- Acerto entre a profissional e o studio -->
+<div id="acerto" class="modal-adm">
+  <div class="cx">
+    <h3>Registrar acerto</h3>
+    <p class="desc">Dinheiro que passou de uma para a outra. Abate o saldo da profissional.</p>
+    <div class="resumo-adm" id="ac-resumo"></div>
+    <div class="campo"><label>O que aconteceu</label>
+      <div class="seg" id="ac-sentido">
+        <button type="button" data-sentido="profParaStudio" class="on">Ela repassou ao studio</button>
+        <button type="button" data-sentido="studioParaProf">O studio pagou a ela</button>
+      </div></div>
+    <div class="dupla">
+      <div class="campo"><label for="ac-data">Data</label><input type="date" id="ac-data"></div>
+      <div class="campo"><label for="ac-valor">Valor (R$)</label><input type="number" id="ac-valor" step="0.01" min="0"></div>
+    </div>
+    <div class="campo"><label for="ac-forma">Forma</label>
+      <select id="ac-forma"><option>Pix</option><option>Dinheiro</option><option>Transferência</option><option>Outro</option></select></div>
+    <div class="campo"><label for="ac-desc">Observação (opcional)</label><input type="text" id="ac-desc" placeholder="Ex.: acerto de setembro, vale"></div>
+    <p class="aviso-linha" id="ac-erro"></p>
+    <button class="btn" id="ac-salvar">Registrar acerto</button>
+    <button class="btn vazio" id="ac-cancelar" style="margin-top:8px">Cancelar</button>
+  </div>
+</div>
+
+<!-- Extrato de uma profissional no mês -->
+<div id="extrato" class="modal-adm">
+  <div class="cx largo">
+    <div class="cabeca-bloco">
+      <h3 id="ex-titulo">Extrato</h3>
+      <span class="desc" id="ex-mes"></span>
+    </div>
+    <div id="ex-corpo"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+      <button class="btn mini" id="ex-imprimir">Imprimir fechamento</button>
+      <button class="btn mini linha" id="ex-csv">Baixar planilha</button>
+      <button class="btn mini vazio" id="ex-fechar" style="margin-left:auto">Fechar</button>
+    </div>
   </div>
 </div>
 
@@ -868,6 +1027,7 @@ input,textarea,select{ font:inherit; }
 </section>
 
 <div id="recado"></div>
+<div id="impressao"></div>
 
 <script type="module">
 import { PADRAO, mesclar, migrar, SERVICO_NOVO, PROFISSIONAL_NOVA, DIAS, STATUS, FONTES_TITULO, FONTES_TEXTO, urlDasFontes } from "./assets/padrao.js";
@@ -991,12 +1151,24 @@ $("#sair").addEventListener("click", async () => {
 let PERFIL = null;      // dados da conta logada
 let SOU_DONA = true;    // administradora: só ela cria acessos novos
 let MEU_PID = "";       // id da profissional ligada a esta conta
+let MEU_PERC = 0;       // % do faturamento desta profissional que vai para o studio
 
-/** Todas as profissionais mexem no site inteiro: textos, fotos, serviços,
-    avaliações. O que é individual é o financeiro — sempre o da própria
-    conta — e a criação de acessos, que segue com a administradora. */
+/** A dona cuida do site inteiro e enxerga o financeiro de todas.
+    A profissional parceira vê a própria agenda, os serviços e o próprio
+    caixa — com a divisão do studio já descontada. */
+const ABAS_DA_DONA = ["avaliacoes", "textos", "equipe", "fotos", "aparencia", "contato"];
 function ajustarPermissoes(){
-  $$(".aba").forEach(b => b.classList.remove("esconde"));
+  document.body.classList.toggle("sou-dona", SOU_DONA);
+  document.body.classList.toggle("sou-prof", !SOU_DONA);
+  $("#papel").textContent = SOU_DONA ? "Dona do studio" : "Profissional parceira";
+  $$(".aba").forEach(b => b.classList.toggle("esconde", !SOU_DONA && ABAS_DA_DONA.includes(b.dataset.aba)));
+  if(!SOU_DONA) $('.aba[data-aba="agenda"]').click();
+  ajustarLegendaCaixa();
+}
+function ajustarLegendaCaixa(){
+  $("#legenda-caixa").innerHTML = SOU_DONA
+    ? "Seu caixa, a cota que vem de cada profissional e os acertos com a equipe. Nada daqui aparece no site."
+    : `Seu caixa. <b>${MEU_PERC}%</b> do que você fatura fica com o studio (percentual definido pela dona). Nada daqui aparece no site.`;
 }
 
 async function abrirPainel(user){
@@ -1007,6 +1179,7 @@ async function abrirPainel(user){
   try{ PERFIL = await FB.meuPerfil(user.uid); }catch(e){ PERFIL = null; }
   SOU_DONA = !PERFIL || PERFIL.papel !== "profissional";
   MEU_PID  = PERFIL?.profissionalId || "";
+  MEU_PERC = SOU_DONA ? 0 : (+PERFIL?.percentualStudio || 0);
   ajustarPermissoes();
 
   let salvo = null;
@@ -1112,17 +1285,6 @@ function montarTextos(){
       ${campo("hero.selo1", "Selo 1")}
       ${campo("hero.selo2", "Selo 2")}
      </div>`);
-
-  h += b("Sobre o studio", "A seção que apresenta você.",
-    `<div class="dupla">${campo("sobre.rotulo", "Etiqueta")}${campo("sobre.titulo", "Título")}</div>
-     ${campo("sobre.p1", "Primeiro parágrafo", "area")}
-     ${campo("sobre.p2", "Segundo parágrafo", "area")}
-     <div class="dupla">${campo("sobre.profissional", "Nome no selo redondo")}${campo("sobre.cargo", "Função no selo redondo")}</div>
-     ${[0,1,2].map(i => `<div class="dupla">${campo(`sobre.pontos.${i}.titulo`, `Ponto ${i+1} — título`)}${campo(`sobre.pontos.${i}.texto`, `Ponto ${i+1} — descrição`)}</div>`).join("")}`);
-
-  h += b("Por que as clientes voltam", "Os quatro quadros da faixa escura.",
-    `<div class="dupla">${campo("diferenciais.rotulo", "Etiqueta")}${campo("diferenciais.titulo", "Título")}</div>
-     ${[0,1,2,3].map(i => `<div class="dupla">${campo(`diferenciais.itens.${i}.titulo`, `Quadro ${i+1} — título`)}${campo(`diferenciais.itens.${i}.texto`, `Quadro ${i+1} — texto`, "area")}</div>`).join("")}`);
 
   h += b("Galeria, depoimentos e finais", "Os títulos das últimas seções.",
     `<div class="dupla">
@@ -1259,8 +1421,7 @@ function previa(){
    ABA FOTOS
    ============================================================ */
 const ROTULOS_FOTO = {
-  hero:  "Foto principal",
-  sobre: "Foto do studio"
+  hero:  "Foto principal"
 };
 
 /* reduz a imagem no navegador antes de guardar */
@@ -1865,6 +2026,7 @@ function abrirLancamentoDoAtendimento(item){
   $("#fc-valor").value = valorSugerido(sel.selectedOptions[0]?.dataset.preco);
   $("#fc-erro").textContent = "";
   $("#fc-previsao").value = "";
+  QUEM_FECH = "profissional"; marcarQuem("#fc-quem", QUEM_FECH);
   escolherFormaFechamento("agora");
   $("#fechamento").classList.add("aberto");
   $("#fechamento").dataset.id = item.id;
@@ -2006,9 +2168,10 @@ $("#fc-lancar").addEventListener("click", async () => {
     const categoria = ($("#fc-servico").value === "__outro"
         ? $("#fc-outro").value.trim()
         : $("#fc-servico").value) || item.servico || "Atendimento";
+    const perc = await percentualParaLancar();
     if(depois){
       await FB.salvarAReceber(FB.auth.currentUser.uid, {
-        data: item.data, valor, categoria,
+        data: item.data, valor, categoria, percentualStudio: perc,
         previsao: $("#fc-previsao").value,
         cliente: cli.nome || "Cliente",
         telefone: cli.telefone || "",
@@ -2021,7 +2184,11 @@ $("#fc-lancar").addEventListener("click", async () => {
         data: item.data,
         valor,
         descricao: [cli.nome, $("#fc-obs").value.trim()].filter(Boolean).join(" · ").slice(0, 120),
-        categoria
+        categoria,
+        cliente: cli.nome || "",
+        forma: $("#fc-pgto").value,
+        percentualStudio: perc,
+        recebidoPor: SOU_DONA ? undefined : QUEM_FECH
       });
     }
     await FB.mudarStatus(id, "concluido", { faturado: true, valor, ...(depois ? { aReceber: true } : {}) });
@@ -2054,6 +2221,11 @@ async function recarregarAcessos(){
 }
 
 const acessoDe = (profId) => ACESSOS.find(a => a.profissionalId === profId);
+/** Lê um campo de percentual: número de 0 a 100, ou null se inválido. */
+const lerPct = (el) => {
+  const v = parseFloat(String(el?.value ?? "").replace(",", "."));
+  return Number.isFinite(v) && v >= 0 && v <= 100 ? Math.round(v * 100) / 100 : null;
+};
 
 function montarProfissionais(){
   const topo = $("#campos-equipe-topo");
@@ -2093,14 +2265,28 @@ function montarProfissionais(){
             ${acesso && acesso.papel === "profissional"
               ? `<button class="btn mini perigo tirar-acesso" data-uid="${acesso.uid}" style="margin-left:auto">Remover acesso</button>` : ""}
           </div>
+          ${acesso && acesso.papel !== "profissional"
+            ? `<p class="desc">Dona do studio — o faturamento dela é 100% do studio.</p>` : ""}
+          ${acesso && acesso.papel === "profissional" && SOU_DONA ? `
+            <div class="pct-linha">
+              <div class="campo"><label>% para o studio</label>
+                <input type="number" class="pct" min="0" max="100" step="0.5" value="${Number.isFinite(acesso.percentualStudio) ? acesso.percentualStudio : ""}" placeholder="Ex.: 40"></div>
+              <button class="btn mini salvar-pct" data-uid="${acesso.uid}">Salvar percentual</button>
+            </div>
+            <p class="desc" style="margin-top:6px">${Number.isFinite(acesso.percentualStudio)
+              ? `De um atendimento de R$ 100, ${dinheiro.format(acesso.percentualStudio)} ficam com o studio e ${dinheiro.format(100 - acesso.percentualStudio)} com ela. Mudar vale só para os próximos lançamentos.`
+              : `<b style="color:var(--alerta)">Percentual ainda não definido</b> — defina para a cota do studio ser calculada.`}</p>` : ""}
           ${(acesso || !SOU_DONA) ? "" : `
             <button class="btn mini abrir-acesso">Criar acesso para ela</button>
             <div class="form-acesso">
-              <p class="desc" style="margin-top:12px">Ela vai entrar no mesmo endereço do painel, com este e-mail e senha. Poderá lançar o próprio financeiro e cuidar dos serviços dela.</p>
+              <p class="desc" style="margin-top:12px">Ela vai entrar no mesmo endereço do painel, com este e-mail e senha. Vê só a agenda, os serviços e o próprio caixa — a cota do studio já aparece descontada.</p>
               <div class="dupla">
                 <div class="campo"><label>E-mail</label><input type="email" class="ac-email" placeholder="email@exemplo.com"></div>
                 <div class="campo"><label>Senha (mín. 6)</label><input type="password" class="ac-senha" placeholder="senha inicial"></div>
               </div>
+              <div class="campo" style="max-width:260px"><label>% do faturamento dela para o studio</label>
+                <input type="number" class="ac-pct" min="0" max="100" step="0.5" placeholder="Ex.: 40">
+                <div class="ajuda">Ela lança os atendimentos; esta parte vai para a sua conta.</div></div>
               <p class="aviso-linha ac-erro"></p>
               <button class="btn mini criar-acesso">Criar acesso</button>
               <details style="margin-top:12px">
@@ -2147,8 +2333,10 @@ function montarProfissionais(){
       const email = $(".ac-email", cartao).value.trim();
       const senha = $(".ac-senha", cartao).value;
       const erro  = $(".ac-erro", cartao);
+      const pct = lerPct($(".ac-pct", cartao));
       if(!email) return erro.textContent = "Digite o e-mail dela.";
       if(senha.length < 6) return erro.textContent = "A senha precisa de pelo menos 6 caracteres.";
+      if(pct === null) return erro.textContent = "Informe o percentual do studio (de 0 a 100).";
       erro.textContent = "";
 
       const bt = $(".criar-acesso", cartao);
@@ -2157,7 +2345,8 @@ function montarProfissionais(){
         await FB.criarAcessoProfissional({
           email, senha,
           nome: CFG.profissionais[i].nome,
-          profissionalId: pid
+          profissionalId: pid,
+          percentualStudio: pct
         });
         await recarregarAcessos();
         montarProfissionais();
@@ -2181,15 +2370,31 @@ function montarProfissionais(){
       const uid = $(".ac-uid", cartao).value.trim();
       const erro = $(".ac-erro", cartao);
       if(uid.length < 10) return erro.textContent = "Cole o UID que aparece no Console.";
+      const pct = lerPct($(".ac-pct", cartao));
+      if(pct === null) return erro.textContent = "Informe o percentual do studio (de 0 a 100).";
       try{
         await FB.vincularAcesso({
           uid, email: $(".ac-email", cartao).value.trim(),
-          nome: CFG.profissionais[i].nome, profissionalId: pid
+          nome: CFG.profissionais[i].nome, profissionalId: pid, percentualStudio: pct
         });
         await recarregarAcessos();
         montarProfissionais();
         recado("Conta vinculada.");
       }catch(e){ erro.textContent = FB.explicarErro(e); }
+    });
+
+    $(".salvar-pct", cartao)?.addEventListener("click", async (e) => {
+      const pct = lerPct($(".pct", cartao));
+      if(pct === null) return recado("O percentual precisa ser um número de 0 a 100.", true);
+      const bt = e.target;
+      bt.disabled = true;
+      try{
+        await FB.definirPercentual(bt.dataset.uid, pct);
+        await recarregarAcessos();
+        montarProfissionais();
+        await carregarCaixa();
+        recado(`Percentual salvo: ${pct}% para o studio nos próximos lançamentos.`);
+      }catch(err){ recado(FB.explicarErro(err), true); bt.disabled = false; }
     });
 
     $(".tirar-acesso", cartao)?.addEventListener("click", async (e) => {
@@ -2233,6 +2438,9 @@ const mesAtras = (mes, n) => {
 
 let lancamentos = [];        // últimos 6 meses, já carregados
 let baseDizimo = "faturamento";
+let EQUIPE = [];             // (só a dona) caixa de cada profissional parceira
+let minhasReceitas = [];     // (profissional) todas as entradas, para o saldo
+let meusAcertos = [];        // (profissional) acertos já feitos com o studio
 /** Etiqueta de quem é este caixa — deixa claro que o número é só dela. */
 function montarDonoDoCaixa(){
   const nome = CFG.profissionais.find(p => p.id === MEU_PID)?.nome
@@ -2245,78 +2453,132 @@ async function carregarCaixa(){
   const mes = $("#mes").value || mesAtual();
   const inicio = mesAtras(mes, 5) + "-01";
   const fim = ultimoDia(mes);
+  const eu = FB.auth.currentUser.uid;
 
   try{
-    // sempre e só a conta que está logada
-    lancamentos = await FB.lancamentosEntre(FB.auth.currentUser.uid, inicio, fim);
+    // o caixa da conta que está logada
+    lancamentos = await FB.lancamentosEntre(eu, inicio, fim);
   }catch(e){
     lancamentos = [];
     recado(FB.explicarErro(e), true);
     console.error(e);
+  }
+  if(SOU_DONA){
+    await carregarEquipe(inicio, fim);
+  }else{
+    // saldo com o studio: precisa do histórico inteiro, não só dos 6 meses
+    try{
+      [minhasReceitas, meusAcertos] = await Promise.all([FB.receitasDaConta(eu), FB.acertosDaConta(eu)]);
+    }catch(e){ minhasReceitas = []; meusAcertos = []; console.error(e); }
   }
   montarDonoDoCaixa();
   desenharCaixa();
   await Promise.all([carregarParceladas(), carregarAReceber()]);
 }
 
-function somaDoMes(mes){
-  const doMes = lancamentos.filter(l => l.data?.startsWith(mes) && l.tipo !== "receber");
-  const entra = doMes.filter(l => l.tipo === "receita").reduce((s, l) => s + (+l.valor || 0), 0);
-  const sai   = doMes.filter(l => l.tipo === "despesa").reduce((s, l) => s + (+l.valor || 0), 0);
-  return { entra, sai, lucro: entra - sai, itens: doMes };
+/* ---------- contas da divisão ---------- */
+const centavos = (v) => Math.round((+v || 0) * 100) / 100;
+/** % gravado no lançamento; lançamentos antigos (sem o campo) usam o percentual atual. */
+const pctDe = (l, perc) => Number.isFinite(l.percentualStudio) ? l.percentualStudio : (+perc || 0);
+const cotaDe = (l, perc) => centavos((+l.valor || 0) * pctDe(l, perc) / 100);
+
+/** Números de um mês a partir de uma lista de lançamentos. */
+function somaDoMes(mes, lista = lancamentos, perc = MEU_PERC){
+  const itens = lista.filter(l => l.data?.startsWith(mes) && (l.tipo === "receita" || l.tipo === "despesa"));
+  const rec = itens.filter(l => l.tipo === "receita");
+  const bruto = rec.reduce((s, l) => s + (+l.valor || 0), 0);
+  const sai   = itens.filter(l => l.tipo === "despesa").reduce((s, l) => s + (+l.valor || 0), 0);
+  const cota  = rec.reduce((s, l) => s + cotaDe(l, perc), 0);
+  const peloStudio = rec.filter(l => l.recebidoPor === "studio").reduce((s, l) => s + (+l.valor || 0), 0);
+  return { bruto, sai, cota, parte: bruto - cota, peloStudio, itens, rec };
+}
+
+/** Saldo acumulado entre profissional e studio.
+    > 0 → ela deve repassar ao studio · < 0 → o studio deve pagar a ela. */
+function saldoDe(receitas, acertos, perc){
+  let s = 0;
+  receitas.forEach(r => {
+    const cota = cotaDe(r, perc);
+    if(r.recebidoPor === "studio") s -= (+r.valor || 0) - cota;
+    else s += cota;
+  });
+  acertos.forEach(a => { s += a.sentido === "studioParaProf" ? (+a.valor || 0) : -(+a.valor || 0); });
+  return centavos(s);
+}
+
+/** Cota que a equipe inteira gerou para o studio num mês. */
+const cotaEquipeNoMes = (mes) => EQUIPE.reduce((s, m) => s + somaDoMes(mes, m.lanc, m.perc).cota, 0);
+
+/** O que conta como "entrada" no dashboard de cada papel:
+    dona → atendimentos dela + cota das profissionais;
+    profissional → só a parte dela (a cota do studio já sai). */
+function resumoMes(mes){
+  const r = somaDoMes(mes);
+  const cotaEquipe = SOU_DONA ? cotaEquipeNoMes(mes) : 0;
+  const entra = SOU_DONA ? r.bruto + cotaEquipe : r.parte;
+  return { ...r, cotaEquipe, entra, lucro: entra - r.sai };
 }
 
 function desenharCaixa(){
   const mes = $("#mes").value || mesAtual();
-  const { entra, sai, lucro, itens } = somaDoMes(mes);
+  const R = resumoMes(mes);
+  const { entra, sai, lucro, itens } = R;
   const dizimo = (baseDizimo === "lucro" ? Math.max(0, lucro) : entra) * 0.10;
   const margem = entra > 0 ? Math.round((lucro / entra) * 100) : 0;
+  const nAtend = R.rec.length;
+  const aRec = totalAReceber() > 0 ? ` · ${dinheiro.format(totalAReceber())} a receber` : "";
+  const parcTxt = (() => {
+    const p = itens.filter(i => i.tipo === "despesa" && i.parcelado).reduce((s, i) => s + (+i.valor || 0), 0);
+    return p > 0 ? `inclui ${dinheiro.format(p)} em parcelas` : "materiais e demais gastos";
+  })();
+  const card = (rot, v, sub, extra = "") =>
+    `<div class="num ${extra}"><b>${rot}</b><span class="v ${v < 0 ? "negativo" : ""}">${dinheiro.format(v)}</span><small>${sub}</small></div>`;
 
-  $("#numeros").innerHTML = `
-    <div class="num">
-      <b>Faturamento</b>
-      <span class="v">${dinheiro.format(entra)}</span>
-      <small>${itens.filter(i => i.tipo === "receita").length} atendimento(s)${
-        totalAReceber() > 0 ? ` · ${dinheiro.format(totalAReceber())} a receber` : ""}</small>
-    </div>
-    <div class="num">
-      <b>Custos</b>
-      <span class="v">${dinheiro.format(sai)}</span>
-      <small>${(() => {
-        const p = itens.filter(i => i.tipo === "despesa" && i.parcelado).reduce((s, i) => s + (+i.valor || 0), 0);
-        return p > 0 ? `inclui ${dinheiro.format(p)} em parcelas` : "materiais e demais gastos";
-      })()}</small>
-    </div>
-    <div class="num">
-      <b>Lucro real</b>
-      <span class="v ${lucro < 0 ? "negativo" : ""}">${dinheiro.format(lucro)}</span>
-      <small>${entra > 0 ? `margem de ${margem}%` : "sem entradas no mês"}</small>
-    </div>
+  let cards = "";
+  if(SOU_DONA){
+    const nEq = EQUIPE.length;
+    cards += card("Meus atendimentos", R.bruto, `${nAtend} atendimento(s)${aRec}`);
+    cards += card("Cota da equipe", R.cotaEquipe,
+      nEq ? `vem de ${nEq} profissional${nEq > 1 ? "is" : ""} · <a href="#" id="ir-studio">ver detalhes</a>` : "nenhuma parceira com acesso");
+    cards += card("Custos do studio", sai, parcTxt);
+    cards += card("Lucro real", lucro, entra > 0 ? `margem de ${margem}%` : "sem entradas no mês");
+  }else{
+    cards += card("Faturamento bruto", R.bruto, `${nAtend} atendimento(s)${aRec}`);
+    cards += card(`Cota do studio (${MEU_PERC}%)`, R.cota, "vai para a dona do studio");
+    cards += card("Minha parte", R.parte, "faturamento − cota do studio");
+    cards += card("Meus custos", sai, parcTxt);
+    cards += card("Meu lucro", lucro, entra > 0 ? `margem de ${margem}% sobre a sua parte` : "sem entradas no mês");
+  }
+  cards += `
     <div class="num destaque">
       <b>Dízimo (10%)</b>
       <span class="v">${dinheiro.format(dizimo)}</span>
       <small>
         <label style="cursor:pointer;display:inline-flex;gap:5px;align-items:center">
-          <input type="radio" name="base-dizimo" value="faturamento" ${baseDizimo === "faturamento" ? "checked" : ""}> do faturamento
+          <input type="radio" name="base-dizimo" value="faturamento" ${baseDizimo === "faturamento" ? "checked" : ""}> ${SOU_DONA ? "da receita" : "da minha parte"}
         </label>
         <label style="cursor:pointer;display:inline-flex;gap:5px;align-items:center;margin-left:8px">
           <input type="radio" name="base-dizimo" value="lucro" ${baseDizimo === "lucro" ? "checked" : ""}> do lucro
         </label>
       </small>
     </div>`;
+  $("#numeros").innerHTML = cards;
+  $("#ir-studio")?.addEventListener("click", e => { e.preventDefault(); $('.sub-aba[data-sub="studio"]').click(); });
 
   $$('input[name="base-dizimo"]').forEach(r => r.addEventListener("change", () => {
     baseDizimo = r.value;
     desenharCaixa();
   }));
 
+  if(!SOU_DONA) desenharDivisao(mes, R);
+
   /* gráfico dos 6 meses */
   const meses = [5,4,3,2,1,0].map(n => mesAtras(mes, n));
-  const dados = meses.map(m => ({ m, ...somaDoMes(m) }));
+  const dados = meses.map(m => ({ m, ...resumoMes(m) }));
   const teto = Math.max(...dados.map(d => Math.max(d.entra, d.sai)), 1);
 
   $("#legenda-grafico").innerHTML =
-    `<span class="chave"><i style="background:var(--rosa)"></i> entradas</span>
+    `<span class="chave"><i style="background:var(--rosa)"></i> ${SOU_DONA ? "receita (seus atendimentos + cota da equipe)" : "sua parte"}</span>
      <span class="chave"><i style="background:var(--borda)"></i> custos</span>`;
 
   $("#grafico").innerHTML = dados.map(d => `
@@ -2328,34 +2590,28 @@ function desenharCaixa(){
       <span class="rot">${MESES[+d.m.slice(5) - 1]}</span>
     </div>`).join("");
 
-  /* custos por categoria */
-  const custos = itens.filter(i => i.tipo === "despesa");
-  const porCat = {};
-  custos.forEach(c => { porCat[c.categoria || "Outros"] = (porCat[c.categoria || "Outros"] || 0) + (+c.valor || 0); });
-  const cats = Object.entries(porCat).sort((a, b) => b[1] - a[1]);
-  const tetoCat = Math.max(1, ...cats.map(c => c[1]));
-  $("#por-categoria").innerHTML = cats.length ? cats.map(([nome, v]) => `
-    <div class="cat">
-      <span class="nm">${escaparTxt(nome)}</span>
-      <span class="barra"><i style="width:${Math.round(v / tetoCat * 100)}%"></i></span>
-      <span class="vl">${dinheiro.format(v)}</span>
-    </div>`).join("") : `<p class="desc">Nenhum custo lançado neste mês.</p>`;
+  /* barras horizontais reaproveitadas */
+  const barras = (pares, vazio) => {
+    const teto = Math.max(1, ...pares.map(c => c[1]));
+    return pares.length ? pares.map(([nome, v]) => `
+      <div class="cat">
+        <span class="nm">${escaparTxt(nome)}</span>
+        <span class="barra"><i style="width:${Math.round(v / teto * 100)}%"></i></span>
+        <span class="vl">${dinheiro.format(v)}</span>
+      </div>`).join("") : `<p class="desc">${vazio}</p>`;
+  };
+  const agrupar = (lista, chave, padrao) => {
+    const g = {};
+    lista.forEach(i => { const k = i[chave] || padrao; g[k] = (g[k] || 0) + (+i.valor || 0); });
+    return Object.entries(g).sort((a, b) => b[1] - a[1]);
+  };
 
-  /* serviços que mais renderam */
-  const receitas = itens.filter(i => i.tipo === "receita");
-  const porServ = {};
-  receitas.forEach(r => { porServ[r.categoria || "Atendimento"] = (porServ[r.categoria || "Atendimento"] || 0) + (+r.valor || 0); });
-  const servs = Object.entries(porServ).sort((a, b) => b[1] - a[1]).slice(0, 6);
-  const tetoServ = Math.max(1, ...servs.map(x => x[1]));
-  $("#top-servicos").innerHTML = servs.length ? servs.map(([nome, v]) => `
-    <div class="cat">
-      <span class="nm">${escaparTxt(nome)}</span>
-      <span class="barra"><i style="width:${Math.round(v / tetoServ * 100)}%"></i></span>
-      <span class="vl">${dinheiro.format(v)}</span>
-    </div>`).join("") : `<p class="desc">Nenhuma entrada lançada neste mês.</p>`;
+  $("#por-categoria").innerHTML = barras(agrupar(itens.filter(i => i.tipo === "despesa"), "categoria", "Outros"), "Nenhum custo lançado neste mês.");
+  $("#top-servicos").innerHTML  = barras(agrupar(R.rec, "categoria", "Atendimento").slice(0, 6), "Nenhuma entrada lançada neste mês.");
+  $("#por-forma").innerHTML     = barras(agrupar(R.rec, "forma", "Não informado"), "Nenhuma entrada lançada neste mês.");
 
   /* comparativo com o mês anterior */
-  const ant = somaDoMes(mesAtras(mes, 1));
+  const ant = resumoMes(mesAtras(mes, 1));
   const linha = (nome, agora, antes) => {
     const dif = antes > 0 ? Math.round((agora - antes) / antes * 100) : (agora > 0 ? 100 : 0);
     const cls = dif > 0 ? "sobe" : dif < 0 ? "desce" : "";
@@ -2366,10 +2622,14 @@ function desenharCaixa(){
     </div>`;
   };
   $("#comparativo").innerHTML =
-    linha("Faturamento", entra, ant.entra) +
+    (SOU_DONA
+      ? linha("Receita", entra, ant.entra) + linha("Cota da equipe", R.cotaEquipe, ant.cotaEquipe)
+      : linha("Faturamento bruto", R.bruto, ant.bruto) + linha("Minha parte", entra, ant.entra)) +
     linha("Custos", sai, ant.sai) +
     linha("Lucro", lucro, ant.lucro) +
     `<p class="desc" style="margin:12px 0 0">Comparado com ${MESES[+mesAtras(mes,1).slice(5) - 1]}.</p>`;
+
+  if(SOU_DONA) desenharStudio();
 
   /* lista do mês */
   const alvo = $("#lista-lancamentos");
@@ -2382,12 +2642,15 @@ function desenharCaixa(){
     .map(l => {
       const entrada = l.tipo === "receita";
       const etq = l.parcelado ? `<span class="etq-parc">parcela ${l.parcela}/${l.parcelas}</span>` : "";
+      const etqStudio = entrada && !SOU_DONA && l.recebidoPor === "studio" ? `<span class="etq-studio">pago ao studio</span>` : "";
+      const divisao = entrada && !SOU_DONA
+        ? ` · studio ${pctDe(l, MEU_PERC)}%: ${dinheiro.format(cotaDe(l, MEU_PERC))} · sua parte ${dinheiro.format((+l.valor || 0) - cotaDe(l, MEU_PERC))}` : "";
       return `<div class="lanc" data-id="${l.id}" data-uid="${l.uid}">
         <span class="dia">${l.data.slice(8)}/${l.data.slice(5,7)}</span>
         <span class="txt">
-          <b>${escaparTxt(l.descricao || l.categoria || (entrada ? "Atendimento" : "Custo"))}${etq}</b>
-          <small>${escaparTxt(l.categoria || (entrada ? "Atendimento" : "Custo"))}${l.parcelado ? ` · compra de ${dinheiro.format(l.valorTotal || 0)}` : ""}${
-            l.deFiado && l.dataAtendimento ? ` · atendida em ${l.dataAtendimento.slice(8)}/${l.dataAtendimento.slice(5, 7)}, pagou depois` : ""}</small>
+          <b>${escaparTxt(l.descricao || l.categoria || (entrada ? "Atendimento" : "Custo"))}${etq}${etqStudio}</b>
+          <small>${escaparTxt(l.categoria || (entrada ? "Atendimento" : "Custo"))}${l.forma ? " · " + escaparTxt(l.forma) : ""}${l.parcelado ? ` · compra de ${dinheiro.format(l.valorTotal || 0)}` : ""}${
+            l.deFiado && l.dataAtendimento ? ` · atendida em ${l.dataAtendimento.slice(8)}/${l.dataAtendimento.slice(5, 7)}, pagou depois` : ""}${divisao}</small>
         </span>
         <span class="val ${entrada ? "ent" : "sai"}">${entrada ? "+" : "−"} ${dinheiro.format(l.valor)}</span>
         <button class="btn mini editar-lanc">Editar</button>
@@ -2414,6 +2677,7 @@ function desenharCaixa(){
     try{
       await FB.excluirLancamento(linha.dataset.uid, linha.dataset.id);
       lancamentos = lancamentos.filter(l => l.id !== linha.dataset.id);
+      minhasReceitas = minhasReceitas.filter(l => l.id !== linha.dataset.id);
       desenharCaixa();
       recado("Lançamento excluído.");
     }catch(e){ recado(FB.explicarErro(e), true); bt.disabled = false; }
@@ -2453,9 +2717,10 @@ async function lancar(tipo){
   const bt = $(tipo === "receita" ? "#add-receita" : "#add-despesa");
   bt.disabled = true; bt.textContent = "Lançando…";
   try{
+    const perc = tipo === "receita" ? await percentualParaLancar() : undefined;
     if(fiado){
       await FB.salvarAReceber(FB.auth.currentUser.uid, {
-        data, valor, descricao,
+        data, valor, descricao, percentualStudio: perc,
         previsao: $("#r-previsao").value,
         cliente: $("#r-cliente").value,
         telefone: $("#r-tel").value,
@@ -2472,11 +2737,16 @@ async function lancar(tipo){
       await FB.salvarLancamento(FB.auth.currentUser.uid, {
         tipo, data, valor,
         descricao,
-        categoria: tipo === "receita" ? $("#r-servico").value : $("#d-cat").value
+        categoria: tipo === "receita" ? $("#r-servico").value : $("#d-cat").value,
+        ...(tipo === "receita" ? {
+          forma: $("#r-pgto").value,
+          percentualStudio: perc,
+          recebidoPor: SOU_DONA ? undefined : QUEM_RECEITA
+        } : {})
       });
     }
     $(`#${p}-valor`).value = ""; $(`#${p}-desc`).value = "";
-    if(tipo === "despesa") atualizarPreviaParcelas();
+    if(tipo === "despesa") atualizarPreviaParcelas(); else dicaCota();
     await carregarCaixa();
     recado(fiado ? "Anotado em A receber." : tipo === "receita" ? "Entrada lançada."
       : parcelado ? `Compra lançada em ${$("#d-parcelas").value} parcelas.` : "Custo lançado.");
@@ -2598,6 +2868,43 @@ $("#ed-salvar").addEventListener("click", async () => {
    ============================================================ */
 let FORMA_RECEITA = "agora";
 let FORMA_FECHAMENTO = "agora";
+let QUEM_RECEITA = "profissional", QUEM_FECH = "profissional", QUEM_RB = "profissional";
+
+/** Liga um seletor "Eu / O studio" e devolve a escolha por callback. */
+function ligarQuem(sel, fn){
+  $$(sel + " button").forEach(b => b.addEventListener("click", () => {
+    $$(sel + " button").forEach(x => x.classList.toggle("on", x === b));
+    fn(b.dataset.quem);
+  }));
+}
+const marcarQuem = (sel, v) => $$(sel + " button").forEach(x => x.classList.toggle("on", x.dataset.quem === v));
+ligarQuem("#r-quem",  v => { QUEM_RECEITA = v; dicaCota(); });
+ligarQuem("#fc-quem", v => { QUEM_FECH = v; });
+ligarQuem("#rb-quem", v => { QUEM_RB = v; });
+
+/** Mostra na hora quanto fica com o studio e quanto é dela. */
+function dicaCota(){
+  const el = $("#r-dica-cota");
+  const v = parseFloat($("#r-valor").value);
+  if(SOU_DONA || !(v > 0) || FORMA_RECEITA === "depois"){ el.textContent = ""; return; }
+  const cota = centavos(v * MEU_PERC / 100), parte = centavos(v - cota);
+  el.innerHTML = `Studio fica com <b>${MEU_PERC}%</b> (${dinheiro.format(cota)}) · sua parte <b>${dinheiro.format(parte)}</b>. ` +
+    (QUEM_RECEITA === "studio" ? `Como o studio recebeu, ele te repassa ${dinheiro.format(parte)} no acerto.`
+                               : `Como você recebeu, repasse ${dinheiro.format(cota)} ao studio no acerto.`);
+}
+$("#r-valor").addEventListener("input", dicaCota);
+
+/** Relê o percentual antes de lançar — se a dona mudou há pouco, o
+    servidor exige o novo, e o lançamento não pode falhar por isso. */
+async function percentualParaLancar(){
+  if(SOU_DONA) return undefined;
+  try{
+    const p = await FB.meuPerfil(FB.auth.currentUser.uid);
+    MEU_PERC = +p?.percentualStudio || 0;
+    ajustarLegendaCaixa();
+  }catch(e){ console.warn(e); }
+  return MEU_PERC;
+}
 let aReceber = [];
 let recebidosDeFiado = [];
 
@@ -2614,7 +2921,9 @@ $$("#r-forma button").forEach(b => b.addEventListener("click", () => {
   $("#r-rot-data").textContent = depois ? "Data do atendimento" : "Data";
   $("#r-rot-valor").textContent = depois ? "Valor a receber (R$)" : "Valor recebido (R$)";
   $("#add-receita").textContent = depois ? "Anotar a receber" : "Lançar entrada";
+  $("#r-cx-pgto").classList.toggle("esconde", depois);
   $("#r-erro").textContent = "";
+  dicaCota();
 }));
 
 /* alternância no fechamento do atendimento (agenda) */
@@ -2625,6 +2934,7 @@ function escolherFormaFechamento(forma){
   $("#fc-cx-previsao").classList.toggle("esconde", !depois);
   $("#fc-rot-valor").textContent = depois ? "Valor a receber (R$)" : "Valor recebido (R$)";
   $("#fc-lancar").textContent = depois ? "Anotar a receber" : "Lançar no faturamento";
+  $("#fc-cx-pgto").classList.toggle("esconde", depois);
 }
 $$("#fc-forma button").forEach(b => b.addEventListener("click", () => escolherFormaFechamento(b.dataset.forma)));
 
@@ -2762,6 +3072,7 @@ function abrirRecebimento(r){
   $("#rb-valor").value = r.valor;
   $("#rb-nova").value = "";
   $("#rb-erro").textContent = "";
+  QUEM_RB = "profissional"; marcarQuem("#rb-quem", QUEM_RB);
   atualizarDicaRecebimento();
   m.classList.add("aberto");
   setTimeout(() => $("#rb-valor").focus(), 250);
@@ -2794,8 +3105,11 @@ $("#rb-salvar").addEventListener("click", async () => {
   const bt = $("#rb-salvar");
   bt.disabled = true; bt.textContent = "Salvando…";
   try{
+    const perc = await percentualParaLancar();
     await FB.registrarRecebimento(FB.auth.currentUser.uid, r, {
-      data, valor, forma: $("#rb-forma").value, novaPrevisao: $("#rb-nova").value
+      data, valor, forma: $("#rb-forma").value, novaPrevisao: $("#rb-nova").value,
+      recebidoPor: SOU_DONA ? undefined : QUEM_RB,
+      percentualStudio: perc
     });
     fecharRecebimento();
     await carregarCaixa();
@@ -3034,7 +3348,7 @@ $("#mostrar-quitadas").addEventListener("change", desenharParceladas);
 
 $$(".sub-aba").forEach(b => b.addEventListener("click", () => {
   $$(".sub-aba").forEach(x => x.classList.toggle("ativa", x === b));
-  ["painel", "lancar", "receber"].forEach(n =>
+  ["painel", "studio", "lancar", "receber"].forEach(n =>
     $(`#sub-${n}`).classList.toggle("esconde", b.dataset.sub !== n));
   // "A receber" não depende do mês
   $(".mes-barra").classList.toggle("esconde", b.dataset.sub === "receber");
@@ -3042,6 +3356,333 @@ $$(".sub-aba").forEach(b => b.addEventListener("click", () => {
 
 $("#mes").addEventListener("change", carregarCaixa);
 $("#mes-hoje").addEventListener("click", () => { $("#mes").value = mesAtual(); carregarCaixa(); });
+
+/* ============================================================
+   STUDIO E EQUIPE (visão da dona) + DIVISÃO (visão da profissional)
+   Cada profissional lança no próprio caixa. A dona lê o caixa de
+   todas: o percentual do studio vira a "cota da equipe" no dashboard
+   dela, e o saldo mostra quem deve repassar o quê a quem.
+   ============================================================ */
+const nomeDaConta = (a) =>
+  CFG.profissionais.find(p => p.id === a.profissionalId)?.nome || a.nome || a.email || "Profissional";
+
+async function carregarEquipe(inicio, fim){
+  const contas = ACESSOS.filter(a => a.papel === "profissional");
+  EQUIPE = await Promise.all(contas.map(async a => {
+    const m = {
+      uid: a.uid, pid: a.profissionalId, email: a.email || "", nome: nomeDaConta(a),
+      perc: +a.percentualStudio || 0, semPerc: !Number.isFinite(a.percentualStudio),
+      lanc: [], receitas: [], acertos: [], erro: ""
+    };
+    try{
+      [m.lanc, m.receitas, m.acertos] = await Promise.all([
+        FB.lancamentosEntre(a.uid, inicio, fim), FB.receitasDaConta(a.uid), FB.acertosDaConta(a.uid)
+      ]);
+    }catch(e){ m.erro = FB.explicarErro(e); console.error(e); }
+    m.saldo = saldoDe(m.receitas, m.acertos, m.perc);
+    return m;
+  }));
+}
+
+/** Etiqueta do saldo. "ela" na visão da dona, "você" na da profissional. */
+function etiquetaSaldo(saldo, visao = "dona"){
+  const v = dinheiro.format(Math.abs(saldo));
+  if(saldo > 0.004)  return `<span class="saldo deve">${visao === "dona" ? `Ela deve repassar <b>${v}</b> ao studio` : `Você deve repassar <b>${v}</b> ao studio`}</span>`;
+  if(saldo < -0.004) return `<span class="saldo pagar">${visao === "dona" ? `O studio deve pagar <b>${v}</b> a ela` : `O studio te deve <b>${v}</b>`}</span>`;
+  return `<span class="saldo ok">Tudo acertado</span>`;
+}
+
+function barraDivisao(cota, parte, rotStudio = "Studio", rotProf = "Profissional"){
+  const tot = cota + parte;
+  if(tot <= 0) return "";
+  const pc = Math.round(cota / tot * 100);
+  return `<div class="barra-div"><i class="st" style="width:${pc}%"></i><i class="pf" style="width:${100 - pc}%"></i></div>
+    <div class="leg-div"><span><i style="background:var(--rosa)"></i>${rotStudio} ${dinheiro.format(cota)}</span>
+    <span><i style="background:var(--dourado)"></i>${rotProf} ${dinheiro.format(parte)}</span></div>`;
+}
+
+function desenharStudio(){
+  const mes = $("#mes").value || mesAtual();
+  const minhas = somaDoMes(mes, lancamentos, 0);
+  const linhas = EQUIPE.map(m => ({ m, r: somaDoMes(mes, m.lanc, m.perc) }));
+  const soma = (f) => linhas.reduce((s, x) => s + f(x), 0);
+  const brutoEq = soma(x => x.r.bruto), cotaEq = soma(x => x.r.cota), parteEq = soma(x => x.r.parte);
+  const aReceber = EQUIPE.reduce((s, m) => s + Math.max(0, m.saldo), 0);
+  const aPagar   = EQUIPE.reduce((s, m) => s + Math.max(0, -m.saldo), 0);
+  const pendentes = EQUIPE.filter(m => Math.abs(m.saldo) > 0.004 || m.semPerc).length;
+
+  const selo = $("#selo-studio");
+  selo.textContent = pendentes; selo.classList.toggle("esconde", !pendentes);
+
+  $("#studio-resumo").innerHTML = `
+    <div class="painel-num">
+      <div class="num"><b>Faturamento total do studio</b><span class="v">${dinheiro.format(minhas.bruto + brutoEq)}</span>
+        <small>você ${dinheiro.format(minhas.bruto)} · equipe ${dinheiro.format(brutoEq)}</small></div>
+      <div class="num destaque"><b>Fica com você</b><span class="v">${dinheiro.format(minhas.bruto + cotaEq)}</span>
+        <small>seus atendimentos + ${dinheiro.format(cotaEq)} de cota</small></div>
+      <div class="num"><b>Parte das profissionais</b><span class="v">${dinheiro.format(parteEq)}</span>
+        <small>o que é delas no mês</small></div>
+      <div class="num"><b>Saldo a acertar</b><span class="v">${dinheiro.format(aReceber - aPagar)}</span>
+        <small>a receber ${dinheiro.format(aReceber)} · a pagar ${dinheiro.format(aPagar)}</small></div>
+    </div>
+    ${brutoEq > 0 ? `<div class="bloco" style="padding-bottom:16px"><h3>Faturamento da equipe em ${MESES[+mes.slice(5) - 1]}</h3>
+      ${barraDivisao(cotaEq, parteEq, "Cota do studio", "Parte das profissionais")}</div>` : ""}`;
+
+  const alvo = $("#studio-lista");
+  if(!EQUIPE.length){
+    alvo.innerHTML = `<div class="vazio">Nenhuma profissional parceira com acesso ao painel.<br>
+      Vá em <b>Profissionais</b>, cadastre a profissional e clique em <b>Criar acesso para ela</b> — é lá que você define o percentual do studio.</div>`;
+    return;
+  }
+  alvo.innerHTML = linhas.map(({ m, r }) => `
+    <div class="eq" data-uid="${m.uid}">
+      <div class="topo">
+        <span class="nm"><b>${escaparTxt(m.nome)}</b>
+          <small>${m.semPerc ? "percentual não definido" : `${m.perc}% do faturamento para o studio`}${m.email ? " · " + escaparTxt(m.email) : ""}</small></span>
+        ${etiquetaSaldo(m.saldo)}
+      </div>
+      ${m.semPerc ? `<div class="aviso-caixa" style="margin:0"><b>Defina o percentual desta profissional</b> na aba Profissionais. Enquanto isso, a cota dela conta como 0%.</div>` : ""}
+      ${m.erro ? `<p class="aviso-linha" style="margin:0">Não deu para ler o caixa dela: ${escaparTxt(m.erro)}</p>` : ""}
+      <div class="nums">
+        <div><b>Atendimentos</b><span>${r.rec.length}</span></div>
+        <div><b>Faturou (bruto)</b><span>${dinheiro.format(r.bruto)}</span></div>
+        <div class="studio"><b>Cota do studio</b><span>${dinheiro.format(r.cota)}</span></div>
+        <div><b>Parte dela</b><span>${dinheiro.format(r.parte)}</span></div>
+        <div><b>Pago ao studio</b><span>${dinheiro.format(r.peloStudio)}</span></div>
+      </div>
+      <div class="acoes">
+        <button class="btn mini abrir-acerto">Registrar acerto</button>
+        <button class="btn mini linha abrir-extrato">Extrato do mês</button>
+        <button class="btn mini linha imprimir-eq">Imprimir fechamento</button>
+      </div>
+    </div>`).join("");
+
+  $$(".eq", alvo).forEach(el => {
+    const m = EQUIPE.find(x => x.uid === el.dataset.uid);
+    $(".abrir-acerto", el).addEventListener("click", () => abrirAcerto(m));
+    $(".abrir-extrato", el).addEventListener("click", () => abrirExtrato(m));
+    $(".imprimir-eq", el).addEventListener("click", () => imprimirFechamento(dadosFechamento(m)));
+  });
+}
+
+/** Bloco "Divisão com o studio" no dashboard da profissional. */
+function desenharDivisao(mes, R){
+  const saldo = saldoDe(minhasReceitas, meusAcertos, MEU_PERC);
+  const ultimos = meusAcertos.slice().sort((a, b) => b.data.localeCompare(a.data)).slice(0, 8);
+  $("#divisao").innerHTML = `
+    <p class="desc" style="margin-bottom:10px">Seu percentual: <b>${MEU_PERC}%</b> do faturamento vai para o studio. Quem define é a dona do studio.</p>
+    ${barraDivisao(R.cota, R.parte, "Studio", "Você") || `<p class="desc">Nenhuma entrada lançada neste mês.</p>`}
+    <div style="margin:16px 0 6px">${etiquetaSaldo(saldo, "voce")}</div>
+    <p class="desc">Saldo de todos os meses: soma das cotas do que você recebeu direto, menos o que o studio recebeu por você, menos os acertos já feitos.</p>
+    ${ultimos.length ? `<div class="rolagem"><table class="tabela">
+      <thead><tr><th>Acerto</th><th>O que foi</th><th>Forma</th><th class="n">Valor</th></tr></thead>
+      <tbody>${ultimos.map(a => `<tr><td>${diaCurto(a.data)}</td>
+        <td>${a.sentido === "studioParaProf" ? "O studio pagou a você" : "Você repassou ao studio"}${a.descricao ? " · " + escaparTxt(a.descricao) : ""}</td>
+        <td>${escaparTxt(a.forma || "")}</td><td class="n">${dinheiro.format(a.valor)}</td></tr>`).join("")}</tbody></table></div>`
+      : `<p class="desc">Nenhum acerto registrado ainda. Os acertos são lançados pela dona do studio.</p>`}`;
+}
+
+$("#imprimir-meu").addEventListener("click", () => imprimirFechamento(dadosFechamento({
+  nome: CFG.profissionais.find(p => p.id === MEU_PID)?.nome || PERFIL?.nome || $("#meu-email").textContent,
+  perc: MEU_PERC, lanc: lancamentos, receitas: minhasReceitas, acertos: meusAcertos
+})));
+
+/* ---- modal: acerto ---- */
+let SENTIDO_AC = "profParaStudio";
+let ACERTO_DE = null;
+
+function abrirAcerto(m){
+  ACERTO_DE = m;
+  $("#ac-resumo").innerHTML = `
+    <div><span>Profissional</span><b>${escaparTxt(m.nome)}</b></div>
+    <div><span>Saldo agora</span><b>${m.saldo > 0.004 ? `ela deve ${dinheiro.format(m.saldo)}`
+      : m.saldo < -0.004 ? `studio deve ${dinheiro.format(-m.saldo)}` : "zerado"}</b></div>`;
+  escolherSentido(m.saldo < -0.004 ? "studioParaProf" : "profParaStudio");
+  $("#ac-valor").value = Math.abs(m.saldo) > 0.004 ? Math.abs(m.saldo).toFixed(2) : "";
+  $("#ac-data").value = hojeISO();
+  $("#ac-desc").value = "";
+  $("#ac-erro").textContent = "";
+  $("#acerto").classList.add("aberto");
+  setTimeout(() => $("#ac-valor").focus(), 250);
+}
+function escolherSentido(v){
+  SENTIDO_AC = v;
+  $$("#ac-sentido button").forEach(x => x.classList.toggle("on", x.dataset.sentido === v));
+}
+$$("#ac-sentido button").forEach(b => b.addEventListener("click", () => escolherSentido(b.dataset.sentido)));
+const fecharAcerto = () => $("#acerto").classList.remove("aberto");
+$("#ac-cancelar").addEventListener("click", fecharAcerto);
+$("#acerto").addEventListener("click", e => { if(e.target.id === "acerto") fecharAcerto(); });
+
+$("#ac-salvar").addEventListener("click", async () => {
+  const erro = $("#ac-erro");
+  const valor = parseFloat($("#ac-valor").value);
+  const data = $("#ac-data").value;
+  if(!data) return erro.textContent = "Escolha a data.";
+  if(!(valor > 0)) return erro.textContent = "Digite o valor do acerto.";
+  erro.textContent = "";
+  const bt = $("#ac-salvar");
+  bt.disabled = true; bt.textContent = "Salvando…";
+  try{
+    await FB.salvarAcerto(ACERTO_DE.uid, {
+      data, valor, sentido: SENTIDO_AC, forma: $("#ac-forma").value, descricao: $("#ac-desc").value
+    });
+    fecharAcerto();
+    await carregarCaixa();
+    recado("Acerto registrado.");
+  }catch(e){ erro.textContent = FB.explicarErro(e); console.error(e); }
+  finally{ bt.disabled = false; bt.textContent = "Registrar acerto"; }
+});
+
+/* ---- modal: extrato do mês de uma profissional ---- */
+let EXTRATO_DE = null;
+
+function abrirExtrato(m){
+  EXTRATO_DE = m;
+  const mes = $("#mes").value || mesAtual();
+  const r = somaDoMes(mes, m.lanc, m.perc);
+  const acertos = m.acertos.slice().sort((a, b) => b.data.localeCompare(a.data));
+  $("#ex-titulo").textContent = m.nome;
+  $("#ex-mes").textContent = nomeDoMes(mes);
+  $("#ex-corpo").innerHTML = `
+    ${r.rec.length ? `<div class="rolagem"><table class="tabela">
+      <thead><tr><th>Dia</th><th>Serviço</th><th>Obs.</th><th>Forma</th><th>Recebeu</th>
+        <th class="n">Valor</th><th class="n">%</th><th class="n">Studio</th><th class="n">Ela</th></tr></thead>
+      <tbody>${r.rec.slice().sort((a, b) => a.data.localeCompare(b.data)).map(l => `<tr>
+        <td>${l.data.slice(8)}/${l.data.slice(5, 7)}</td><td>${escaparTxt(l.categoria || "Atendimento")}</td>
+        <td>${escaparTxt(l.cliente || l.descricao || "")}</td><td>${escaparTxt(l.forma || "")}</td>
+        <td>${l.recebidoPor === "studio" ? "Studio" : "Ela"}</td>
+        <td class="n">${dinheiro.format(l.valor)}</td><td class="n">${pctDe(l, m.perc)}%</td>
+        <td class="n">${dinheiro.format(cotaDe(l, m.perc))}</td><td class="n">${dinheiro.format(l.valor - cotaDe(l, m.perc))}</td></tr>`).join("")}</tbody>
+      <tfoot><tr><td colspan="5">Total do mês</td><td class="n">${dinheiro.format(r.bruto)}</td><td></td>
+        <td class="n">${dinheiro.format(r.cota)}</td><td class="n">${dinheiro.format(r.parte)}</td></tr></tfoot></table></div>`
+      : `<p class="desc">Nenhum atendimento lançado por ela neste mês.</p>`}
+    <div style="margin:4px 0 14px">${etiquetaSaldo(m.saldo)}</div>
+    <h3 style="font-size:1.05rem;margin-bottom:6px">Acertos</h3>
+    ${acertos.length ? `<div class="rolagem"><table class="tabela">
+      <thead><tr><th>Data</th><th>O que foi</th><th>Forma</th><th class="n">Valor</th><th></th></tr></thead>
+      <tbody>${acertos.slice(0, 30).map(a => `<tr data-id="${a.id}"><td>${diaCurto(a.data)}</td>
+        <td>${a.sentido === "studioParaProf" ? "Studio pagou a ela" : "Ela repassou ao studio"}${a.descricao ? " · " + escaparTxt(a.descricao) : ""}</td>
+        <td>${escaparTxt(a.forma || "")}</td><td class="n">${dinheiro.format(a.valor)}</td>
+        <td class="n"><button class="btn mini perigo apagar-acerto">Excluir</button></td></tr>`).join("")}</tbody></table></div>`
+      : `<p class="desc">Nenhum acerto registrado.</p>`}`;
+
+  $$(".apagar-acerto", $("#ex-corpo")).forEach(bt => bt.addEventListener("click", async () => {
+    if(!confirm("Excluir este acerto? O saldo volta a considerar esse valor em aberto.")) return;
+    bt.disabled = true;
+    try{
+      await FB.excluirLancamento(m.uid, bt.closest("tr").dataset.id);
+      await carregarCaixa();
+      const novo = EQUIPE.find(x => x.uid === m.uid);
+      if(novo) abrirExtrato(novo);
+      recado("Acerto excluído.");
+    }catch(e){ recado(FB.explicarErro(e), true); bt.disabled = false; }
+  }));
+  $("#extrato").classList.add("aberto");
+}
+const fecharExtrato = () => $("#extrato").classList.remove("aberto");
+$("#ex-fechar").addEventListener("click", fecharExtrato);
+$("#extrato").addEventListener("click", e => { if(e.target.id === "extrato") fecharExtrato(); });
+$("#ex-imprimir").addEventListener("click", () => EXTRATO_DE && imprimirFechamento(dadosFechamento(EXTRATO_DE)));
+$("#ex-csv").addEventListener("click", () => {
+  if(!EXTRATO_DE) return;
+  const mes = $("#mes").value || mesAtual();
+  baixarCSV(`fechamento-${slug(EXTRATO_DE.nome)}-${mes}.csv`, linhasCSVDivisao(EXTRATO_DE.nome, somaDoMes(mes, EXTRATO_DE.lanc, EXTRATO_DE.perc).rec, EXTRATO_DE.perc));
+});
+
+/* ---- fechamento imprimível ---- */
+function dadosFechamento(m){
+  const mes = $("#mes").value || mesAtual();
+  const r = somaDoMes(mes, m.lanc, m.perc);
+  return {
+    nome: m.nome, perc: m.perc, mes, r,
+    acertosMes: m.acertos.filter(a => a.data?.startsWith(mes)),
+    saldo: saldoDe(m.receitas, m.acertos, m.perc)
+  };
+}
+
+function imprimirFechamento(d){
+  const studio = `${CFG.marca.nome1 || ""} ${CFG.marca.nome2 || ""}`.trim();
+  const saldoTxt = d.saldo > 0.004 ? `A profissional deve repassar ${dinheiro.format(d.saldo)} ao studio`
+    : d.saldo < -0.004 ? `O studio deve pagar ${dinheiro.format(-d.saldo)} à profissional` : "Tudo acertado";
+  $("#impressao").innerHTML = `
+    <h1>Fechamento de ${nomeDoMes(d.mes)}</h1>
+    <p class="sub">${escaparTxt(studio)} · Profissional: <b>${escaparTxt(d.nome)}</b> · Percentual do studio: ${d.perc}%</p>
+    <div class="totais">
+      <div><b>Faturamento bruto</b>${dinheiro.format(d.r.bruto)}</div>
+      <div><b>Cota do studio</b>${dinheiro.format(d.r.cota)}</div>
+      <div><b>Parte da profissional</b>${dinheiro.format(d.r.parte)}</div>
+      <div><b>Saldo acumulado</b>${saldoTxt}</div>
+    </div>
+    <table class="tabela">
+      <thead><tr><th>Data</th><th>Serviço</th><th>Obs.</th><th>Forma</th><th>Recebido por</th>
+        <th class="n">Valor</th><th class="n">%</th><th class="n">Studio</th><th class="n">Profissional</th></tr></thead>
+      <tbody>${d.r.rec.slice().sort((a, b) => a.data.localeCompare(b.data)).map(l => `<tr>
+        <td>${diaCurto(l.data)}</td><td>${escaparTxt(l.categoria || "Atendimento")}</td><td>${escaparTxt(l.cliente || l.descricao || "")}</td>
+        <td>${escaparTxt(l.forma || "")}</td><td>${l.recebidoPor === "studio" ? "Studio" : "Profissional"}</td>
+        <td class="n">${dinheiro.format(l.valor)}</td><td class="n">${pctDe(l, d.perc)}%</td>
+        <td class="n">${dinheiro.format(cotaDe(l, d.perc))}</td><td class="n">${dinheiro.format(l.valor - cotaDe(l, d.perc))}</td></tr>`).join("")
+        || `<tr><td colspan="9">Nenhum atendimento no mês.</td></tr>`}</tbody>
+      <tfoot><tr><td colspan="5">Total</td><td class="n">${dinheiro.format(d.r.bruto)}</td><td></td>
+        <td class="n">${dinheiro.format(d.r.cota)}</td><td class="n">${dinheiro.format(d.r.parte)}</td></tr></tfoot>
+    </table>
+    ${d.acertosMes.length ? `<h3 style="margin-top:18px">Acertos no mês</h3><table class="tabela"><tbody>
+      ${d.acertosMes.map(a => `<tr><td>${diaCurto(a.data)}</td><td>${a.sentido === "studioParaProf" ? "Studio pagou à profissional" : "Profissional repassou ao studio"}</td>
+        <td>${escaparTxt(a.forma || "")}</td><td class="n">${dinheiro.format(a.valor)}</td></tr>`).join("")}</tbody></table>` : ""}
+    <div class="assin"><div>${escaparTxt(studio)}</div><div>${escaparTxt(d.nome)}</div></div>
+    <p class="sub" style="margin-top:24px">Gerado pelo painel em ${new Date().toLocaleDateString("pt-BR")}.</p>`;
+  window.print();
+}
+
+/* ---- planilhas (CSV que abre no Excel e no Google Planilhas) ---- */
+const slug = (t) => String(t || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const numBR = (v) => (Math.round((+v || 0) * 100) / 100).toFixed(2).replace(".", ",");
+
+function baixarCSV(nome, linhas){
+  const txt = linhas.map(l => l.map(c => {
+    const v = String(c ?? "");
+    return /[;"\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v;
+  }).join(";")).join("\r\n");
+  const url = URL.createObjectURL(new Blob(["﻿" + txt], { type: "text/csv;charset=utf-8" }));
+  const a = Object.assign(document.createElement("a"), { href: url, download: nome });
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+function linhasCSVDivisao(nome, receitas, perc, comCabecalho = true){
+  const linhas = comCabecalho ? [["Profissional", "Data", "Serviço", "Observação", "Forma", "Recebido por", "Valor", "% studio", "Cota studio", "Parte profissional"]] : [];
+  receitas.slice().sort((a, b) => a.data.localeCompare(b.data)).forEach(l => linhas.push([
+    nome, diaCurto(l.data), l.categoria || "Atendimento", l.cliente || l.descricao || "", l.forma || "",
+    l.recebidoPor === "studio" ? "Studio" : "Profissional",
+    numBR(l.valor), pctDe(l, perc), numBR(cotaDe(l, perc)), numBR(l.valor - cotaDe(l, perc))
+  ]));
+  return linhas;
+}
+
+$("#studio-csv").addEventListener("click", () => {
+  const mes = $("#mes").value || mesAtual();
+  const eu = CFG.profissionais.find(p => p.id === MEU_PID)?.nome || "Dona do studio";
+  let linhas = linhasCSVDivisao(eu, somaDoMes(mes, lancamentos, 0).rec, 0);
+  EQUIPE.forEach(m => { linhas = linhas.concat(linhasCSVDivisao(m.nome, somaDoMes(mes, m.lanc, m.perc).rec, m.perc, false)); });
+  if(linhas.length < 2) return recado("Nenhum atendimento no mês para exportar.", true);
+  baixarCSV(`studio-${mes}.csv`, linhas);
+});
+
+$("#meu-csv").addEventListener("click", () => {
+  const mes = $("#mes").value || mesAtual();
+  const { itens } = somaDoMes(mes);
+  if(!itens.length) return recado("Nenhum lançamento no mês para exportar.", true);
+  const linhas = [["Data", "Tipo", "Serviço / categoria", "Observação", "Forma", "Recebido por", "Valor", "% studio", "Cota studio", "Minha parte"]];
+  itens.slice().sort((a, b) => a.data.localeCompare(b.data)).forEach(l => {
+    const ent = l.tipo === "receita";
+    const cota = ent && !SOU_DONA ? cotaDe(l, MEU_PERC) : 0;
+    linhas.push([diaCurto(l.data), ent ? "Entrada" : "Custo", l.categoria || "", l.descricao || "", l.forma || "",
+      ent ? (l.recebidoPor === "studio" ? "Studio" : (SOU_DONA ? "" : "Eu")) : "",
+      numBR(ent ? l.valor : -l.valor), ent && !SOU_DONA ? pctDe(l, MEU_PERC) : "",
+      ent && !SOU_DONA ? numBR(cota) : "", ent ? numBR(l.valor - cota) : ""]);
+  });
+  baixarCSV(`lancamentos-${mes}.csv`, linhas);
+});
 
 /* ============================================================
    SALVAR

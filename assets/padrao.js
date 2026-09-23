@@ -26,20 +26,6 @@ export const PADRAO = {
     selo2: "Material esterilizado"
   },
 
-  sobre: {
-    rotulo: "O estúdio",
-    titulo: "Um horário<br>só seu.",
-    p1: "Aqui não tem correria nem sala cheia. Cada horário é reservado para uma cliente por vez, com material esterilizado, tempo para escolher a cor com calma e cuidado em cada canto da cutícula.",
-    p2: "O estúdio nasceu da ideia de que cuidar das unhas pode ser a melhor parte da semana — e não mais uma coisa correndo na agenda.",
-    profissional: "Jessica Aline",
-    cargo: "Nail designer",
-    pontos: [
-      { titulo: "Atendimento individual", texto: "Uma cliente por horário, sem espera e sem sobreposição." },
-      { titulo: "Esterilização a cada atendimento", texto: "Alicates e espátulas passam por autoclave antes de encostarem em você." },
-      { titulo: "Acabamento que dura", texto: "Preparo correto da unha e produtos profissionais para o esmalte durar semanas." }
-    ]
-  },
-
   servicos: {
     rotulo: "Serviços",
     titulo: "Escolha o seu cuidado",
@@ -109,17 +95,6 @@ export const PADRAO = {
     }
   ],
 
-  diferenciais: {
-    rotulo: "Por dentro",
-    titulo: "Por que as clientes<br>voltam",
-    itens: [
-      { titulo: "Hora marcada de verdade", texto: "Seu horário é seu. Nada de chegar e esperar duas clientes na sua frente — a agenda é montada com folga entre um atendimento e outro." },
-      { titulo: "Higiene sem atalho",      texto: "Autoclave, descartáveis e bancada limpa a cada cliente." },
-      { titulo: "Produtos profissionais",  texto: "Esmaltes e géis de marcas conhecidas, sem economia no que fica na sua unha." },
-      { titulo: "Sua unha, seu estilo",    texto: "Clássica e discreta ou cheia de arte — a gente conversa antes de começar e decide junto o formato, o tamanho e a cor." }
-    ]
-  },
-
   galeria: {
     rotulo: "Nosso trabalho",
     titulo: "Inspire-se para<br>a próxima",
@@ -174,7 +149,7 @@ export const PADRAO = {
   /* "" = moldura com o monograma JA
      "midia:ID" = foto enviada pelo painel
      "https://..." = foto hospedada em outro lugar */
-  imagens: { hero: "", sobre: "" },
+  imagens: { hero: "" },
   galeriaFotos: ["", "", "", "", "", "", "", ""],
 
   letreiro: ["Manicure", "Pedicure", "Unhas em gel", "Alongamento", "Nail Art", "Francesinha", "Blindagem"]

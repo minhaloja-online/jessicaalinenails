@@ -144,6 +144,32 @@ O bloco **Compras parceladas** mostra quanto já foi pago, quanto falta e quanto
 
 Não precisa de índice novo nem mudança nas regras do Firestore.
 
+## Divisão de faturamento com as profissionais ⚠️ republique as regras
+
+> Esta versão mudou o `firestore.rules`. Depois de subir os arquivos, cole o conteúdo novo em **Firestore Database → Regras → Publicar**. Sem isso a dona não consegue ler o caixa das profissionais.
+
+**Quem é quem.** A primeira conta criada é a **dona do studio**. As outras são **profissionais parceiras**, criadas pela dona em **Profissionais → Criar acesso para ela**. No cadastro a dona informa o **percentual do studio** (ex.: 40 → de cada R$ 100 que a profissional fatura, R$ 40 vão para a dona).
+
+**O que cada uma vê.**
+- **Dona:** o painel inteiro. No Financeiro, o dashboard soma os atendimentos dela + a **cota da equipe**, e a sub-aba **Studio e equipe** mostra cada profissional: atendimentos, faturamento bruto, cota do studio, parte dela e o **saldo a acertar**.
+- **Profissional:** só Agenda, Serviços, Financeiro e Minha conta. O caixa dela já mostra bruto, cota do studio, a parte dela, custos, lucro e o saldo com o studio.
+
+**Lançamentos.** Cada profissional lança os próprios atendimentos (ou pelo botão Concluir da agenda) e informa a forma de pagamento e **quem recebeu o dinheiro**:
+- *Eu* (Pix/dinheiro na mão dela) → ela fica devendo a cota ao studio.
+- *O studio* (maquininha/Pix do studio) → o studio fica devendo a parte dela.
+
+O percentual fica **gravado em cada lançamento**. Se a dona mudar o percentual, vale só dali para frente — o passado não muda.
+
+**Acertos.** Quando o dinheiro passa de uma para a outra, a dona registra em **Studio e equipe → Registrar acerto** (o valor já vem preenchido com o saldo). Saldo zerado = tudo acertado. Acertos só a dona grava; a profissional vê o histórico no dashboard dela.
+
+**Fechamento do mês.** *Imprimir fechamento* gera uma folha com todos os atendimentos, a divisão, os acertos e espaço para as duas assinarem (dá para salvar em PDF pela janela de impressão). *Baixar planilha* exporta o mês em CSV, que abre no Excel ou Google Planilhas.
+
+**Proteções no servidor (não só na tela):** a profissional não consegue lançar entrada com percentual diferente do que a dona definiu, não altera o percentual de um lançamento já feito, não mexe no percentual do próprio cadastro e não registra acertos.
+
+Contas de profissional criadas antes desta versão ficam com percentual **0%** até a dona definir — o painel avisa em Studio e equipe. Lançamentos antigos sem percentual gravado usam o percentual atual da profissional.
+
+Não precisa de índice novo.
+
 ---
 
 ## O visual
